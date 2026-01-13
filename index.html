@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Taleem Player – Demo Gold (Timed)</title>
+
+  <!-- Reusable demo styles -->
+  <link rel="stylesheet" href="./styles/demo.css" />
+</head>
+<body>
+
+  <div id="app"></div>
+
+  <div class="controls">
+    <input
+      id="slider"
+      type="range"
+      min="0"
+      max="0"
+      step="1"
+      value="0"
+    />
+  </div>
+
+  <script type="module">
+    import { createTaleemPlayer } from "./src/index.js";
+
+    /* ----------------------------------
+       Base path (GitHub Pages safe)
+       ---------------------------------- */
+    const BASE = location.pathname.replace(/\/[^/]*$/, "");
+
+    /* ----------------------------------
+       Load GOLD deck with timings
+       ---------------------------------- */
+    const deck = await fetch(`${BASE}/decks/demo-gold-timings.json`)
+      .then(r => r.json());
+
+    /* ----------------------------------
+       Fix image paths
+       ---------------------------------- */
+    function fixImagePaths(deck) {
+      deck.deck.forEach(slide => {
+        slide.data?.forEach(item => {
+          if (
+            typeof item.content === "string" &&
+            item.content.endsWith(".webp")
+          ) {
+            item.content =
+              `${BASE}/public/media/images/${item.content.split("/").pop()}`;
+          }
+        });
+      });
+
+      if (deck.background?.backgroundImage) {
+        deck.background.backgroundImage =
+          `${BASE}/public/media/images/${deck.background.backgroundImage.split("/").pop()}`;
+      }
+    }
+
+    fixImagePaths(deck);
+
+    /* ----------------------------------
+       Demo renderer (temporary)
+       ---------------------------------- */
+    const demoRenderer = {
+      render({ mount, slide, time }) {
+        mount.innerHTML = `
+          <div class="slide-box">
+            <div class="slide-title">${slide.type}</div>
+
+            ${
+              slide.data?.map(item => {
+                if (typeof item.content === "string" && item.content.endsWith(".webp")) {
+                  return `<img src="${item.content}" />`;
+                }
+                return `<div>${item.content ?? ""}</div>`;
+              }).join("")
+            }
+
+            <div class="meta">
+              time = ${time}s<br/>
+              start = ${slide.start}, end = ${slide.end}
+            </div>
+          </div>
+        `;
+      }
+    };
+
+    /* ----------------------------------
+       Create player
+       ---------------------------------- */
+    const player = createTaleemPlayer({
+      mount: "#app",
+      deck,
+      renderer: demoRenderer
+    });
+
+    /* ----------------------------------
+       Time scrub (external clock)
+       ---------------------------------- */
+    const slider = document.getElementById("slider");
+
+    const duration = Math.max(...deck.deck.map(s => s.end));
+    slider.max = duration;
+
+    slider.addEventListener("input", e => {
+      player.renderAt(Number(e.target.value));
+    });
+
+    // initial render
+    player.renderAt(0);
+  </script>
+
+</body>
+</html>
