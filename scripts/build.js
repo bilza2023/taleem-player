@@ -1,6 +1,5 @@
 import { build } from "esbuild";
 import fs from "fs";
-import path from "path";
 
 const dist = "dist";
 
@@ -11,7 +10,7 @@ fs.mkdirSync(dist, { recursive: true });
 // ---- JS: ESM build ----
 await build({
   entryPoints: ["src/index.js"],
-  outfile: "dist/taleem-browser.esm.js",
+  outfile: "dist/taleem-player.esm.js",
   bundle: true,
   format: "esm",
   platform: "browser",
@@ -21,18 +20,12 @@ await build({
 // ---- JS: UMD build ----
 await build({
   entryPoints: ["src/index.js"],
-  outfile: "dist/taleem-browser.umd.js",
+  outfile: "dist/taleem-player.umd.js",
   bundle: true,
   format: "iife",
-  globalName: "TaleemBrowser",
+  globalName: "TaleemPlayer",
   platform: "browser",
   sourcemap: false
 });
 
-// ---- CSS copy ----
-// fs.copyFileSync(
-//   "src/styles/taleem.css",
-//   "dist/taleem.css"
-// );
-
-console.log("✔ taleem-browser build complete");
+console.log("✔ taleem-player build complete");
