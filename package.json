@@ -1,7 +1,7 @@
 
 {
     "name": "taleem-player",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "description": "Headless time-based player for deck-v1 (play, pause, scrub, no renderer)",
     "type": "module",
     "main": "./dist/taleem-player.umd.js",
