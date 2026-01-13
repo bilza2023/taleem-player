@@ -1,38 +1,22 @@
-
 {
-    "name": "taleem-player",
-    "version": "0.2.0",
-    "description": "Headless time-based player for deck-v1 (play, pause, scrub, no renderer)",
-    "type": "module",
-    "main": "./dist/taleem-player.umd.js",
-    "module": "./dist/taleem-player.esm.js",
-    "exports": {
-      ".": {
-        "import": "./dist/taleem-player.esm.js",
-        "require": "./dist/taleem-player.umd.js"
-      }
-    },
-    "files": [
-      "dist"
-    ],
-    "scripts": {
-      "build": "node ./scripts/build.js",
-      "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
-    },
-    "keywords": [
-      "taleem",
-      "presentation",
-      "player",
-      "deck-v1",
-      "timeline",
-      "education"
-    ],
-    "author": "Taleem.Help",
-    "license": "MIT",
-    "devDependencies": {
-      "esbuild": "^0.27.2",
-      "jest": "^29.7.0",
-      "jest-environment-jsdom": "^30.2.0"
+  "name": "taleem-player",
+  "version": "0.2.1",
+  "type": "module",
+
+  "main": "./dist/taleem-player.umd.js",
+  "module": "./dist/taleem-player.esm.js",
+
+  "exports": {
+    ".": {
+      "import": "./dist/taleem-player.esm.js",
+      "require": "./dist/taleem-player.umd.js"
     }
+  },
+
+  "files": ["dist"],
+
+  "scripts": {
+    "build": "node ./scripts/build.js",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
   }
-  
+}
