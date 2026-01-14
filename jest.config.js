@@ -1,3 +1,6 @@
 export default {
-  testEnvironment: "jsdom"
+  testEnvironment: "jsdom",
+  moduleNameMapper: {
+    "\\.(css)$": "<rootDir>/tests/__mocks__/styleMock.js"
+  }
 };
