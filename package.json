@@ -1,6 +1,6 @@
 {
   "name": "taleem-player",
-  "version": "0.4.1",
+  "version": "0.5.0",
   "type": "module",
   "main": "./dist/taleem-player.umd.js",
   "module": "./dist/taleem-player.esm.js",
@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "taleem-core": "^1.2.0",
+    "taleem-slides": "^0.5.0",
     "zod": "^4.3.5"
   },
   "devDependencies": {

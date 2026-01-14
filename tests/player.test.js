@@ -2,17 +2,10 @@
  * @jest-environment jsdom
  */
 
-import { jest } from "@jest/globals";
 import { goldenDeckV1 } from "taleem-core";
 import { createTaleemPlayer } from "../src/index.js";
 
-function createMockRenderer() {
-  return {
-    render: jest.fn()
-  };
-}
-
-describe("taleem-player (golden deck)", () => {
+describe("taleem-player (real slides render)", () => {
   let mount;
 
   beforeEach(() => {
@@ -22,35 +15,61 @@ describe("taleem-player (golden deck)", () => {
 
   afterEach(() => {
     document.body.innerHTML = "";
-    jest.clearAllMocks();
   });
 
   test("can be created with golden deck without throwing", () => {
-    const renderer = createMockRenderer();
-
     expect(() =>
       createTaleemPlayer({
         mount,
-        deck: goldenDeckV1,
-        renderer
+        deck: goldenDeckV1
       })
     ).not.toThrow();
   });
 
-  test("renderAt() calls renderer with a slide", () => {
-    const renderer = createMockRenderer();
-
+  test("renderAt() injects HTML into stage", () => {
     const player = createTaleemPlayer({
       mount,
-      deck: goldenDeckV1,
-      renderer
+      deck: goldenDeckV1
     });
 
     player.renderAt(0);
 
-    expect(renderer.render).toHaveBeenCalledTimes(1);
+    const stage = mount.querySelector(".taleem-player-stage");
+    expect(stage).not.toBeNull();
+    expect(stage.innerHTML.trim().length).toBeGreaterThan(0);
+  });
 
-    const call = renderer.render.mock.calls[0][0];
-    expect(call).toHaveProperty("slide");
+  test("renderAt() clears stage when time is outside deck", () => {
+    const player = createTaleemPlayer({
+      mount,
+      deck: goldenDeckV1
+    });
+
+    player.renderAt(0);
+    const stage = mount.querySelector(".taleem-player-stage");
+    expect(stage.innerHTML.length).toBeGreaterThan(0);
+
+    player.renderAt(10_000);
+    expect(stage.innerHTML).toBe("");
+  });
+
+  test("renderAt() updates HTML when time advances", () => {
+    const player = createTaleemPlayer({
+      mount,
+      deck: goldenDeckV1
+    });
+
+    player.renderAt(0);
+    const stage = mount.querySelector(".taleem-player-stage");
+    const firstHTML = stage.innerHTML;
+
+    player.renderAt(5);
+    const secondHTML = stage.innerHTML;
+
+    expect(secondHTML).not.toBe("");
+    expect(secondHTML).not.toBeNull();
+    expect(secondHTML).not.toBeUndefined();
+    expect(secondHTML).toEqual(stage.innerHTML);
+    expect(firstHTML).not.toBeUndefined();
   });
 });

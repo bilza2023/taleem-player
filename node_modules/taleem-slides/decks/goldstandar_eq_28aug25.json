@@ -1,0 +1,69 @@
+{
+    "name": "goldstandard_eq_28aug25",
+    "description": "Title + one long EQ slide (FLAT authoring) covering all sidebar types",
+    "tags": ["eq", "gold-standard", "flat-authoring"],
+    "status": "draft",
+    "version": "deck-v1",
+    "background": {
+      "backgroundColor": "#0e0f14",
+      "backgroundImage": "/media/images/box.webp",
+      "backgroundImageOpacity": 0.07
+    },
+    "deck": [
+      {
+        "type": "imageWithTitle",
+        "start": 0,
+        "end": 5,
+        "data": [
+          { "name": "image", "content": "/media/images/box.webp", "showAt": 0 },
+          { "name": "title", "content": "EQ Sidebar Gold Standard", "showAt": 0 }
+        ]
+      },
+      {
+        "type": "eq",
+        "start": 5,
+        "end": 55,
+        "data": [
+          { "name": "heading", "content": "Test All Sidebar Types", "showAt": 5 },
+      
+          { "name": "spHeading", "content": "SP Heading" },
+          { "name": "spText", "content": "This is a sidebar comment." },
+          { "name": "spMath", "content": "a^2 + b^2 = c^2" },
+          { "name": "spImage", "content": "/media/images/box.webp" },
+      
+          { "name": "math", "content": "E = mc^2", "showAt": 12 },
+          { "name": "spHeading", "content": "Einstein's Law" },
+          { "name": "spText", "content": "Energy–mass equivalence" },
+          { "name": "spImage", "content": "/media/images/box.webp" },
+      
+          { "name": "math", "content": "\\int_0^\\pi \\sin x \\,dx = 2", "showAt": 20 },
+          { "name": "spHeading", "content": "Integral Result" },
+          { "name": "spText", "content": "Area under sine from 0 to π" },
+          { "name": "spMath", "content": "\\int_0^\\pi \\sin x \\,dx = 2" },
+      
+          { "name": "math", "content": "\\sum_{n=1}^{\\infty} \\frac{1}{n^2} = \\frac{\\pi^2}{6}", "showAt": 28 },
+          { "name": "spHeading", "content": "Basel Problem" },
+          { "name": "spText", "content": "Euler's celebrated result" },
+          { "name": "spImage", "content": "/media/images/box.webp" },
+      
+          { "name": "text", "content": "Ohm’s Law", "showAt": 36 },
+          { "name": "spMath", "content": "V = I R" },
+          { "name": "spText", "content": "Voltage = Current × Resistance" },
+      
+          { "name": "math", "content": "p = m v", "showAt": 42 },
+          { "name": "spText", "content": "Momentum = mass × velocity" },
+      
+          { "name": "math", "content": "KE = ½ m v^2", "showAt": 46 },
+          { "name": "spText", "content": "Kinetic energy formula" },
+      
+          { "name": "math", "content": "PE = m g h", "showAt": 50 },
+          { "name": "spText", "content": "Potential energy at height h" },
+      
+          { "name": "text", "content": "End of test. All sidebar types shown.", "showAt": 54 },
+          { "name": "spText", "content": "Thanks for testing EQ format!" }
+      
+        ]
+      }
+    ]
+  }
+  
