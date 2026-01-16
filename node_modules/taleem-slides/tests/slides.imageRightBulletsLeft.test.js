@@ -1,21 +1,18 @@
-// slides.imageRightBulletsLeft.test.js
 import { describe, test, expect } from "vitest";
 import { ImageRightBulletsLeftSlide } from "../src/slides/ImageRightBulletsLeftSlide.js";
+import { goldenDeckV1 } from "taleem-core";
 
 describe("ImageRightBulletsLeftSlide", () => {
-  test("renders image and bullets", () => {
-    const raw = {
-      type: "imageRightBulletsLeft",
-      data: [
-        { name: "image", content: "img.png" },
-        { name: "bullet", content: "A" }
-      ]
-    };
+  test("renders imageRightBulletsLeft from golden deck", () => {
+    const slideData = goldenDeckV1.deck.find(
+      s => s.type === "imageRightBulletsLeft"
+    );
 
-    const slide = ImageRightBulletsLeftSlide.fromJSON(raw);
+    const slide = ImageRightBulletsLeftSlide.fromJSON(slideData);
     const html = slide.render();
 
-    expect(html).toContain("img.png");
-    expect(html).toContain("A");
+    expect(html).toContain("imageRightBulletsLeft");
+    expect(html).toContain("<img");
+    expect(html).toContain("<li>");
   });
 });

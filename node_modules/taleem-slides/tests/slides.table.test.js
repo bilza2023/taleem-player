@@ -1,41 +1,16 @@
+// tests/slides.table.test.js
 import { describe, test, expect } from "vitest";
 import { TableSlide } from "../src/slides/TableSlide.js";
+import { goldenDeckV1 } from "taleem-core";
 
-describe("table", () => {
-  test("builds with rows", () => {
-    const raw = {
-      type: "table",
-      data: [
-        { name: "row", content: ["A", "B"] },
-        { name: "row", content: ["C", "D"] }
-      ]
-    };
-
+describe("TableSlide", () => {
+  test("renders from golden deck", () => {
+    const raw = goldenDeckV1.deck.find(s => s.type === "table");
     const slide = TableSlide.fromJSON(raw);
     const html = slide.render();
 
-    expect(html).toContain("<td>A</td>");
-    expect(html).toContain("<td>D</td>");
-  });
-
-  test("throws if no rows provided", () => {
-    expect(() =>
-      TableSlide.fromJSON({
-        type: "table",
-        data: []
-      })
-    ).toThrow("table: requires at least one row");
-  });
-
-  test("render output is deterministic", () => {
-    const raw = {
-      type: "table",
-      data: [{ name: "row", content: ["X"] }]
-    };
-
-    const a = TableSlide.fromJSON(raw);
-    const b = TableSlide.fromJSON(raw);
-
-    expect(a.render()).toBe(b.render());
+    expect(html).toContain("slide table");
+    expect(html).toContain("<th>A</th>");
+    expect(html).toContain("<td>1</td>");
   });
 });

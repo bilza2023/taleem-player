@@ -1,4 +1,4 @@
-// TitleAndParaSlide.js
+// src/slides/TitleAndParaSlide.js
 export const TitleAndParaSlide = {
   type: "titleAndPara",
 
@@ -12,9 +12,6 @@ export const TitleAndParaSlide = {
 
     return Object.freeze({
       type: "titleAndPara",
-      title,
-      para,
-
       render() {
         return `
           <section class="slide titleAndPara">

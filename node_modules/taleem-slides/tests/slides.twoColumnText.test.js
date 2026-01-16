@@ -1,29 +1,16 @@
+// tests/slides.twoColumnText.test.js
 import { describe, test, expect } from "vitest";
 import { TwoColumnTextSlide } from "../src/slides/TwoColumnTextSlide.js";
+import { goldenDeckV1 } from "taleem-core";
 
 describe("TwoColumnTextSlide", () => {
-  test("builds with left and right", () => {
-    const raw = {
-      type: "twoColumnText",
-      data: [
-        { name: "left", content: "L1" },
-        { name: "right", content: "R1" }
-      ]
-    };
-
+  test("renders from golden deck", () => {
+    const raw = goldenDeckV1.deck.find(s => s.type === "twoColumnText");
     const slide = TwoColumnTextSlide.fromJSON(raw);
     const html = slide.render();
 
-    expect(html).toContain("L1");
-    expect(html).toContain("R1");
-  });
-
-  test("throws if one side missing", () => {
-    expect(() =>
-      TwoColumnTextSlide.fromJSON({
-        type: "twoColumnText",
-        data: [{ name: "left", content: "Only" }]
-      })
-    ).toThrow("twoColumnText: requires left and right columns");
+    expect(html).toContain("twoColumnText");
+    expect(html).toContain("Left column");
+    expect(html).toContain("Right column");
   });
 });

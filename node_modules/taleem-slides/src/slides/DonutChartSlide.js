@@ -1,16 +1,22 @@
-// DonutChartSlide.js
 export const DonutChartSlide = {
   type: "donutChart",
 
   fromJSON(raw) {
-    const segments = raw.data
-      ?.filter(d => d.name === "segment")
-      .map(d => ({
-        label: d.content.label,
-        value: d.content.value
-      }));
+    const segments = [];
+    let current = null;
 
-    if (!segments?.length) {
+    for (const d of raw.data || []) {
+      if (d.name === "percent") {
+        current = { percent: d.content };
+        segments.push(current);
+      } else if (current && d.name === "label") {
+        current.label = d.content;
+      } else if (current && d.name === "color") {
+        current.color = d.content;
+      }
+    }
+
+    if (!segments.length) {
       throw new Error("donutChart: requires at least one segment");
     }
 
@@ -18,19 +24,13 @@ export const DonutChartSlide = {
       type: "donutChart",
       segments,
 
-      render({ visibleCount = segments.length, activeIndex = null } = {}) {
+      render({ visibleCount = segments.length } = {}) {
         return `
           <section class="slide donutChart">
             <ul>
               ${segments.map((s, i) => {
                 if (i >= visibleCount) return "";
-                const cls =
-                  i === activeIndex
-                    ? "is-active"
-                    : i < activeIndex
-                    ? "is-dim"
-                    : "";
-                return `<li class="${cls}">${s.label}: ${s.value}</li>`;
+                return `<li>${s.label}: ${s.percent}%</li>`;
               }).join("")}
             </ul>
           </section>

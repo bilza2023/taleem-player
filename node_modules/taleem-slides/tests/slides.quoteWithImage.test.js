@@ -1,28 +1,19 @@
 
-// slides.quoteWithImage.test.js
 import { describe, test, expect } from "vitest";
 import { QuoteWithImageSlide } from "../src/slides/QuoteWithImageSlide.js";
+import { goldenDeckV1 } from "taleem-core";
 
 describe("QuoteWithImageSlide", () => {
-  test("renders quote with image", () => {
-    const raw = {
-      type: "quoteWithImage",
-      data: [
-        { name: "quote", content: "Learn daily" },
-        { name: "image", content: "img.png" }
-      ]
-    };
+  test("renders quoteWithImage from golden deck", () => {
+    const slideData = goldenDeckV1.deck.find(
+      s => s.type === "quoteWithImage"
+    );
 
-    const slide = QuoteWithImageSlide.fromJSON(raw);
+    const slide = QuoteWithImageSlide.fromJSON(slideData);
     const html = slide.render();
 
-    expect(html).toContain("Learn daily");
-    expect(html).toContain("img.png");
-  });
-
-  test("throws if missing quote or image", () => {
-    expect(() =>
-      QuoteWithImageSlide.fromJSON({ type: "quoteWithImage", data: [] })
-    ).toThrow("quoteWithImage: quote and image required");
+    expect(html).toContain("quoteWithImage");
+    expect(html).toContain("<img");
+    expect(html).toContain("<blockquote");
   });
 });

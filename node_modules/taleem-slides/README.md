@@ -1,111 +1,71 @@
 
-
 # 📦 taleem-slides
 
-## ⚠️ Warning: Work in Progress — expect breaking changes
+> **Simple HTML slide templates for JSON-based presentations**
 
-> **Pure slide template library for Taleem decks**
+`taleem-slides` is a **small, focused library** that turns
+**plain slide JSON** into **HTML**.
 
-`taleem-slides` is a **simple, deterministic template library** that turns
-**deck-style slide JSON** into **HTML**.
+You give it slide data.  
+It gives you HTML.
 
-It does **one thing only**:
-
-> **Given slide data + render state → return HTML**
-
-It does **not** manage time, indexes, playback, or decks.
+That’s it.
 
 ---
 
-## 🌐 Live Display Center (Important)
+## 🌐 Live Docs, Demo & Reference (START HERE)
 
-👉 **Official live display & reference implementation**
-**[https://bilza2023.github.io/taleem/](https://bilza2023.github.io/taleem/)**
+👉 **https://bilza2023.github.io/taleem**
 
-This is **not a mock demo**.
-This link is the **active display center** where:
+This site is the **official reference** for:
 
-* slide templates are rendered in real browsers
-* visual behavior is validated
-* browser / player integration is tested
+- all supported slide types
+- visual behavior
+- real rendered output
+- examples and demos
 
----
-
-## ✨ Taleem.help Philosophy
-
-**Taleem.help** is an educational technology initiative focused on making
-**content-first learning tools**.
-
-The goal of the `taleem-*` libraries is simple:
-
-> Enable educators to create **JSON-based presentations**
-> and display them online using **free, open tools**.
-
-### Key ideas
-
-* Slides already encode *layout + structure*
-* Users provide **content only**
-* There are **no configuration knobs**
-* What you see is what the template decides
-
-This removal of choice is **intentional**.
-
-It makes the system:
-
-* easy to learn
-* hard to misuse
-* consistent across platforms
-
-If a different layout is needed, the solution is **not configuration** —
-it is **a new slide template**.
-
-Templates are cheap.
-Even hundreds of templates add no runtime cost.
+If something is unclear in this README,  
+**the website is the final authority**.
 
 ---
 
-## ✨ What this library is
+## ✅ What this library does
 
-* A collection of **slide templates**
-* Each template:
-
-  * reads slide JSON
-  * renders HTML
-  * applies CSS classes based on a given state
-* Fully **stateless** and **pure**
-
-Think of it as:
-
-> *Handlebars / JSX for Taleem slides*
+- Converts slide JSON into HTML
+- Uses fixed, opinionated layouts
+- Applies simple state-based CSS classes
+- Works in any JS environment (browser, player, SSR)
 
 ---
 
-## ❌ What this library is NOT
+## ❌ What this library does NOT do
 
 `taleem-slides` does **not**:
 
-* build decks
-* validate full decks
-* manage timing (`showAt`)
-* decide which slide is active
-* manage playback
-* mutate data
+- play slides
+- manage time or animations
+- navigate slides
+- validate full decks
+- touch the DOM
+- apply CSS styles
 
-All of that belongs elsewhere.
+It only returns HTML strings.
 
 ---
 
 ## 🧠 Mental Model
 
 ```
-slide JSON + render state
-        ↓
-   slide template
-        ↓
-       HTML
-```
 
-How the state is calculated is **not this library’s concern**.
+slide data + render state
+↓
+taleem-slides
+↓
+HTML
+
+````
+
+How slides are shown, timed, or styled is **your responsibility**.
 
 ---
 
@@ -113,77 +73,69 @@ How the state is calculated is **not this library’s concern**.
 
 ```bash
 npm install taleem-slides
-```
+````
 
 ---
 
 ## 🚀 Basic Usage
 
-### 1️⃣ Import a template
+### 1️⃣ Get a slide template
 
 ```js
 import { getSlideTemplate } from "taleem-slides";
+
+const Slide = getSlideTemplate("bulletList");
 ```
 
 ---
 
-### 2️⃣ Load slide data (once)
+### 2️⃣ Load slide data
 
 ```js
-const SlideTemplate = getSlideTemplate("bulletList");
-
-const slide = SlideTemplate.fromJSON({
+const slide = Slide.fromJSON({
   type: "bulletList",
   data: [
     { name: "bullet", content: "First point" },
-    { name: "bullet", content: "Second point" },
-    { name: "bullet", content: "Third point" }
+    { name: "bullet", content: "Second point" }
   ]
 });
 ```
 
-> `fromJSON()` only **reads and stores structure**.
-> No timing. No logic.
+`fromJSON()` reads and stores structure only.
 
 ---
 
-### 3️⃣ Render with state
+### 3️⃣ Render HTML
 
 ```js
 const html = slide.render({
-  visibleCount: 2,
-  activeIndex: 1
+  visibleCount: 1,
+  activeIndex: 0
 });
 ```
 
-This will:
-
-* render first 2 bullets
-* highlight the second bullet
-* dim the first
-
 ---
 
-## 🎨 Render State Contract
+## 🎨 Render State (Simple)
 
-Templates accept a **render state object**.
+Render state is just a plain object.
 
 Common fields:
 
 ```ts
 {
-  visibleCount?: number; // how many items exist
-  activeIndex?: number;  // which item is highlighted
+  visibleCount?: number
+  activeIndex?: number
 }
 ```
 
-Slides may choose to use one or both.
+Each slide uses only what it needs.
 
 ---
 
-## 🎯 Class Name Contract
+## 🎯 CSS Class Contract
 
-Templates apply **standard class names only**:
+Slides emit only these state classes:
 
 ```text
 .is-active
@@ -191,173 +143,64 @@ Templates apply **standard class names only**:
 .is-hidden
 ```
 
-Styling is handled entirely by the consuming app.
+You control **all styling**.
 
 ---
 
-## 🧭 How this fits in the ecosystem
+## 🧩 Supported Slide Types
 
-`taleem-slides` is intentionally **small** and **focused**.
+See the **live site** for visuals and examples:
 
-It is used by higher-level projects:
+👉 [https://bilza2023.github.io/taleem](https://bilza2023.github.io/taleem)
 
-### 🧩 Sister Projects
+Supported categories include:
 
-* **taleem-browser**
-  Index-based slide viewer (manual navigation)
+* titles and text slides
+* bullet lists and columns
+* images and image+text layouts
+* tables and charts
+* quotes and stats
+* equation slides
 
-* **taleem-player**
-  Time-based slide player (audio / video synced)
+Layouts are **fixed by design**.
 
-Both projects:
-
-* compute render state (`activeIndex`, `visibleCount`)
-* pass it to `taleem-slides`
-* receive consistent HTML output
-
----
-
-## 🧪 Demo & Reference Projects
-
-* 🌐 **Live Display Center**
-  [https://bilza2023.github.io/taleem/](https://bilza2023.github.io/taleem/)
-
-* 📁 **GitHub Demo / Playground**
-  *(link can be added here when ready)*
+If you need a new layout, you add a new template.
 
 ---
 
-## 🧊 Stability & Versioning
+## 🧪 Stability & Guarantees
 
-* Targets **deck-v1**
-* Breaking changes allowed during WIP phase
-* HTML output is intentionally simple and predictable
-
----
-
-## 🧠 Design Principle (Locked)
-
-> **taleem-slides renders HTML.
-> It does not decide *when* or *why*.**
+* Deterministic output
+* No hidden state
+* No configuration knobs
+* Same input → same HTML
 
 ---
 
-## 🔳 Deck Background Support (NEW)
+## 🔒 Design Principle
 
-`taleem-slides` also defines **how deck backgrounds are resolved**, while remaining fully **DOM-agnostic**.
-
-A deck background is **optional** and applies to the **entire deck**, not individual slides.
-
----
-
-### Background responsibility split
-
-#### taleem-slides
-
-* decides **what background should be used**
-* exposes a **pure resolver function**
-* returns **plain background data**
-
-#### player / browser
-
-* renders the background into the DOM
-* applies styles and layout
-* handles mounting and lifecycle
-
-This keeps slide rendering **pure and portable**.
+> **This library renders HTML only.
+> It does not decide when or how slides appear.**
 
 ---
 
-## 🎨 Background Resolution API
+## 📍 Where this fits
 
-`taleem-slides` exports a small helper:
+`taleem-slides` is meant to be used by:
 
-```js
-import { resolveBackground } from "taleem-slides";
-```
+* slide viewers
+* presentation players
+* educational tools
+* static or dynamic renderers
 
-### Purpose
-
-`resolveBackground` answers one question only:
-
-> **“What background should be used for this deck?”**
-
-It does **not**:
-
-* touch the DOM
-* inject styles
-* manage themes
-* animate or time anything
+It is intentionally small so it can be reused everywhere.
 
 ---
 
-### Input (conceptual)
+## ✅ Status
 
-```ts
-{
-  deckBackground?: {
-    backgroundColor?: string
-    backgroundImage?: string
-    backgroundImageOpacity?: number
-  },
-  themeSurfaceColor?: string
-}
-```
+* Actively used
+* Fully tested
+* Backed by live reference site
+* Ready for production
 
----
-
-### Output
-
-```ts
-{
-  backgroundColor?: string
-  backgroundImage?: string
-  backgroundImageOpacity?: number
-}
-```
-
----
-
-### Resolution rules (locked)
-
-* If the deck defines a background → **use it**
-* Otherwise → **fall back to the theme’s surface color**
-
-These rules are **format-level guarantees**, not rendering behavior.
-
----
-
-## 🧠 Mental Model (Updated)
-
-```
-deck JSON + render state + theme surface
-        ↓
-   taleem-slides
-        ↓
-HTML + resolved background data
-        ↓
-player / browser
-        ↓
-        DOM
-```
-
-`taleem-slides` decides **what exists**.
-The player / browser decides **how it appears**.
-
----
-
-## 🔒 Design Principle (Extended)
-
-> **taleem-slides renders HTML and resolves deck-level intent.
-> It never touches the DOM and never manages playback.**
-
----
-
-## ✅ What this achieves
-
-* background rules are centralized
-* players remain simple
-* browsers stay dumb
-* future renderers (CLI, SSR, export) stay possible
-
----

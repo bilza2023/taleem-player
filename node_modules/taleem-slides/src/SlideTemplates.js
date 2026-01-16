@@ -53,5 +53,4 @@ export const SlideTemplates = {
   contactSlide: ContactSlide,
 
   eq: EqSlide,
-  svgPointer: SvgPointerSlide
 };

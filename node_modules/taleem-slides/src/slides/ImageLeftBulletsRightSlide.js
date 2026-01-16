@@ -1,4 +1,3 @@
-// ImageLeftBulletsRightSlide.js
 export const ImageLeftBulletsRightSlide = {
   type: "imageLeftBulletsRight",
 
@@ -6,9 +5,9 @@ export const ImageLeftBulletsRightSlide = {
     const image = raw.data?.find(d => d.name === "image")?.content;
     const bullets = raw.data
       ?.filter(d => d.name === "bullet")
-      .map(d => ({ content: d.content }));
+      .map(d => d.content);
 
-    if (!image || !bullets?.length) {
+    if (!image || !bullets || bullets.length === 0) {
       throw new Error("imageLeftBulletsRight: image and bullets required");
     }
 
@@ -17,21 +16,14 @@ export const ImageLeftBulletsRightSlide = {
       image,
       bullets,
 
-      render({ visibleCount = bullets.length, activeIndex = null } = {}) {
+      render({ visibleCount = bullets.length } = {}) {
         return `
           <section class="slide imageLeftBulletsRight">
             <img src="${image}" alt="" />
             <ul>
-              ${bullets.map((b, i) => {
-                if (i >= visibleCount) return "";
-                const cls =
-                  i === activeIndex
-                    ? "is-active"
-                    : i < activeIndex
-                    ? "is-dim"
-                    : "";
-                return `<li class="${cls}">${b.content}</li>`;
-              }).join("")}
+              ${bullets.map((text, i) =>
+                i < visibleCount ? `<li>${text}</li>` : ""
+              ).join("")}
             </ul>
           </section>
         `;

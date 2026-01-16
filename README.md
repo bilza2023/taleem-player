@@ -1,33 +1,54 @@
 
 # 📦 taleem-player
 
-**taleem-player** is a **headless, time-driven playback engine** for Taleem slide decks.
+**taleem-player** is a **time-driven player** for **Taleem slides**.
+
+It plays slide decks rendered by `taleem-slides`, using **time** instead of index.
 
 It is designed for:
 
-* timed presentations
 * narrated lessons
+* timed presentations
 * audio / video–synced slides
 * external playback control
 
-At its core, `taleem-player` does one thing well:
+At its core, `taleem-player` does one thing:
 
-> **Given a valid deck and a clock, decide which slide should be active and when.**
+> **Given a player-ready deck and a time value, render the correct Taleem slide.**
 
-It does **not** render slides.
-It does **not** define layouts.
-It does **not** ship CSS.
+It does **not** author decks.
+It does **not** fix data.
+It does **not** manage time.
 
-Those responsibilities belong elsewhere.
+---
+
+## 🌐 Live Docs, Demo & Reference (START HERE)
+
+👉 **[https://bilza2023.github.io/taleem](https://bilza2023.github.io/taleem)**
+
+This website is the **official reference** for the Taleem system.
+
+It shows:
+
+* all supported slide types
+* real visual behavior
+* actual rendered output
+* examples and demos
+
+If anything in this README feels unclear:
+
+> **The website is the final authority.**
+
+The README explains *rules*.
+The website shows *results*.
 
 ---
 
 ## Core idea
 
-A slide deck can be interpreted in **time**, not just order.
+Slides are not just ordered — they are placed on a **timeline**.
 
-`taleem-player` treats a deck as a **timeline**, where each slide occupies a
-known interval:
+`taleem-player` treats a deck as time intervals:
 
 ```text
 [start ─────────── end)
@@ -35,10 +56,12 @@ known interval:
 
 At any given moment:
 
-* exactly one slide may be active
-* or no slide (before / after the timeline)
+* one slide may be active
+* or no slide (before or after the timeline)
 
-The player’s job is to **resolve time → slide** and notify a renderer.
+The player’s job is simple:
+
+> **time → slide → render**
 
 ---
 
@@ -46,48 +69,45 @@ The player’s job is to **resolve time → slide** and notify a renderer.
 
 `taleem-player`:
 
-* Accepts a **deck-v1 JSON object**
-* Enforces **strict timing validity**
+* Accepts a **player-ready deck-v1**
+* Assumes **valid timing**
 * Owns a single DOM stage
-* Resolves the active slide for a given time
-* Calls an injected **renderer**
-* Supports **scrubbing, autoplay, pause, stop**
-* Is completely **renderer-agnostic**
+* Resolves which slide is active at a given time
+* Renders slides using **taleem-slides**
+* Exposes a **minimal API**
 
-The public API is intentionally small:
+Public API:
 
 ```js
 player.renderAt(time)
 player.destroy()
 ```
 
-Higher-level controls (play, pause, keyboard, UI) are built **on top**, not inside.
+Time always comes from **outside**.
 
 ---
 
 ## What this library intentionally does NOT do
 
-This is not accidental — it is a design boundary.
-
 `taleem-player` does **not**:
 
+* validate deck schemas
+* auto-generate timings
+* fix broken decks
 * define slide layouts
-* ship or inject CSS
-* depend on `taleem-slides`
-* interpret slide content
-* infer or auto-fix timings
+* ship CSS
 * manage audio or narration
-* expose internal state
-* depend on any framework
+* play / pause / autoplay
+* own clocks or intervals
 
-If a deck is invalid, the player **throws**.
-If rendering looks wrong, the renderer is responsible.
+If a deck is wrong, the player may break.
+This is intentional.
 
 ---
 
 ## Strict timing model (important)
 
-`taleem-player` only accepts **player-ready decks**.
+> **NOTE: taleem-player assumes a *player-ready deck*.**
 
 Every slide **must** define:
 
@@ -100,141 +120,96 @@ Every slide **must** define:
 
 Rules:
 
-* `start` and `end` are **absolute seconds**
+* time unit is **seconds**
+* fractional seconds are allowed (e.g. `3.1`, `3.75`)
 * `end` must be greater than `start`
-* No implicit inheritance
-* No auto-injection
-* No browser-style forgiveness
+* timings must be monotonic
+* no auto-injection
+* no browser forgiveness
 
-This strictness is intentional and non-negotiable.
+Deck preparation happens **before** the player
+(e.g. via tooling like `assignMockTimings`).
 
 ---
 
-## Renderer contract
+## Rendering model
 
-`taleem-player` does not know how slides look.
+`taleem-player` renders **Taleem slides**.
 
-Instead, it calls a renderer with this contract:
+Internally it:
 
-```js
-renderer.render({
-  mount,   // HTMLElement
-  slide,   // full slide JSON
-  time     // absolute time (seconds)
-})
-```
+1. Finds the active slide for the given time
+2. Computes minimal render state
+3. Uses `taleem-slides` to generate HTML
+4. Injects HTML into a single stage
 
-That’s it.
-
-How the slide is rendered — HTML, SVG, Canvas, WebGL — is **not the player’s concern**.
+Rendering is **deterministic** and **stateless**.
 
 ---
 
 ## Relationship to other Taleem libraries
 
-`taleem-player` is part of a **layered system**.
+`taleem-player` is part of a small, focused system.
 
-### Lower-level
+### **taleem-core**
 
-**taleem-slides**
-Pure slide renderer.
-Converts slide JSON into HTML + CSS.
+Defines schemas and canonical (golden) decks.
 
-### Higher-level
+### **taleem-slides**
 
-**Taleem demo app**
-Wires together:
+Renders slide JSON into HTML + CSS.
 
-* `taleem-player`
-* `taleem-slides`
-* playback controls
-* UI
+### **taleem-browser**
 
-### Sibling
-
-**taleem-browser**
 Index-based slide viewer (no time).
 
-Each library has **one responsibility**.
-They are composed — never merged.
+### **Apps / demos**
+
+Own time, UI, controls, audio, narration.
+
+Each library does **one job**.
+They are composed, not mixed.
 
 ---
 
-## Why this library exists
-
-`taleem-browser` treats slides as a **document**.
-`taleem-player` treats slides as a **timeline**.
-
-Both are valid interpretations.
-
-By separating them:
-
-* timed playback does not pollute browsing logic
-* rendering does not pollute playback logic
-* decks remain portable JSON documents
-
-This separation allows:
-
-* narration sync
-* recorded lessons
-* adaptive playback
-* multiple renderers
-
-without rewriting the core.
-
----
-
-## Typical usage (composition layer)
+## Typical usage
 
 ```js
 import { createTaleemPlayer } from "taleem-player";
-import { createSlidesRenderer } from "taleem-slides";
-import "taleem-slides/dist/taleem.css";
-
-const renderer = createSlidesRenderer();
 
 const player = createTaleemPlayer({
   mount: "#app",
-  deck,
-  renderer
+  deck // must be player-ready
 });
 
 // external clock
 player.renderAt(12.5);
 ```
 
-The **player** never imports slides.
-The **slides** never import the player.
-The **app** composes them.
+`taleem-player` never controls time.
+Time always belongs to the app.
 
 ---
 
 ## Design philosophy (locked)
 
 * Time is external
-* Rendering is replaceable
-* Strictness beats convenience
+* Slides are deterministic
+* Seconds are enough
 * Libraries stay small
-* Composition happens at the edge
+* Control lives at the top
 
-> **A player decides *when*.
-> A renderer decides *how*.
-> An app decides *why*.**
+> **The player decides *what* to show.**
+> **The app decides *when* and *why*.**
 
 ---
 
 ## Project status
 
-**Core complete and stable.**
+**Release Candidate (API locked).**
 
-Future work belongs in:
-
-* demo applications
-* playback UI layers
-* renderers
-* authoring tools
-
-The player itself should change rarely.
+Only bug fixes should follow.
+No new concepts belong here.
 
 ---
 

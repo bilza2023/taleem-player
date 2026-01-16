@@ -1,10 +1,11 @@
-// ImageWithTitleSlide.js
+
 export const ImageWithTitleSlide = {
   type: "imageWithTitle",
 
   fromJSON(raw) {
     const src = raw.data?.find(d => d.name === "image")?.content;
     const title = raw.data?.find(d => d.name === "title")?.content;
+
     if (!src || !title) {
       throw new Error("imageWithTitle: image and title required");
     }

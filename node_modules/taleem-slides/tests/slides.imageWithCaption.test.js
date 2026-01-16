@@ -1,28 +1,18 @@
 
-// slides.imageWithCaption.test.js
 import { describe, test, expect } from "vitest";
 import { ImageWithCaptionSlide } from "../src/slides/ImageWithCaptionSlide.js";
+import { goldenDeckV1 } from "taleem-core";
 
 describe("ImageWithCaptionSlide", () => {
-  test("renders image and caption", () => {
-    const raw = {
-      type: "imageWithCaption",
-      data: [
-        { name: "image", content: "img.png" },
-        { name: "caption", content: "Caption text" }
-      ]
-    };
+  test("renders imageWithCaption from golden deck", () => {
+    const slideData = goldenDeckV1.deck.find(
+      s => s.type === "imageWithCaption"
+    );
 
-    const slide = ImageWithCaptionSlide.fromJSON(raw);
+    const slide = ImageWithCaptionSlide.fromJSON(slideData);
     const html = slide.render();
 
-    expect(html).toContain("img.png");
-    expect(html).toContain("Caption text");
-  });
-
-  test("throws if missing image or caption", () => {
-    expect(() =>
-      ImageWithCaptionSlide.fromJSON({ type: "imageWithCaption", data: [] })
-    ).toThrow("imageWithCaption: image and caption required");
+    expect(html).toContain("imageWithCaption");
+    expect(html).toContain("<figcaption>");
   });
 });

@@ -1,26 +1,31 @@
-// CornerWordsSlide.js
+
 export const CornerWordsSlide = {
   type: "cornerWordsSlide",
 
   fromJSON(raw) {
-    const words = raw.data
-      ?.filter(d => d.name === "word")
-      .map(d => ({ content: d.content }));
+    const cards = raw.data
+      ?.filter(d => d.name === "card")
+      .map(d => ({ icon: d.icon, label: d.label }));
 
-    if (!words?.length) {
-      throw new Error("cornerWordsSlide: requires at least one word");
+    if (!cards || cards.length === 0) {
+      throw new Error("cornerWordsSlide: requires at least one card");
     }
 
     return Object.freeze({
       type: "cornerWordsSlide",
-      words,
+      cards,
 
-      render({ visibleCount = words.length } = {}) {
+      render({ visibleCount = cards.length } = {}) {
         return `
           <section class="slide cornerWordsSlide">
-            ${words.map((w, i) => {
+            ${cards.map((c, i) => {
               if (i >= visibleCount) return "";
-              return `<span class="corner-word corner-${i + 1}">${w.content}</span>`;
+              return `
+                <span class="corner-card corner-${i + 1}">
+                  <span class="icon">${c.icon}</span>
+                  <span class="label">${c.label}</span>
+                </span>
+              `;
             }).join("")}
           </section>
         `;

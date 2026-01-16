@@ -1,6 +1,4 @@
-
-
-// TitleAndSubtitleSlide.js
+// src/slides/TitleAndSubtitleSlide.js
 export const TitleAndSubtitleSlide = {
   type: "titleAndSubtitle",
 
@@ -14,9 +12,6 @@ export const TitleAndSubtitleSlide = {
 
     return Object.freeze({
       type: "titleAndSubtitle",
-      title,
-      subtitle,
-
       render() {
         return `
           <section class="slide titleAndSubtitle">

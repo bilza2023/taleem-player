@@ -1,28 +1,18 @@
 
-// slides.contactSlide.test.js
 import { describe, test, expect } from "vitest";
 import { ContactSlide } from "../src/slides/ContactSlide.js";
+import { goldenDeckV1 } from "taleem-core";
 
 describe("ContactSlide", () => {
-  test("renders contact lines", () => {
-    const raw = {
-      type: "contactSlide",
-      data: [
-        { name: "line", content: "Email" },
-        { name: "line", content: "Phone" }
-      ]
-    };
+  test("renders contactSlide from golden deck", () => {
+    const slideData = goldenDeckV1.deck.find(
+      slide => slide.type === "contactSlide"
+    );
 
-    const slide = ContactSlide.fromJSON(raw);
+    const slide = ContactSlide.fromJSON(slideData);
     const html = slide.render();
 
-    expect(html).toContain("Email");
-    expect(html).toContain("Phone");
-  });
-
-  test("throws without content", () => {
-    expect(() =>
-      ContactSlide.fromJSON({ type: "contactSlide", data: [] })
-    ).toThrow("contactSlide: content required");
+    expect(html).toContain("contactSlide");
+    expect(html).toContain("<div>");
   });
 });

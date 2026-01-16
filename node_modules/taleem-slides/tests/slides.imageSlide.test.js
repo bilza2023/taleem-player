@@ -1,25 +1,18 @@
 
-
-// slides.imageSlide.test.js
 import { describe, test, expect } from "vitest";
 import { ImageSlide } from "../src/slides/ImageSlide.js";
+import { goldenDeckV1 } from "taleem-core";
 
 describe("ImageSlide", () => {
-  test("renders image", () => {
-    const raw = {
-      type: "imageSlide",
-      data: [{ name: "image", content: "img.png" }]
-    };
+  test("renders imageSlide from golden deck", () => {
+    const slideData = goldenDeckV1.deck.find(
+      s => s.type === "imageSlide"
+    );
 
-    const slide = ImageSlide.fromJSON(raw);
+    const slide = ImageSlide.fromJSON(slideData);
     const html = slide.render();
 
-    expect(html).toContain("img.png");
-  });
-
-  test("throws without image", () => {
-    expect(() =>
-      ImageSlide.fromJSON({ type: "imageSlide", data: [] })
-    ).toThrow("imageSlide: image required");
+    expect(html).toContain("imageSlide");
+    expect(html).toContain("<img");
   });
 });

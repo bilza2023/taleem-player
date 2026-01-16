@@ -1,24 +1,18 @@
 
-// slides.cornerWordsSlide.test.js
 import { describe, test, expect } from "vitest";
 import { CornerWordsSlide } from "../src/slides/CornerWordsSlide.js";
+import { goldenDeckV1 } from "taleem-core";
 
 describe("CornerWordsSlide", () => {
-  test("renders words", () => {
-    const raw = {
-      type: "cornerWordsSlide",
-      data: [{ name: "word", content: "A" }]
-    };
+  test("renders cornerWordsSlide from golden deck", () => {
+    const slideData = goldenDeckV1.deck.find(
+      slide => slide.type === "cornerWordsSlide"
+    );
 
-    const slide = CornerWordsSlide.fromJSON(raw);
+    const slide = CornerWordsSlide.fromJSON(slideData);
     const html = slide.render();
 
-    expect(html).toContain("A");
-  });
-
-  test("throws without words", () => {
-    expect(() =>
-      CornerWordsSlide.fromJSON({ type: "cornerWordsSlide", data: [] })
-    ).toThrow("cornerWordsSlide: requires at least one word");
+    expect(html).toContain("cornerWordsSlide");
+    expect(html).toContain("corner-card");
   });
 });

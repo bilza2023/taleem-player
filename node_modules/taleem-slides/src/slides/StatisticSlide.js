@@ -1,24 +1,23 @@
-// StatisticSlide.js
 export const StatisticSlide = {
   type: "statistic",
 
   fromJSON(raw) {
     const label = raw.data?.find(d => d.name === "label")?.content;
-    const value = raw.data?.find(d => d.name === "value")?.content;
+    const number = raw.data?.find(d => d.name === "number")?.content;
 
-    if (!label || value === undefined) {
-      throw new Error("statistic: requires label and value");
+    if (!label || number === undefined) {
+      throw new Error("statistic: requires number and label");
     }
 
     return Object.freeze({
       type: "statistic",
       label,
-      value,
+      number,
 
       render() {
         return `
           <section class="slide statistic">
-            <div class="stat-value">${value}</div>
+            <div class="stat-value">${number}</div>
             <div class="stat-label">${label}</div>
           </section>
         `;

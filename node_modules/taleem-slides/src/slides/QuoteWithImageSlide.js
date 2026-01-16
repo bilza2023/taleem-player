@@ -1,10 +1,9 @@
-// QuoteWithImageSlide.js
 export const QuoteWithImageSlide = {
   type: "quoteWithImage",
 
   fromJSON(raw) {
-    const quote = raw.data?.find(d => d.name === "quote")?.content;
-    const image = raw.data?.find(d => d.name === "image")?.content;
+    const quote  = raw.data?.find(d => d.name === "quote")?.content;
+    const image  = raw.data?.find(d => d.name === "image")?.content;
     const author = raw.data?.find(d => d.name === "author")?.content;
 
     if (!quote || !image) {

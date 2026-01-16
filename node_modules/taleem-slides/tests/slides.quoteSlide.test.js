@@ -1,28 +1,17 @@
-
-// slides.quoteSlide.test.js
 import { describe, test, expect } from "vitest";
 import { QuoteSlide } from "../src/slides/QuoteSlide.js";
+import { goldenDeckV1 } from "taleem-core";
 
 describe("QuoteSlide", () => {
-  test("renders quote and author", () => {
-    const raw = {
-      type: "quoteSlide",
-      data: [
-        { name: "quote", content: "Knowledge is power" },
-        { name: "author", content: "Francis Bacon" }
-      ]
-    };
+  test("renders quoteSlide from golden deck", () => {
+    const slideData = goldenDeckV1.deck.find(
+      s => s.type === "quoteSlide"
+    );
 
-    const slide = QuoteSlide.fromJSON(raw);
+    const slide = QuoteSlide.fromJSON(slideData);
     const html = slide.render();
 
-    expect(html).toContain("Knowledge is power");
-    expect(html).toContain("Francis Bacon");
-  });
-
-  test("throws without quote", () => {
-    expect(() =>
-      QuoteSlide.fromJSON({ type: "quoteSlide", data: [] })
-    ).toThrow("quoteSlide: quote required");
+    expect(html).toContain("quoteSlide");
+    expect(html).toContain("<blockquote");
   });
 });

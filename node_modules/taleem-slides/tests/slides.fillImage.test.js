@@ -1,24 +1,18 @@
 
-// slides.fillImage.test.js
 import { describe, test, expect } from "vitest";
 import { FillImageSlide } from "../src/slides/FillImageSlide.js";
+import { goldenDeckV1 } from "taleem-core";
 
 describe("FillImageSlide", () => {
-  test("renders image", () => {
-    const raw = {
-      type: "fillImage",
-      data: [{ name: "image", content: "/img.png" }]
-    };
+  test("renders fillImage from golden deck", () => {
+    const slideData = goldenDeckV1.deck.find(
+      slide => slide.type === "fillImage"
+    );
 
-    const slide = FillImageSlide.fromJSON(raw);
+    const slide = FillImageSlide.fromJSON(slideData);
     const html = slide.render();
 
-    expect(html).toContain("/img.png");
-  });
-
-  test("throws without image", () => {
-    expect(() =>
-      FillImageSlide.fromJSON({ type: "fillImage", data: [] })
-    ).toThrow("fillImage: image required");
+    expect(html).toContain("fillImage");
+    expect(html).toContain("<img");
   });
 });

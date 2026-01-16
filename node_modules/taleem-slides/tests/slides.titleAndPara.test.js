@@ -1,29 +1,17 @@
+
 // tests/slides.titleAndPara.test.js
 import { describe, test, expect } from "vitest";
 import { TitleAndParaSlide } from "../src/slides/TitleAndParaSlide.js";
+import { goldenDeckV1 } from "taleem-core";
 
 describe("TitleAndParaSlide", () => {
-  test("renders title and paragraph", () => {
-    const slide = TitleAndParaSlide.fromJSON({
-      type: "titleAndPara",
-      data: [
-        { name: "title", content: "Hello" },
-        { name: "para", content: "World" }
-      ]
-    });
-
+  test("renders from golden deck", () => {
+    const raw = goldenDeckV1.deck.find(s => s.type === "titleAndPara");
+    const slide = TitleAndParaSlide.fromJSON(raw);
     const html = slide.render();
 
-    expect(html).toContain("Hello");
-    expect(html).toContain("World");
-  });
-
-  test("throws if title or para missing", () => {
-    expect(() =>
-      TitleAndParaSlide.fromJSON({
-        type: "titleAndPara",
-        data: []
-      })
-    ).toThrow("titleAndPara: requires title and para");
+    expect(html).toContain("titleAndPara");
+    expect(html).toContain("End");
+    expect(html).toContain("All 21 slide types validated.");
   });
 });

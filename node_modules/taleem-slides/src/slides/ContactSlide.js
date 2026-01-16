@@ -1,11 +1,10 @@
-// ContactSlide.js
 export const ContactSlide = {
   type: "contactSlide",
 
   fromJSON(raw) {
-    const items = raw.data?.map(d => ({ content: d.content }));
+    const items = raw.data?.map(d => d.content);
 
-    if (!items?.length) {
+    if (!items || items.length === 0) {
       throw new Error("contactSlide: content required");
     }
 
@@ -16,7 +15,7 @@ export const ContactSlide = {
       render() {
         return `
           <section class="slide contactSlide">
-            ${items.map(i => `<div>${i.content}</div>`).join("")}
+            ${items.map(text => `<div>${text}</div>`).join("")}
           </section>
         `;
       }

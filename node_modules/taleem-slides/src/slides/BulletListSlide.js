@@ -1,13 +1,12 @@
-// BulletListSlide.js
 export const BulletListSlide = {
   type: "bulletList",
 
   fromJSON(raw) {
     const bullets = raw.data
       ?.filter(d => d.name === "bullet")
-      .map(d => ({ content: d.content }));
+      .map(d => d.content);
 
-    if (!bullets?.length) {
+    if (!bullets || bullets.length === 0) {
       throw new Error("bulletList: requires at least one bullet");
     }
 
@@ -19,15 +18,15 @@ export const BulletListSlide = {
         return `
           <section class="slide bulletList">
             <ul>
-              ${bullets.map((b, i) => {
+              ${bullets.map((text, i) => {
                 if (i >= visibleCount) return "";
                 const cls =
                   i === activeIndex
                     ? "is-active"
-                    : i < activeIndex
+                    : activeIndex !== null && i < activeIndex
                     ? "is-dim"
                     : "";
-                return `<li class="${cls}">${b.content}</li>`;
+                return `<li class="${cls}">${text}</li>`;
               }).join("")}
             </ul>
           </section>

@@ -1,16 +1,16 @@
-// BarChartSlide.js
 export const BarChartSlide = {
   type: "barChart",
 
   fromJSON(raw) {
+    // Consume canonical deck-v1 shape directly
     const bars = raw.data
       ?.filter(d => d.name === "bar")
       .map(d => ({
-        label: d.content.label,
-        value: d.content.value
+        label: d.label,
+        value: d.value
       }));
 
-    if (!bars?.length) {
+    if (!bars || bars.length === 0) {
       throw new Error("barChart: requires at least one bar");
     }
 
@@ -27,7 +27,7 @@ export const BarChartSlide = {
                 const cls =
                   i === activeIndex
                     ? "is-active"
-                    : i < activeIndex
+                    : activeIndex !== null && i < activeIndex
                     ? "is-dim"
                     : "";
                 return `

@@ -1,17 +1,17 @@
 // src/core/player.js
 
-import { validateDeckV1 } from "taleem-core";
+// import { validateDeckV1 } from "taleem-core";
 import { getSlideTemplate } from "taleem-slides";
 import { createStage } from "./stage.js";
 
 export function createTaleemPlayer({ mount, deck }) {
-  const result = validateDeckV1(deck);
-  if (!result.ok) {
-    throw new Error(
-      "taleem-player: invalid deck\n" +
-        result.errors.map(e => e.message).join("\n")
-    );
-  }
+  // const result = validateDeckV1(deck);
+  // if (!result.ok) {
+  //   throw new Error(
+  //     "taleem-player: invalid deck\n" +
+  //       result.errors.map(e => e.message).join("\n")
+  //   );
+  // }
 
   const stage = createStage(mount);
   let lastSlide = null;

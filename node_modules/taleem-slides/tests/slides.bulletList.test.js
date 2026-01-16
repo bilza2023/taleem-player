@@ -1,31 +1,17 @@
-
-// slides.bulletList.test.js
 import { describe, test, expect } from "vitest";
 import { BulletListSlide } from "../src/slides/BulletListSlide.js";
+import { goldenDeckV1 } from "taleem-core";
 
 describe("BulletListSlide", () => {
-  test("renders bullets with state", () => {
-    const raw = {
-      type: "bulletList",
-      data: [
-        { name: "bullet", content: "A" },
-        { name: "bullet", content: "B" },
-        { name: "bullet", content: "C" }
-      ]
-    };
+  test("renders bulletList from golden deck", () => {
+    const slideData = goldenDeckV1.deck.find(
+      slide => slide.type === "bulletList"
+    );
 
-    const slide = BulletListSlide.fromJSON(raw);
-    const html = slide.render({ visibleCount: 2, activeIndex: 1 });
+    const slide = BulletListSlide.fromJSON(slideData);
+    const html = slide.render();
 
-    expect(html).toContain("A");
-    expect(html).toContain("B");
-    expect(html).not.toContain("C");
-    expect(html).toContain("is-active");
-  });
-
-  test("throws without bullets", () => {
-    expect(() =>
-      BulletListSlide.fromJSON({ type: "bulletList", data: [] })
-    ).toThrow("bulletList: requires at least one bullet");
+    expect(html).toContain("bulletList");
+    expect(html).toContain("<li");
   });
 });

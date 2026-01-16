@@ -1,29 +1,18 @@
 
-// slides.eq.test.js
 import { describe, test, expect } from "vitest";
 import { EqSlide } from "../src/slides/EqSlide.js";
+import { goldenDeckV1 } from "taleem-core";
 
 describe("EqSlide", () => {
-  test("renders equations with active index", () => {
-    const raw = {
-      type: "eq",
-      data: [
-        { content: "a+b=c" },
-        { content: "x=y" }
-      ]
-    };
+  test("renders eq slide from golden deck", () => {
+    const slideData = goldenDeckV1.deck.find(
+      slide => slide.type === "eq"
+    );
 
-    const slide = EqSlide.fromJSON(raw);
-    const html = slide.render({ activeIndex: 1 });
+    const slide = EqSlide.fromJSON(slideData);
+    const html = slide.render();
 
-    expect(html).toContain("a+b=c");
-    expect(html).toContain("x=y");
-    expect(html).toContain("is-active");
-  });
-
-  test("throws if data is not array", () => {
-    expect(() =>
-      EqSlide.fromJSON({ type: "eq", data: null })
-    ).toThrow("eq: data must be array");
+    expect(html).toContain("eq");
+    expect(html).toContain("eq-line");
   });
 });

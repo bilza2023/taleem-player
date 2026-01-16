@@ -1,4 +1,3 @@
-// ImageSlide.js
 export const ImageSlide = {
   type: "imageSlide",
 
