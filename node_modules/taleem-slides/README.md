@@ -1,71 +1,77 @@
 
 # 📦 taleem-slides
 
-> **Simple HTML slide templates for JSON-based presentations**
+> **Render slide JSON → HTML (nothing more, nothing less)**
 
-`taleem-slides` is a **small, focused library** that turns
-**plain slide JSON** into **HTML**.
+`taleem-slides` is a **small, focused rendering library**.
+It takes **validated slide JSON** and returns **HTML strings** using fixed, opinionated layouts.
 
-You give it slide data.  
-It gives you HTML.
-
-That’s it.
-
----
-
-## 🌐 Live Docs, Demo & Reference (START HERE)
-
-👉 **https://bilza2023.github.io/taleem**
-
-This site is the **official reference** for:
-
-- all supported slide types
-- visual behavior
-- real rendered output
-- examples and demos
-
-If something is unclear in this README,  
-**the website is the final authority**.
+No player.
+No timing.
+No DOM.
+Just HTML.
 
 ---
 
-## ✅ What this library does
+## 🌐 Live Reference (Authoritative)
 
-- Converts slide JSON into HTML
-- Uses fixed, opinionated layouts
-- Applies simple state-based CSS classes
-- Works in any JS environment (browser, player, SSR)
+👉 **[https://bilza2023.github.io/taleem](https://bilza2023.github.io/taleem)**
+
+This site is the **source of truth** for:
+
+* supported slide types
+* exact visual layouts
+* real rendered output
+* examples and behavior
+
+If something here and the site disagree, **the site wins**.
 
 ---
 
-## ❌ What this library does NOT do
+## ✅ What taleem-slides DOES
+
+* Converts slide JSON into HTML
+* Implements fixed slide layouts
+* Applies minimal state-based CSS classes
+* Works in browser, player, SSR, or Node
+
+---
+
+## ❌ What taleem-slides DOES NOT do
 
 `taleem-slides` does **not**:
 
-- play slides
-- manage time or animations
-- navigate slides
-- validate full decks
-- touch the DOM
-- apply CSS styles
+* manage time or animations
+* navigate slides
+* validate decks or schemas
+* apply CSS
+* touch the DOM
+* control presentation flow
 
-It only returns HTML strings.
+Those responsibilities live **outside** this library.
 
 ---
 
 ## 🧠 Mental Model
 
 ```
-
-slide data + render state
+slide JSON
 ↓
 taleem-slides
 ↓
-HTML
+HTML string
+```
 
-````
+That’s it.
 
-How slides are shown, timed, or styled is **your responsibility**.
+How the HTML is:
+
+* shown
+* styled
+* animated
+* timed
+
+…is **your responsibility**.
 
 ---
 
@@ -73,13 +79,13 @@ How slides are shown, timed, or styled is **your responsibility**.
 
 ```bash
 npm install taleem-slides
-````
+```
 
 ---
 
 ## 🚀 Basic Usage
 
-### 1️⃣ Get a slide template
+### 1️⃣ Get a slide renderer
 
 ```js
 import { getSlideTemplate } from "taleem-slides";
@@ -89,7 +95,7 @@ const Slide = getSlideTemplate("bulletList");
 
 ---
 
-### 2️⃣ Load slide data
+### 2️⃣ Load slide JSON
 
 ```js
 const slide = Slide.fromJSON({
@@ -101,7 +107,11 @@ const slide = Slide.fromJSON({
 });
 ```
 
-`fromJSON()` reads and stores structure only.
+`fromJSON()`:
+
+* reads structure
+* prepares render logic
+* does **not** touch the DOM
 
 ---
 
@@ -114,13 +124,14 @@ const html = slide.render({
 });
 ```
 
+You decide what to do with the HTML.
+
 ---
 
-## 🎨 Render State (Simple)
+## 🎛 Render State (Minimal)
 
-Render state is just a plain object.
-
-Common fields:
+Render state is a plain object.
+Only pass what you need.
 
 ```ts
 {
@@ -129,13 +140,13 @@ Common fields:
 }
 ```
 
-Each slide uses only what it needs.
+Each slide reads only the fields it cares about.
 
 ---
 
-## 🎯 CSS Class Contract
+## 🎨 CSS Contract (Very Small)
 
-Slides emit only these state classes:
+Slides may emit these state classes only:
 
 ```text
 .is-active
@@ -143,64 +154,58 @@ Slides emit only these state classes:
 .is-hidden
 ```
 
-You control **all styling**.
+All layout, color, animation, and transitions are **external**.
 
 ---
 
-## 🧩 Supported Slide Types
+## 🧩 Supported Slides
 
-See the **live site** for visuals and examples:
+See the live reference for visuals and examples:
 
 👉 [https://bilza2023.github.io/taleem](https://bilza2023.github.io/taleem)
 
-Supported categories include:
+Categories include:
 
-* titles and text slides
+* titles and text
 * bullet lists and columns
 * images and image+text layouts
 * tables and charts
-* quotes and stats
+* quotes, stats, and numbers
 * equation slides
 
 Layouts are **fixed by design**.
-
-If you need a new layout, you add a new template.
+New layouts = new slide templates.
 
 ---
 
-## 🧪 Stability & Guarantees
+## 🧪 Guarantees
 
 * Deterministic output
 * No hidden state
 * No configuration knobs
 * Same input → same HTML
 
+Safe to cache. Safe to reuse.
+
+---
+
+## 📍 Where it fits
+
+`taleem-slides` can be used:
+
+* directly in browsers
+* inside presentation players
+* in SSR pipelines
+* in static generators
+* in educational tools
+
+It is intentionally small so it can sit **anywhere**.
+
 ---
 
 ## 🔒 Design Principle
 
-> **This library renders HTML only.
-> It does not decide when or how slides appear.**
+> **Render HTML only.
+> Never control presentation logic.**
 
 ---
-
-## 📍 Where this fits
-
-`taleem-slides` is meant to be used by:
-
-* slide viewers
-* presentation players
-* educational tools
-* static or dynamic renderers
-
-It is intentionally small so it can be reused everywhere.
-
----
-
-## ✅ Status
-
-* Actively used
-* Fully tested
-* Backed by live reference site
-* Ready for production
-
