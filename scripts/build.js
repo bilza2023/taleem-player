@@ -1,5 +1,6 @@
 import { build } from "esbuild";
 import fs from "fs";
+import path from "path";
 
 const dist = "dist";
 
@@ -27,5 +28,13 @@ await build({
   platform: "browser",
   sourcemap: false
 });
+
+// ---- CSS: copy styles ----
+fs.mkdirSync("dist/css/themes", { recursive: true });
+
+fs.copyFileSync("src/css/taleem.css", "dist/css/taleem.css");
+fs.copyFileSync("src/css/themes/dark.css", "dist/css/themes/dark.css");
+fs.copyFileSync("src/css/themes/light.css", "dist/css/themes/light.css");
+fs.copyFileSync("src/css/themes/paper.css", "dist/css/themes/paper.css");
 
 console.log("✔ taleem-player build complete");

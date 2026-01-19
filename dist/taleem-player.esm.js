@@ -590,7 +590,7 @@ function getSlideTemplate(type) {
   return template;
 }
 
-// src/core/stage.js
+// src/engines/player/stage.js
 function createStage(mount) {
   if (!mount) throw new Error("taleem-player: mount is required");
   const root = typeof mount === "string" ? document.querySelector(mount) : mount;
@@ -615,7 +615,7 @@ function createStage(mount) {
   };
 }
 
-// src/core/player.js
+// src/engines/player/player.js
 function createTaleemPlayer({ mount, deck }) {
   const stage = createStage(mount);
   let lastSlide = null;
@@ -677,6 +677,118 @@ function createTaleemPlayer({ mount, deck }) {
     destroy
   };
 }
+
+// src/engines/browser/browser.js
+function createTaleemBrowser({ mount, deck }) {
+  if (!mount) {
+    throw new Error("taleem-browser: mount is required");
+  }
+  if (!deck || !Array.isArray(deck.deck)) {
+    throw new Error("taleem-browser: valid deck-v1 required");
+  }
+  const root = typeof mount === "string" ? document.querySelector(mount) : mount;
+  if (!root) {
+    throw new Error("taleem-browser: mount not found");
+  }
+  root.innerHTML = `
+    <div class="taleem-browser-bg"></div>
+    <div class="taleem-browser-slide"></div>
+  `;
+  const bgEl = root.querySelector(".taleem-browser-bg");
+  const slideEl = root.querySelector(".taleem-browser-slide");
+  applyBackground(bgEl, deck.background);
+  const slides = deck.deck.map((slideJSON, i) => {
+    if (!slideJSON.type) {
+      throw new Error(`taleem-browser: slide ${i} missing type`);
+    }
+    const Template = getSlideTemplate(slideJSON.type);
+    if (!Template) {
+      throw new Error(`taleem-browser: unknown slide type "${slideJSON.type}"`);
+    }
+    return Template.fromJSON(slideJSON);
+  });
+  const total = slides.length;
+  function render(index, renderState = {}) {
+    if (index < 0 || index >= total) return;
+    const slide = slides[index];
+    slideEl.innerHTML = slide.render(renderState);
+  }
+  return {
+    render,
+    getTotal() {
+      return total;
+    }
+  };
+}
+function applyBackground(el, bg = {}) {
+  el.style.position = "absolute";
+  el.style.inset = "0";
+  el.style.zIndex = "0";
+  el.style.backgroundColor = bg.backgroundColor || "#000";
+  el.style.backgroundImage = bg.backgroundImage ? `url(${bg.backgroundImage})` : "none";
+  el.style.backgroundSize = "cover";
+  el.style.backgroundPosition = "center";
+  el.style.opacity = bg.backgroundImageOpacity !== void 0 ? bg.backgroundImageOpacity : 1;
+}
+
+// src/utils/assignMockTimings.js
+function assignMockTimings(goldenDeck, slideDuration = 5) {
+  if (!goldenDeck || !Array.isArray(goldenDeck.deck) || typeof slideDuration !== "number") {
+    throw new Error("assignMockTimings: invalid deck or slideDuration");
+  }
+  let currentTime = 0;
+  const deckWithTimings = {
+    ...goldenDeck,
+    deck: goldenDeck.deck.map((slide) => {
+      const start = currentTime;
+      const end = start + slideDuration;
+      currentTime = end;
+      const data = Array.isArray(slide.data) ? slide.data.map((item) => ({
+        ...item,
+        showAt: start + (typeof item.showAt === "number" ? item.showAt : 0)
+      })) : slide.data;
+      return {
+        ...slide,
+        start,
+        end,
+        data
+      };
+    })
+  };
+  return deckWithTimings;
+}
+
+// src/utils/resolveAssetPaths.js
+function resolveAssetPaths(deck, IMG_BASE) {
+  if (deck.background?.backgroundImage && typeof deck.background.backgroundImage === "string") {
+    deck.background.backgroundImage = IMG_BASE + deck.background.backgroundImage.split("/").pop();
+  }
+  deck.deck.forEach((slide) => {
+    slide.data?.forEach((item) => {
+      if (item.name === "image" && typeof item.content === "string") {
+        item.content = IMG_BASE + item.content.split("/").pop();
+      }
+    });
+  });
+  return deck;
+}
+
+// src/utils/resolveBackground.js
+function resolveBackground2(deck, ASSET_BASE) {
+  if (!deck || !deck.background) return deck;
+  const bg = deck.background;
+  if (typeof bg.backgroundImage === "string" && bg.backgroundImage.length > 0) {
+    bg.backgroundImage = ASSET_BASE + bg.backgroundImage.split("/").pop();
+  }
+  if (bg.backgroundImageOpacity === void 0) {
+    bg.backgroundImageOpacity = 1;
+  }
+  return deck;
+}
 export {
-  createTaleemPlayer
+  assignMockTimings,
+  createTaleemBrowser,
+  createTaleemPlayer,
+  resolveAssetPaths,
+  resolveBackground2 as resolveBackground
 };
