@@ -2,7 +2,7 @@
 # Taleem Player
 
 
-<img src="https://raw.githubusercontent.com/bilza2023/taleem-player/main/docs/images/taleem.webp" alt="Taleem Player — JSON to Web Presentations" />
+<img src="./docs/images/taleem.webp" alt="Taleem Player — JSON to Web Presentations" />
 
 **Taleem Player** is a JavaScript library that converts **JSON slide data** into **web-based presentations**.
 
@@ -11,24 +11,21 @@ It provides multiple **modes** to display the same JSON presentation in differen
 ---
 ###### Work in progress. Expect minor bugs, but no API breakages.
 
-Demo and Documentation
-
-See Taleem Player in action:
+Demo and Documentation - See Taleem Player in action:
 
 👉 https://bilza2023.github.io/taleem/
 
 This live demo lets you explore:
 
-Browser Mode — instant, index-based slide rendering
+- Browser Mode — instant, index-based slide rendering
 
-Player Mode — time-driven, progressive presentations
+- Player Mode — time-driven, progressive presentations
 
-Real Taleem slide JSON used in production
+- Real Taleem slide JSON used in production
 
-Shared CSS system powering all display modes
+- Shared CSS system powering all display modes
 
-No screenshots. No mock data.
-What you see is the real engine running in the browser.
+ **No screenshots. No mock data.What you see is the real engine running in the browser.**
 ---
 
 ## What it does
