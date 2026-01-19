@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Taleem Schema</title>
+  <link rel="stylesheet" href="./docs.css" />
+</head>
+
+<body>
+  <div class="container">
+
+    <h1>Taleem JSON Schema</h1>
+
+    <p>
+      The Taleem schema defines what a presentation <em>is</em>.
+    </p>
+
+    <p>
+      It is a structural contract that describes the shape of a Taleem deck,
+      independent of how that deck is rendered, browsed, or played.
+    </p>
+
+    <h2>What the Schema Defines</h2>
+
+    <p>
+      The schema specifies:
+    </p>
+
+    <ul>
+      <li>the overall structure of a deck</li>
+      <li>the order of slides</li>
+      <li>the available slide types</li>
+      <li>the data fields each slide type accepts</li>
+    </ul>
+
+    <p>
+      If a JSON file follows this schema, it is a valid Taleem deck.
+    </p>
+
+    <h2>What the Schema Does Not Define</h2>
+
+    <p>
+      The schema does not include:
+    </p>
+
+    <ul>
+      <li>layout or visual styling</li>
+      <li>CSS or themes</li>
+      <li>animation or transitions</li>
+      <li>playback or timing behavior</li>
+      <li>application or UI logic</li>
+    </ul>
+
+    <p>
+      These concerns belong to the renderer and the application,
+      not the data format.
+    </p>
+
+    <h2>Pure Data Only</h2>
+
+    <p>
+      The Taleem schema contains only data.
+    </p>
+
+    <p>
+      There are no functions, callbacks, or executable logic.
+      This allows the same deck to be reused across different environments
+      without modification.
+    </p>
+
+    <h2>Explicit Slide Types</h2>
+
+    <p>
+      Every slide declares its type explicitly.
+    </p>
+
+    <p>
+      Each type accepts a fixed and known set of fields.
+      Unknown or malformed data is rejected rather than guessed.
+    </p>
+
+    <p>
+      This keeps rendering predictable and prevents silent layout drift.
+    </p>
+
+    <h2>Validation</h2>
+
+    <p>
+      A deck is considered valid only if it conforms fully to the schema.
+    </p>
+
+    <p>
+      There are no partial modes, fallbacks, or best-effort rendering.
+      Invalid data is treated as an error.
+    </p>
+
+    <h2>Why This Matters</h2>
+
+    <p>
+      Treating presentation content as structured data makes it possible to:
+    </p>
+
+    <ul>
+      <li>generate decks programmatically</li>
+      <li>render the same content in multiple ways</li>
+      <li>keep systems deterministic and testable</li>
+      <li>evolve renderers without rewriting content</li>
+    </ul>
+
+    <p>
+      The schema is the foundation that allows Taleem Player to remain stable
+      while applications and renderers change over time.
+    </p>
+
+    <div class="footer">
+      Taleem Player Docs
+    </div>
+
+  </div>
+</body>
+</html>

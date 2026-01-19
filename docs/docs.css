@@ -1,0 +1,167 @@
+/* docs.css – Taleem light documentation theme */
+:root {
+  /* base */
+  --bg: #ccc2b0;              /* warm cream paper */
+  --panel: #faf7f2;           /* raised paper */
+
+  /* text */
+  --fg: #2f2a25;              /* dark brown ink */
+  --muted: #6b6358;           /* soft brown gray */
+
+  /* accents */
+  --accent: #8b5e34;          /* leather brown */
+  --accent-strong: #6f4726;   /* darker coffee */
+
+  /* structure */
+  --border: #ded6c9;
+  --shadow: 0 6px 20px rgba(60,45,30,0.18);
+}
+
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  font-size: 25px;
+  line-height: 1.7;
+  font-weight: 400;
+}
+
+/* layout */
+
+.container {
+  max-width: 1700px;
+  margin: 0 auto;
+  padding: 48px 64px 96px;
+}
+
+/* headings */
+
+h1 {
+  font-size: 48px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 24px;
+}
+
+h2 {
+  margin-top: 72px;
+  margin-bottom: 16px;
+  font-size: 28px;
+  font-weight: 700;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+h3 {
+  margin-top: 48px;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+/* text */
+
+p {
+  margin: 18px 0;
+  max-width: 900px;
+}
+
+strong {
+  font-weight: 600;
+}
+
+/* blockquote */
+
+blockquote {
+  margin: 40px 0;
+  padding: 24px 32px;
+  background: var(--panel);
+  border-left: 4px solid var(--accent);
+  color: var(--fg);
+}
+
+/* lists */
+
+ul, ol {
+  margin: 24px 0;
+  padding-left: 28px;
+  max-width: 900px;
+}
+
+li {
+  margin: 10px 0;
+}
+
+/* links */
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* footer */
+
+.footer {
+  margin-top: 96px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+  font-size: 14px;
+  color: var(--muted);
+}
+
+/* code blocks */
+
+pre {
+  margin: 32px 0;
+  padding: 20px 24px;
+  background: #f6f8fa;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow-x: auto;
+}
+
+code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #1f2328;
+  white-space: pre;
+}
+
+/* inline code */
+
+p code,
+li code,
+h1 code,
+h2 code,
+h3 code {
+  background: #eef1f4;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+
+/* responsive */
+
+@media (max-width: 900px) {
+  body {
+    font-size: 18px;
+  }
+
+  h1 {
+    font-size: 36px;
+  }
+
+  .container {
+    padding: 32px 20px 64px;
+  }
+}

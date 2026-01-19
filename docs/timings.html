@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Slide Timing Rules</title>
+  <link rel="stylesheet" href="./docs.css" />
+</head>
+
+<body>
+  <div class="container">
+
+    <h1>Slide Timing Rules</h1>
+
+    <p>
+      Timing in Taleem is <strong>explicit and declarative</strong>.
+    </p>
+
+    <p>
+      All timing values describe <em>when something becomes visible</em>.
+      Nothing is inferred.
+    </p>
+
+    <h2>Slide-Level Timing</h2>
+
+    <p>
+      Every slide defines a visible time window.
+    </p>
+
+<pre><code>{
+  "start": 10,
+  "end": 20
+}</code></pre>
+
+    <p>
+      A slide is considered visible when:
+    </p>
+
+    <blockquote>
+      start ≤ currentTime &lt; end
+    </blockquote>
+
+    <h2>Item-Level Timing (<code>showAt</code>)</h2>
+
+    <p>
+      Items inside a slide may define <code>showAt</code>.
+    </p>
+
+<pre><code>{
+  "name": "bullet",
+  "content": "Key point",
+  "showAt": 12
+}</code></pre>
+
+    <p>
+      An item is visible when:
+    </p>
+
+    <blockquote>
+      currentTime ≥ showAt
+    </blockquote>
+
+    <h2>No Implicit Ordering</h2>
+
+    <p>
+      Item order does <strong>not</strong> control timing.
+    </p>
+
+    <p>
+      Only explicit time values matter.
+    </p>
+
+    <h2>Browser vs Player</h2>
+
+    <p>
+      Timing rules exist even if they are not used.
+    </p>
+
+    <ul>
+      <li>
+        <strong>Browser Engine</strong> ignores time
+      </li>
+      <li>
+        <strong>Player Engine</strong> enforces time
+      </li>
+    </ul>
+
+    <h2>What Timing Does NOT Do</h2>
+
+    <ul>
+      <li>animate content</li>
+      <li>create transitions</li>
+      <li>resolve overlaps</li>
+      <li>fix invalid ranges</li>
+    </ul>
+
+    <p>
+      Timing is a contract, not behavior.
+    </p>
+
+    <h2>Authoring Rule</h2>
+
+    <blockquote>
+      If something appears later, it must say when.
+    </blockquote>
+
+    <div class="footer">
+      Taleem Player Docs
+    </div>
+
+  </div>
+</body>
+</html>

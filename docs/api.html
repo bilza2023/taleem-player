@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Taleem Slide Schema — deck-v1</title>
+  <link rel="stylesheet" href="./docs.css" />
+</head>
+
+<body>
+  <div class="container">
+
+    <h1>Taleem Slide Schema — <code>deck-v1</code></h1>
+    <p><strong>Status:</strong> Stable · Frozen</p>
+
+    <p>
+      This document is the <strong>authoring reference</strong> for Taleem slides.
+      All examples below are valid, canonical, and safe to copy.
+    </p>
+
+    <h2>Deck Skeleton (with background)</h2>
+
+<pre><code>{
+  "version": "deck-v1",
+  "name": "Example Deck",
+  "background": {
+    "backgroundColor": "#0f172a",
+    "backgroundImage": "bg.png",
+    "backgroundImageOpacity": 0.15
+  },
+  "deck": [ /* slides */ ]
+}</code></pre>
+
+    <h2>Slide Grammar (applies to all slides)</h2>
+
+<pre><code>{
+  "type": "slideType",
+  "start": 0,
+  "end": 5,
+  "data": [ /* semantic items */ ]
+}</code></pre>
+
+    <h2>Canonical Slide Types</h2>
+
+    <h3>1. <code>titleSlide</code></h3>
+<pre><code>{
+  "type": "titleSlide",
+  "start": 0,
+  "end": 5,
+  "data": [
+    { "name": "title", "content": "My Title", "showAt": 0 }
+  ]
+}</code></pre>
+
+    <h3>2. <code>titleAndSubtitle</code></h3>
+<pre><code>{
+  "type": "titleAndSubtitle",
+  "start": 5,
+  "end": 10,
+  "data": [
+    { "name": "title", "content": "Main Title", "showAt": 5 },
+    { "name": "subtitle", "content": "Secondary line", "showAt": 6 }
+  ]
+}</code></pre>
+
+    <h3>3. <code>titleAndPara</code></h3>
+<pre><code>{
+  "type": "titleAndPara",
+  "start": 10,
+  "end": 15,
+  "data": [
+    { "name": "title", "content": "Concept", "showAt": 10 },
+    { "name": "para", "content": "Explanation text", "showAt": 11 }
+  ]
+}</code></pre>
+
+    <h3>4. <code>bulletList</code></h3>
+<pre><code>{
+  "type": "bulletList",
+  "start": 15,
+  "end": 20,
+  "data": [
+    { "name": "bullet", "content": "First point", "showAt": 15 },
+    { "name": "bullet", "content": "Second point", "showAt": 16 },
+    { "name": "bullet", "content": "Third point", "showAt": 17 }
+  ]
+}</code></pre>
+
+    <h3>5. <code>twoColumnText</code></h3>
+<pre><code>{
+  "type": "twoColumnText",
+  "start": 20,
+  "end": 25,
+  "data": [
+    { "name": "left", "content": "Left column text", "showAt": 20 },
+    { "name": "right", "content": "Right column text", "showAt": 21 }
+  ]
+}</code></pre>
+
+    <h3>6. <code>imageSlide</code></h3>
+<pre><code>{
+  "type": "imageSlide",
+  "start": 25,
+  "end": 30,
+  "data": [
+    { "name": "image", "content": "image.png", "showAt": 25 }
+  ]
+}</code></pre>
+
+    <h3>7. <code>imageWithTitle</code></h3>
+<pre><code>{
+  "type": "imageWithTitle",
+  "start": 30,
+  "end": 35,
+  "data": [
+    { "name": "title", "content": "Visual Concept", "showAt": 30 },
+    { "name": "image", "content": "image.png", "showAt": 31 }
+  ]
+}</code></pre>
+
+    <h3>8. <code>imageWithCaption</code></h3>
+<pre><code>{
+  "type": "imageWithCaption",
+  "start": 35,
+  "end": 40,
+  "data": [
+    { "name": "image", "content": "image.png", "showAt": 35 },
+    { "name": "caption", "content": "Caption text", "showAt": 36 }
+  ]
+}</code></pre>
+
+    <h3>9. <code>imageLeftBulletsRight</code></h3>
+<pre><code>{
+  "type": "imageLeftBulletsRight",
+  "start": 40,
+  "end": 45,
+  "data": [
+    { "name": "image", "content": "image.png", "showAt": 40 },
+    { "name": "bullet", "content": "Point one", "showAt": 41 },
+    { "name": "bullet", "content": "Point two", "showAt": 42 }
+  ]
+}</code></pre>
+
+    <h3>10. <code>imageRightBulletsLeft</code></h3>
+<pre><code>{
+  "type": "imageRightBulletsLeft",
+  "start": 45,
+  "end": 50,
+  "data": [
+    { "name": "image", "content": "image.png", "showAt": 45 },
+    { "name": "bullet", "content": "Point one", "showAt": 46 },
+    { "name": "bullet", "content": "Point two", "showAt": 47 }
+  ]
+}</code></pre>
+
+    <h3>11. <code>table</code></h3>
+<pre><code>{
+  "type": "table",
+  "start": 50,
+  "end": 55,
+  "data": [
+    ["Column A", "Column B"],
+    ["Value 1", "Value 2"],
+    ["Value 3", "Value 4"]
+  ]
+}</code></pre>
+
+    <h3>12. <code>statistic</code></h3>
+<pre><code>{
+  "type": "statistic",
+  "start": 55,
+  "end": 60,
+  "data": [
+    { "name": "number", "content": "42", "showAt": 55 },
+    { "name": "label", "content": "Answer", "showAt": 56 }
+  ]
+}</code></pre>
+
+    <h3>13. <code>donutChart</code></h3>
+<pre><code>{
+  "type": "donutChart",
+  "start": 60,
+  "end": 65,
+  "data": [
+    { "name": "percent", "content": "75", "showAt": 60 },
+    { "name": "label", "content": "Completed", "showAt": 61 },
+    { "name": "color", "content": "#ff9900", "showAt": 62 }
+  ]
+}</code></pre>
+
+    <h3>14. <code>bigNumber</code></h3>
+<pre><code>{
+  "type": "bigNumber",
+  "start": 65,
+  "end": 70,
+  "data": [
+    { "name": "number", "content": "100%", "showAt": 65 },
+    { "name": "label", "content": "Accuracy", "showAt": 66 }
+  ]
+}</code></pre>
+
+    <h3>15. <code>barChart</code></h3>
+<pre><code>{
+  "type": "barChart",
+  "start": 70,
+  "end": 75,
+  "data": [
+    { "name": "bar", "label": "A", "value": 3, "showAt": 70 },
+    { "name": "bar", "label": "B", "value": 5, "showAt": 71 }
+  ]
+}</code></pre>
+
+    <h3>16. <code>quoteSlide</code></h3>
+<pre><code>{
+  "type": "quoteSlide",
+  "start": 75,
+  "end": 80,
+  "data": [
+    { "name": "quote", "content": "Clarity matters.", "showAt": 75 },
+    { "name": "author", "content": "— Taleem", "showAt": 76 }
+  ]
+}</code></pre>
+
+    <h3>17. <code>quoteWithImage</code></h3>
+<pre><code>{
+  "type": "quoteWithImage",
+  "start": 80,
+  "end": 85,
+  "data": [
+    { "name": "quote", "content": "Structure beats chaos.", "showAt": 80 },
+    { "name": "author", "content": "— Taleem", "showAt": 81 },
+    { "name": "image", "content": "image.png", "showAt": 82 }
+  ]
+}</code></pre>
+
+    <h3>18. <code>cornerWordsSlide</code></h3>
+<pre><code>{
+  "type": "cornerWordsSlide",
+  "start": 85,
+  "end": 90,
+  "data": [
+    { "name": "card", "icon": "🧠", "label": "Focus", "showAt": 85 },
+    { "name": "card", "icon": "📘", "label": "Clarity", "showAt": 86 }
+  ]
+}</code></pre>
+
+    <h3>19. <code>contactSlide</code></h3>
+<pre><code>{
+  "type": "contactSlide",
+  "start": 90,
+  "end": 95,
+  "data": [
+    { "name": "headline", "content": "Taleem", "showAt": 90 },
+    { "name": "email", "content": "hello@example.com", "showAt": 91 },
+    { "name": "phone", "content": "+00 0000000", "showAt": 92 }
+  ]
+}</code></pre>
+
+    <h3>20. <code>eq</code></h3>
+<pre><code>{
+  "type": "eq",
+  "start": 95,
+  "end": 100,
+  "data": [
+    {
+      "name": "line",
+      "type": "heading",
+      "content": "Key Equation",
+      "showAt": 95
+    },
+    {
+      "name": "line",
+      "type": "math",
+      "content": "render(data) ⇒ same output",
+      "showAt": 96,
+      "spItems": [
+        { "type": "spText", "content": "No hidden state" }
+      ]
+    }
+  ]
+}</code></pre>
+
+    <div class="footer">
+      Taleem Player Docs
+    </div>
+
+  </div>
+</body>
+</html>

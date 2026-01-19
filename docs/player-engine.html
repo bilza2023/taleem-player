@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Taleem Player Engine</title>
+  <link rel="stylesheet" href="./docs.css" />
+</head>
+
+<body>
+  <div class="container">
+
+    <h1>Taleem Player Engine</h1>
+
+    <p>
+      The Taleem Player Engine is a <strong>time-based playback engine</strong>.
+    </p>
+
+    <p>
+      It determines slide and item visibility as a function of time.
+    </p>
+
+    <h2>What the Player Engine Does</h2>
+
+    <ul>
+      <li>accepts a valid Taleem deck</li>
+      <li>tracks a playback clock</li>
+      <li>reveals slides and items by time</li>
+      <li>supports narration-synced playback</li>
+    </ul>
+
+    <h2>Public API</h2>
+
+    <p>
+      The player engine exposes a single factory function.
+    </p>
+
+<pre><code>import { createTaleemPlayer } from "taleem-player";</code></pre>
+
+    <h3><code>createTaleemPlayer</code></h3>
+
+<pre><code>const player = createTaleemPlayer(deck, options);</code></pre>
+
+    <p>
+      This creates a time-driven playback controller.
+    </p>
+
+    <h2>Player Instance API</h2>
+
+<pre><code>{
+  play(): void,
+  pause(): void,
+  stop(): void,
+
+  seek(time: number): void,
+  setRate(rate: number): void,
+
+  getCurrentTime(): number,
+  getVisibleSlides(): Slide[],
+  getVisibleItems(slideIndex: number): Item[]
+}</code></pre>
+
+    <h2>Timing Model</h2>
+
+    <p>
+      Visibility is computed from:
+    </p>
+
+    <ul>
+      <li>slide <code>start</code> / <code>end</code></li>
+      <li>item <code>showAt</code></li>
+    </ul>
+
+    <h2>Mental Model</h2>
+
+    <blockquote>
+      What should be visible at time <em>T</em>?
+    </blockquote>
+
+    <h2>Relationship to Browser Engine</h2>
+
+    <blockquote>
+      Player Engine moves by <strong>time</strong>, not index.
+    </blockquote>
+
+    <div class="footer">
+      Taleem Player Docs
+    </div>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>EQ Slide Format</title>
+  <link rel="stylesheet" href="./docs.css" />
+</head>
+
+<body>
+  <div class="container">
+
+    <h1>EQ Slide Format</h1>
+
+    <p>
+      The <strong>EQ</strong> slide is the most structured slide type in Taleem.
+    </p>
+
+    <p>
+      It is designed for mathematical, symbolic, or sequential reasoning content
+      where order and grouping matter.
+    </p>
+
+    <h2>Purpose</h2>
+
+    <p>
+      The EQ slide exists to represent content that cannot be expressed
+      as plain text or bullets without losing meaning.
+    </p>
+
+    <p>
+      Examples include:
+    </p>
+
+    <ul>
+      <li>equations</li>
+      <li>step-by-step derivations</li>
+      <li>symbolic transformations</li>
+      <li>annotated mathematical lines</li>
+    </ul>
+
+    <h2>High-Level Structure</h2>
+
+<pre><code>{
+  "type": "eq",
+  "start": 0,
+  "end": 10,
+  "data": [ /* ordered lines */ ]
+}</code></pre>
+
+    <p>
+      The EQ slide uses <strong>ordered lines</strong>.
+      Order is meaningful for this slide type.
+    </p>
+
+    <h2>Line Items</h2>
+
+    <p>
+      Each entry in <code>data</code> represents a line.
+    </p>
+
+<pre><code>{
+  "name": "line",
+  "type": "math",
+  "content": "a² + b² = c²",
+  "showAt": 2
+}</code></pre>
+
+    <p>
+      Common line types include:
+    </p>
+
+    <ul>
+      <li><code>heading</code></li>
+      <li><code>text</code></li>
+      <li><code>math</code></li>
+    </ul>
+
+    <h2>Structured Parts (<code>spItems</code>)</h2>
+
+    <p>
+      Lines may optionally include structured sub-parts.
+    </p>
+
+<pre><code>{
+  "name": "line",
+  "type": "math",
+  "content": "x = y + z",
+  "showAt": 4,
+  "spItems": [
+    { "type": "spText", "content": "substitution step" }
+  ]
+}</code></pre>
+
+    <p>
+      These items are declarative.
+      Interpretation is handled by the renderer.
+    </p>
+
+    <h2>What EQ Does NOT Do</h2>
+
+    <ul>
+      <li>evaluate expressions</li>
+      <li>validate mathematics</li>
+      <li>reorder lines</li>
+      <li>infer structure</li>
+    </ul>
+
+    <p>
+      The EQ slide only describes <em>what exists</em>,
+      not <em>what it means</em>.
+    </p>
+
+    <h2>Authoring Rule</h2>
+
+    <blockquote>
+      If meaning depends on order or structure, use EQ.
+    </blockquote>
+
+    <div class="footer">
+      Taleem Player Docs
+    </div>
+
+  </div>
+</body>
+</html>

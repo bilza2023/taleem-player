@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Taleem Browser Engine</title>
+  <link rel="stylesheet" href="./docs.css" />
+</head>
+
+<body>
+  <div class="container">
+
+    <h1>Taleem Browser Engine</h1>
+
+    <p>
+      The Taleem Browser Engine is an <strong>index-based slide navigation engine</strong>.
+    </p>
+
+    <p>
+      It renders exactly one slide at a time and moves strictly by slide index.
+    </p>
+
+    <h2>What the Browser Engine Does</h2>
+
+    <ul>
+      <li>accepts a valid Taleem deck</li>
+      <li>renders one slide at a time</li>
+      <li>moves by numeric slide index</li>
+      <li>does not track time</li>
+    </ul>
+
+    <h2>Public API</h2>
+
+    <p>
+      The browser engine exposes a single factory function.
+    </p>
+
+<pre><code>import { createTaleemBrowser } from "taleem-browser";</code></pre>
+
+    <h3><code>createTaleemBrowser</code></h3>
+
+<pre><code>const browser = createTaleemBrowser(deck, options);</code></pre>
+
+    <p>
+      This creates an index-driven controller over the deck.
+    </p>
+
+    <h2>Browser Instance API</h2>
+
+<pre><code>{
+  currentIndex: number,
+
+  next(): void,
+  prev(): void,
+  goTo(index: number): void,
+
+  getCurrentSlide(): Slide,
+  getSlideCount(): number
+}</code></pre>
+
+    <h2>Mental Model</h2>
+
+    <blockquote>
+      Which slide should be visible right now?
+    </blockquote>
+
+    <p>
+      The browser engine never partially renders slides and never evaluates time.
+    </p>
+
+    <h2>Relationship to Player Engine</h2>
+
+    <blockquote>
+      Browser Engine moves by <strong>slide index</strong>.
+    </blockquote>
+
+    <div class="footer">
+      Taleem Player Docs
+    </div>
+
+  </div>
+</body>
+</html>
