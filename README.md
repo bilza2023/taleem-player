@@ -1,7 +1,7 @@
 
 # Taleem Player
 
-<img src="https://raw.githubusercontent.com/bilza2023/taleem-player/main/docs/images/taleem.webp"
+<img src="./docs/images/taleem.webp"
      alt="Taleem Player — JSON to Web Presentations"
      width="100%" />
 
