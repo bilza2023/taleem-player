@@ -1,0 +1,128 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Where Time Lives</title>
+  <link rel="stylesheet" href="./docs.css" />
+</head>
+<body>
+  <div class="container">
+    <nav>
+      <a href="./index.html">← Docs</a>
+      <a href="../index.html">Home</a>
+    </nav>
+
+    <h1>Where Time Lives</h1>
+
+    <p>
+      Time exists in exactly one place in the Taleem system.
+    </p>
+
+    <blockquote>
+      Time lives only in the player.
+    </blockquote>
+
+    <h2>Time Is Not Content</h2>
+
+    <p>
+      Time is not part of a lesson.
+    </p>
+
+    <p>
+      A lesson describes <em>what</em> is shown,
+      not <em>when</em> it is shown.
+    </p>
+
+    <p>
+      Treating time as content makes lessons fragile
+      and impossible to reuse.
+    </p>
+
+    <h2>The Only Time-Aware Layer</h2>
+
+    <p>
+      The time-based engine (<strong>taleem-player</strong>)
+      is the only layer allowed to reason in seconds.
+    </p>
+
+    <p>
+      It may:
+    </p>
+
+    <ul>
+      <li>schedule slide visibility</li>
+      <li>advance slides automatically</li>
+      <li>control progressive reveal</li>
+    </ul>
+
+    <h2>Where Time Must Not Exist</h2>
+
+    <p>
+      Time must not appear in:
+    </p>
+
+    <ul>
+      <li>schema definitions</li>
+      <li>renderers</li>
+      <li>browser engines</li>
+      <li>UI components</li>
+    </ul>
+
+    <p>
+      If time appears in any of these places,
+      the boundary has been violated.
+    </p>
+
+    <h2>Why This Rule Is Strict</h2>
+
+    <p>
+      When time leaks into other layers:
+    </p>
+
+    <ul>
+      <li>content becomes tied to a single playback mode</li>
+      <li>reuse becomes impossible</li>
+      <li>systems become tightly coupled</li>
+    </ul>
+
+    <p>
+      By isolating time, Taleem keeps lessons flexible
+      without modifying the content itself.
+    </p>
+
+    <h2>The Consequence</h2>
+
+    <p>
+      A single deck can be:
+    </p>
+
+    <ul>
+      <li>browsed manually</li>
+      <li>played automatically</li>
+      <li>synchronized with audio</li>
+      <li>revealed progressively</li>
+    </ul>
+
+    <p>
+      All without rewriting the lesson.
+    </p>
+
+    <h2>The Rule</h2>
+
+    <p>
+      If a feature needs time,
+      it belongs in the player.
+    </p>
+
+    <p>
+      If it does not,
+      it does not.
+    </p>
+
+    <div class="footer">
+      Taleem Docs
+    </div>
+  </div>
+</body>
+</html>

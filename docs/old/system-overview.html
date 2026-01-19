@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>System Overview</title>
+  <link rel="stylesheet" href="./docs.css" />
+</head>
+<body>
+  <div class="container">
+    <nav>
+      <a href="./index.html">← Docs</a>
+      <a href="../index.html">Home</a>
+    </nav>
+
+    <h1>System Overview</h1>
+
+    <p>
+      Taleem is built as a small number of independent layers.
+    </p>
+
+    <p>
+      Each layer has a single responsibility.
+      No layer overlaps with another.
+    </p>
+
+    <h2>The Four Layers</h2>
+
+    <p>
+      The system is structured as:
+    </p>
+
+    <blockquote>
+      Format → Renderer → Engine → UI
+    </blockquote>
+
+    <h2>1. Format (Schema v1)</h2>
+
+    <p>
+      The format defines what a deck is.
+    </p>
+
+    <p>
+      It is pure structured data.
+    </p>
+
+    <p>
+      The format:
+    </p>
+
+    <ul>
+      <li>defines slide types</li>
+      <li>defines allowed data</li>
+      <li>contains no rendering logic</li>
+      <li>contains no timing or UI concepts</li>
+    </ul>
+
+    <h2>2. Renderer (taleem-slides)</h2>
+
+    <p>
+      The renderer converts validated data into HTML.
+    </p>
+
+    <p>
+      It owns:
+    </p>
+
+    <ul>
+      <li>slide templates</li>
+      <li>markup structure</li>
+    </ul>
+
+    <p>
+      It does not know how slides are used.
+    </p>
+
+    <h2>3. Engines</h2>
+
+    <p>
+      Engines decide when and where rendered slides appear.
+    </p>
+
+    <p>
+      Taleem currently has two engines:
+    </p>
+
+    <ul>
+      <li>index-based navigation (browser)</li>
+      <li>time-based playback (player)</li>
+    </ul>
+
+    <p>
+      Engines treat slides as opaque HTML units.
+    </p>
+
+    <h2>4. UI / Controls</h2>
+
+    <p>
+      The UI layer handles user interaction.
+    </p>
+
+    <p>
+      It provides:
+    </p>
+
+    <ul>
+      <li>buttons</li>
+      <li>keyboard input</li>
+      <li>sliders</li>
+    </ul>
+
+    <p>
+      UI never touches schema or slides directly.
+    </p>
+
+    <h2>Why This Structure Exists</h2>
+
+    <p>
+      Most systems fail because everything knows everything.
+    </p>
+
+    <p>
+      Taleem survives by ensuring that:
+    </p>
+
+    <ul>
+      <li>layers are simple</li>
+      <li>responsibilities do not overlap</li>
+      <li>changes are isolated</li>
+    </ul>
+
+    <p>
+      If a feature does not clearly belong to one layer,
+      it does not belong in the system.
+    </p>
+
+    <div class="footer">
+      Taleem Docs
+    </div>
+  </div>
+</body>
+</html>

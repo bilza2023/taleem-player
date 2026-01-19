@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>One-Way Data Flow</title>
+  <link rel="stylesheet" href="./docs.css" />
+</head>
+<body>
+  <div class="container">
+    <nav>
+      <a href="./index.html">← Docs</a>
+      <a href="../index.html">Home</a>
+    </nav>
+
+    <h1>One-Way Data Flow</h1>
+
+    <p>
+      Taleem enforces a strict one-way flow of information.
+    </p>
+
+    <p>
+      Nothing flows upward.
+    </p>
+
+    <h2>The Direction</h2>
+
+    <blockquote>
+      Schema → Renderer → Engine → DOM
+    </blockquote>
+
+    <h2>No Upward Communication</h2>
+
+    <p>
+      Lower layers do not send information back upward.
+    </p>
+
+    <ul>
+      <li>engines do not inspect slide data</li>
+      <li>renderer does not know how slides are used</li>
+      <li>schema does not react to runtime behavior</li>
+    </ul>
+
+    <h2>Why This Is Strict</h2>
+
+    <p>
+      Two-way systems accumulate hidden dependencies.
+    </p>
+
+    <p>
+      One-way systems remain legible.
+    </p>
+
+    <p>
+      You can reason about behavior
+      by reading from top to bottom.
+    </p>
+
+    <h2>What Happens If This Is Broken</h2>
+
+    <p>
+      When data flows upward:
+    </p>
+
+    <ul>
+      <li>engines start parsing content</li>
+      <li>UI becomes coupled to structure</li>
+      <li>features become impossible to remove</li>
+    </ul>
+
+    <p>
+      The system becomes fragile.
+    </p>
+
+    <h2>The Benefit</h2>
+
+    <p>
+      One-way flow allows:
+    </p>
+
+    <ul>
+      <li>multiple engines</li>
+      <li>multiple UIs</li>
+      <li>future extensions</li>
+    </ul>
+
+    <p>
+      Without rewriting content.
+    </p>
+
+    <p>
+      This is what makes Taleem durable.
+    </p>
+
+    <div class="footer">
+      Taleem Docs
+    </div>
+  </div>
+</body>
+</html>
