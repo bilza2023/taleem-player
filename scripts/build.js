@@ -1,14 +1,17 @@
 import { build } from "esbuild";
 import fs from "fs";
-import path from "path";
 
+// -----------------
+// setup
+// -----------------
 const dist = "dist";
 
-// clean dist
 fs.rmSync(dist, { recursive: true, force: true });
 fs.mkdirSync(dist, { recursive: true });
 
-// ---- JS: ESM build ----
+// -----------------
+// JS: Runtime ESM
+// -----------------
 await build({
   entryPoints: ["src/index.js"],
   outfile: "dist/taleem-player.esm.js",
@@ -18,7 +21,9 @@ await build({
   sourcemap: false
 });
 
-// ---- JS: UMD build ----
+// -----------------
+// JS: Runtime UMD
+// -----------------
 await build({
   entryPoints: ["src/index.js"],
   outfile: "dist/taleem-player.umd.js",
@@ -29,7 +34,9 @@ await build({
   sourcemap: false
 });
 
-// ---- CSS: copy styles ----
+// -----------------
+// CSS
+// -----------------
 fs.mkdirSync("dist/css/themes", { recursive: true });
 
 fs.copyFileSync("src/css/taleem.css", "dist/css/taleem.css");

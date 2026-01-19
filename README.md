@@ -111,26 +111,6 @@ These helpers prepare decks for real usage.
 
 ---
 
-## Deck Validation (Optional Tooling)
-
-Validation is **not performed at runtime**.
-
-Use it at **trust boundaries**:
-
-* editors
-* uploads
-* CI pipelines
-
-```js
-import { validateDeckV1 } from "taleem-player/validate";
-```
-
-* opt-in
-* never bundled unless imported
-* never auto-run by player or browser
-
----
-
 ## CSS
 
 ```js
