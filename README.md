@@ -1,40 +1,30 @@
 
 # Taleem Player
 
+<img src="https://raw.githubusercontent.com/bilza2023/taleem-player/main/docs/images/taleem.webp"
+     alt="Taleem Player — JSON to Web Presentations"
+     width="100%" />
 
-<img src="./docs/images/taleem.webp" alt="Taleem Player — JSON to Web Presentations" />
+**Taleem Player** converts **JSON slide data** into **web-based presentations**.
 
-**Taleem Player** is a JavaScript library that converts **JSON slide data** into **web-based presentations**.
+It renders the *same JSON* in multiple ways using different display modes.
 
-It provides multiple **modes** to display the same JSON presentation in different ways on the web.
+> ⚠️ Work in progress — expect minor bugs, **no API breakages**.
 
 ---
-###### Work in progress. Expect minor bugs, but no API breakages.
 
-Demo and Documentation - See Taleem Player in action:
+## Demo & Documentation
 
 👉 https://bilza2023.github.io/taleem/
 
-This live demo lets you explore:
+The live demo shows:
+- Browser Mode (index-based rendering)
+- Player Mode (time-based rendering)
+- Real production Taleem JSON
+- Shared CSS across all modes
 
-- Browser Mode — instant, index-based slide rendering
-
-- Player Mode — time-driven, progressive presentations
-
-- Real Taleem slide JSON used in production
-
-- Shared CSS system powering all display modes
-
- **No screenshots. No mock data.What you see is the real engine running in the browser.**
----
-
-## What it does
-
-* Takes **Taleem slide JSON**
-* Renders it as a **web presentation**
-* Supports **multiple display modes**
-* Ships **ready-to-use CSS**
-* Includes **utilities** for real-world usage
+**No screenshots. No mock data.  
+What you see is the real engine running in the browser.**
 
 ---
 
@@ -42,24 +32,15 @@ This live demo lets you explore:
 
 ```bash
 npm install taleem-player
-```
+````
 
 ---
 
 ## Display Modes
 
-### 1. Browser Mode
+### Browser Mode (Index-based)
 
-**Index-based slide viewer**.
-
-Use this when you want:
-
-* manual navigation
-* previews
-* galleries
-* syllabus / editor views
-
-#### API
+Use when you want **direct access to slides**.
 
 ```js
 import { createTaleemBrowser } from "taleem-player";
@@ -69,173 +50,98 @@ const browser = createTaleemBrowser({
   deck
 });
 
-browser.render(0);      // render slide by index
-browser.getTotal();    // total number of slides
+browser.render(0);
+browser.getTotal();
 ```
 
-Characteristics:
+**Ideal for**
 
-* slide index driven
-* no timing
-* deterministic rendering
-* same slide JSON as other modes
+* previews
+* galleries
+* editors
+* syllabus pages
 
 ---
 
-### 2. Player Mode
+### Player Mode (Time-based)
 
-**Time-based slide player**.
-
-Use this when you want:
-
-* narrated lessons
-* video / audio sync
-* timed presentations
-
-#### API
+Use when slides must change **progressively over time**.
 
 ```js
 import { createTaleemPlayer } from "taleem-player";
 
-const player = createTaleemPlayer({
-  mount: "#app",
-  deckDemo and Documentation
-
-Live demo and documentation are available here:
-
-👉 https://bilza2023.github.io/taleem/
-
-The demo showcases:
-
-browser mode rendering
-
-player mode rendering
-
-real Taleem slide JSON
-
-shared CSS across modes
-});
-
-player.renderAt(12.5); // render slide at time (seconds)
-player.destroy();
+const player = createTaleemPlayer({ mount: "#app" });
+player.renderAt(12.5);
 ```
-
-Characteristics:
-
-* time driven
-* external clock control
-* no play / pause logic
-* one active slide at a time
-
----
-## Browser Mode vs Player Mode
-
-Both modes render the same JSON presentation, but they serve very different purposes.
-
-| Feature | Browser Mode | Player Mode |
-|-------|-------------|-------------|
-| Rendering model | Index-based | Time-based |
-| Navigation | Manual (by slide index) | Progressive (by time) |
-| Timing required | No | Yes (required) |
-| Rendering behavior | One slide at a time | Slides change over time |
-| Control source | Application-driven | External clock / media |
-| Best suited for | Previews, galleries, editors | Narration, video, audio sync |
-
----
-
-### Browser Mode
-
-Use Browser Mode when you want direct access to slides.
-
-**Characteristics**
-- Index-based rendering  
-- No timing data required  
-- Deterministic output  
 
 **Ideal for**
-- previews  
-- galleries  
-- editors  
-- syllabus pages  
 
-
-⚠️ Important:
-In Player Mode, the user must provide valid and ordered timings (start, end).
-The library does not auto-fix or guess timings.
+* narrated lessons
+* video / audio sync
+* recorded presentations
 
 ---
 
-## Utilities
+## Browser vs Player (Quick Comparison)
 
-Taleem Player includes small helper utilities for preparing decks.
+| Feature         | Browser        | Player         |
+| --------------- | -------------- | -------------- |
+| Rendering       | Index-based    | Time-based     |
+| Timing required | No             | Yes            |
+| Navigation      | Manual         | Progressive    |
+| Control         | App-driven     | External clock |
+| Use case        | Preview / Edit | Playback       |
 
-### assignMockTimings
-
-Convert a non-timed deck into a player-ready deck.
-
-```js
-import { assignMockTimings } from "taleem-player";
-
-const timedDeck = assignMockTimings(deck, 5);
-```
-
----
-
-### resolveAssetPaths
-
-Resolve image paths for deployment.
-
-```js
-import { resolveAssetPaths } from "taleem-player";
-
-resolveAssetPaths(deck, "/images/");
-```
+> ⚠️ Player Mode requires **valid, ordered timings**.
+> The library does not auto-correct or guess timings.
 
 ---
 
-### resolveBackground
-
-Normalize and resolve background configuration.
+## Utilities (Runtime-safe)
 
 ```js
-import { resolveBackground } from "taleem-player";
-
-resolveBackground(deck, "/images/");
+import { assignMockTimings, resolveAssetPaths } from "taleem-player";
 ```
+
+* `assignMockTimings(deck, seconds)`
+* `resolveAssetPaths(deck, basePath)`
+* `resolveBackground(deck, basePath)`
+
+These helpers prepare decks for real usage.
+
+---
+
+## Deck Validation (Optional Tooling)
+
+Validation is **not performed at runtime**.
+
+Use it at **trust boundaries**:
+
+* editors
+* uploads
+* CI pipelines
+
+```js
+import { validateDeckV1 } from "taleem-player/validate";
+```
+
+* opt-in
+* never bundled unless imported
+* never auto-run by player or browser
 
 ---
 
 ## CSS
 
-Taleem Player ships with built-in styles.
-
-### Base styles
-
 ```js
 import "taleem-player/css";
-```
-
-### Themes
-
-```js
 import "taleem-player/css/dark";
 import "taleem-player/css/light";
 import "taleem-player/css/paper";
 ```
 
-CSS controls layout, visibility, and visual behavior.
-Modes share the same CSS.
-
----
-
-## Input format
-
-Taleem Player does **not** define slide structure.
-
-It renders JSON produced for **taleem-slides**.
-
-* Player Mode requires slides with `start` / `end`
-* Browser Mode only needs ordered slides
+CSS controls layout and visual behavior.
+All modes share the same styling system.
 
 ---
 
@@ -243,21 +149,21 @@ It renders JSON produced for **taleem-slides**.
 
 * create slides
 * edit JSON
-* validate schemas
-* manage time or playback
-* handle audio or narration
-* provide UI controls
+* manage playback or time
+* handle audio / narration
+* validate automatically
 
-Those belong to the **application**, not the library.
+Those belong to the **application layer**.
 
 ---
 
 ## Status
 
-**Release Candidate (API stable)**
+**Release Candidate — API stable**
 
 ---
 
 ## License
 
 MIT
+

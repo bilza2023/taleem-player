@@ -1,6 +1,6 @@
 {
   "name": "taleem-player",
-  "version": "0.7.0-rc",
+  "version": "0.7.1-rc",
   "type": "module",
   "main": "./dist/taleem-player.umd.js",
   "module": "./dist/taleem-player.esm.js",
@@ -8,6 +8,13 @@
     ".": {
       "import": "./dist/taleem-player.esm.js",
       "require": "./dist/taleem-player.umd.js"
+    },
+    "./validate": {
+      "import": "./dist/validation/validateDeckV1.js"
+    },
+
+    "./schema": {
+      "import": "./dist/validation/zodDeckV1.js"
     },
     "./css": "./dist/css/taleem.css",
     "./css/dark": "./dist/css/themes/dark.css",
