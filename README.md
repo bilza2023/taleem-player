@@ -5,11 +5,12 @@
      alt="Taleem Player — JSON to Web Presentations"
      width="100%" />
 
-**Taleem Player** converts **JSON slide data** into **web-based presentations**.
+**Taleem Player** converts **Taleem JSON slide data** into **web-based presentations**.
 
-It renders the *same JSON* in multiple ways using different display modes.
+It renders the *same taleem JSON* in multiple ways using different display modes.
 
-> ⚠️ Work in progress — expect minor bugs, **no API breakages**.
+> **Stable 1.0 — API frozen.**  
+> Internal improvements may continue without breaking public contracts.
 
 ---
 
@@ -93,7 +94,7 @@ player.renderAt(12.5);
 | Use case        | Preview / Edit | Playback       |
 
 > ⚠️ Player Mode requires **valid, ordered timings**.
-> The library does not auto-correct or guess timings.
+> The library does not auto-correct or guess timing errors.
 
 ---
 
@@ -120,7 +121,7 @@ import "taleem-player/css/light";
 import "taleem-player/css/paper";
 ```
 
-CSS controls layout and visual behavior.
+CSS must be imported explicitly by the host app.
 All modes share the same styling system.
 
 ---
@@ -129,17 +130,17 @@ All modes share the same styling system.
 
 * create slides
 * edit JSON
-* manage playback or time
-* handle audio / narration
-* validate automatically
+* manage clocks or media playback
+* handle audio or narration
+* auto-validate or repair data
 
-Those belong to the **application layer**.
+Those responsibilities belong to the **application layer**.
 
 ---
 
 ## Status
 
-**Release Candidate — API stable**
+**Stable — Version 1.0**
 
 ---
 
