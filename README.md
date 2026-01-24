@@ -100,15 +100,24 @@ player.renderAt(12.5);
 
 ## Utilities (Runtime-safe)
 
+
+These **Utilities (Runtime-safe)** are exported :
+
 ```js
-import { assignMockTimings, resolveAssetPaths } from "taleem-player";
+import {
+  assignMockTimings,
+  resolveAssetPaths,
+  resolveBackground,
+  getDeckEndTime
+} from "taleem-player";
 ```
 
 * `assignMockTimings(deck, seconds)`
 * `resolveAssetPaths(deck, basePath)`
 * `resolveBackground(deck, basePath)`
+* `getDeckEndTime(deck)`
 
-These helpers prepare decks for real usage.
+These helpers prepare decks for real usage and runtime playback.
 
 ---
 

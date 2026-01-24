@@ -10,3 +10,4 @@ export { createTaleemBrowser } from "./engines/browser/browser.js";
 export { assignMockTimings } from "./utils/assignMockTimings.js";
 export { resolveAssetPaths } from "./utils/resolveAssetPaths.js";
 export { resolveBackground } from "./utils/resolveBackground.js";
+export { getDeckEndTime } from "./utils/getDeckEndTime.js";
