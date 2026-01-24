@@ -785,10 +785,19 @@ function resolveBackground2(deck, ASSET_BASE) {
   }
   return deck;
 }
+
+// src/utils/getDeckEndTime.js
+function getDeckEndTime(deck) {
+  if (!deck || !deck.deck || deck.deck.length === 0) {
+    return 0;
+  }
+  return deck.deck[deck.deck.length - 1].end;
+}
 export {
   assignMockTimings,
   createTaleemBrowser,
   createTaleemPlayer,
+  getDeckEndTime,
   resolveAssetPaths,
   resolveBackground2 as resolveBackground
 };
