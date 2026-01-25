@@ -1,4 +1,3 @@
-
 # Taleem Player
 
 <img src="./docs/images/taleem.webp"
@@ -7,7 +6,7 @@
 
 **Taleem Player** converts **Taleem JSON slide data** into **web-based presentations**.
 
-It renders the *same taleem JSON* in multiple ways using different display modes.
+It renders the _same taleem JSON_ in multiple ways using different display modes.
 
 > **Stable 1.0 — API frozen.**  
 > Internal improvements may continue without breaking public contracts.
@@ -19,6 +18,7 @@ It renders the *same taleem JSON* in multiple ways using different display modes
 👉 https://bilza2023.github.io/taleem/
 
 The live demo shows:
+
 - Browser Mode (index-based rendering)
 - Player Mode (time-based rendering)
 - Real production Taleem JSON
@@ -33,7 +33,7 @@ What you see is the real engine running in the browser.**
 
 ```bash
 npm install taleem-player
-````
+```
 
 ---
 
@@ -48,7 +48,7 @@ import { createTaleemBrowser } from "taleem-player";
 
 const browser = createTaleemBrowser({
   mount: "#app",
-  deck
+  deck,
 });
 
 browser.render(0);
@@ -57,10 +57,10 @@ browser.getTotal();
 
 **Ideal for**
 
-* previews
-* galleries
-* editors
-* syllabus pages
+- previews
+- galleries
+- editors
+- syllabus pages
 
 ---
 
@@ -77,9 +77,9 @@ player.renderAt(12.5);
 
 **Ideal for**
 
-* narrated lessons
-* video / audio sync
-* recorded presentations
+- narrated lessons
+- video / audio sync
+- recorded presentations
 
 ---
 
@@ -100,7 +100,6 @@ player.renderAt(12.5);
 
 ## Utilities (Runtime-safe)
 
-
 These **Utilities (Runtime-safe)** are exported :
 
 ```js
@@ -108,14 +107,14 @@ import {
   assignMockTimings,
   resolveAssetPaths,
   resolveBackground,
-  getDeckEndTime
+  getDeckEndTime,
 } from "taleem-player";
 ```
 
-* `assignMockTimings(deck, seconds)`
-* `resolveAssetPaths(deck, basePath)`
-* `resolveBackground(deck, basePath)`
-* `getDeckEndTime(deck)`
+- `assignMockTimings(deck, seconds)`
+- `resolveAssetPaths(deck, basePath)`
+- `resolveBackground(deck, basePath)`
+- `getDeckEndTime(deck)`
 
 These helpers prepare decks for real usage and runtime playback.
 
@@ -137,11 +136,11 @@ All modes share the same styling system.
 
 ## What Taleem Player does NOT do
 
-* create slides
-* edit JSON
-* manage clocks or media playback
-* handle audio or narration
-* auto-validate or repair data
+- create slides
+- edit JSON
+- manage clocks or media playback
+- handle audio or narration
+- auto-validate or repair data
 
 Those responsibilities belong to the **application layer**.
 
@@ -151,9 +150,13 @@ Those responsibilities belong to the **application layer**.
 
 **Stable — Version 1.0**
 
+The `eq` slide type is **experimental**:
+- it is implemented but intentionally limited
+- it should not be relied on for production math rendering
+- its behavior may evolve without breaking the core player API
+
 ---
 
 ## License
 
 MIT
-
