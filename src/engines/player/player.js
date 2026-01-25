@@ -5,7 +5,7 @@ import { createStage } from "./stage.js";
 
 export function createTaleemPlayer({ mount, deck }) {
 
-  const stage = createStage(mount);
+  const stage = createStage(mount, deck.background);
   let lastSlide = null;
   let lastRenderedKey = null;
 
