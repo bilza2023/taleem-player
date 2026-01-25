@@ -16,17 +16,38 @@
     </p>
 
     <p>
-      It determines slide and item visibility as a function of time.
+      It renders Taleem decks by computing visibility as a function of
+      <strong>absolute time</strong>.
+    </p>
+
+    <p>
+      The player does not infer, guess, or correct timing.
+      It enforces the timing contract exactly as written.
     </p>
 
     <h2>What the Player Engine Does</h2>
 
     <ul>
-      <li>accepts a valid Taleem deck</li>
-      <li>tracks a playback clock</li>
-      <li>reveals slides and items by time</li>
-      <li>supports narration-synced playback</li>
+      <li>accepts a valid <code>deck-v1</code> Taleem deck</li>
+      <li>tracks a playback clock provided by the application</li>
+      <li>computes slide visibility from <code>start</code> / <code>end</code></li>
+      <li>computes item visibility from <code>showAt</code></li>
+      <li>renders progressive, time-synced presentations</li>
     </ul>
+
+    <h2>What the Player Engine Does Not Do</h2>
+
+    <ul>
+      <li>edit or mutate deck data</li>
+      <li>guess missing or invalid timings</li>
+      <li>manage audio or narration playback</li>
+      <li>own the system clock</li>
+      <li>repair malformed decks</li>
+    </ul>
+
+    <p>
+      These responsibilities belong to the application layer.
+    </p>
 
     <h2>Public API</h2>
 
@@ -36,12 +57,13 @@
 
 <pre><code>import { createTaleemPlayer } from "taleem-player";</code></pre>
 
-    <h3><code>createTaleemPlayer</code></h3>
-
-<pre><code>const player = createTaleemPlayer(deck, options);</code></pre>
+<pre><code>const player = createTaleemPlayer({
+  mount: "#app",
+  deck
+});</code></pre>
 
     <p>
-      This creates a time-driven playback controller.
+      This creates a time-driven playback controller over a validated deck.
     </p>
 
     <h2>Player Instance API</h2>
@@ -62,13 +84,27 @@
     <h2>Timing Model</h2>
 
     <p>
-      Visibility is computed from:
+      All visibility decisions are computed from:
     </p>
 
     <ul>
-      <li>slide <code>start</code> / <code>end</code></li>
-      <li>item <code>showAt</code></li>
+      <li>slide <code>start</code> and <code>end</code> times</li>
+      <li>item <code>showAt</code> timestamps</li>
     </ul>
+
+    <p>
+      There is no concept of:
+    </p>
+
+    <ul>
+      <li>relative time</li>
+      <li>slide-local time</li>
+      <li>implicit sequencing</li>
+    </ul>
+
+    <p>
+      Time is absolute and global across the entire deck.
+    </p>
 
     <h2>Mental Model</h2>
 
@@ -76,14 +112,73 @@
       What should be visible at time <em>T</em>?
     </blockquote>
 
+    <p>
+      At any given moment, the player answers this question deterministically.
+    </p>
+
+    <p>
+      Given the same deck and the same time input,
+      the output is always the same.
+    </p>
+
     <h2>Relationship to Browser Engine</h2>
 
+    <p>
+      The two engines serve different, non-overlapping purposes.
+    </p>
+
     <blockquote>
-      Player Engine moves by <strong>time</strong>, not index.
+      Player Engine moves by <strong>time</strong>, not by slide index.
     </blockquote>
 
+    <ul>
+      <li>Browser Engine selects slides explicitly</li>
+      <li>Player Engine reveals content progressively</li>
+    </ul>
+
+    <p>
+      Neither engine is a fallback for the other.
+    </p>
+
+    <h2>Failure Mode (By Design)</h2>
+
+    <p>
+      If timing data is invalid:
+    </p>
+
+    <ul>
+      <li>items may never appear</li>
+      <li>slides may collapse to zero duration</li>
+      <li>playback may appear incorrect</li>
+    </ul>
+
+    <p>
+      These failures are intentional.
+    </p>
+
+    <p>
+      The player does not correct authoring mistakes,
+      because silent correction breaks determinism.
+    </p>
+
+    <h2>Stability</h2>
+
+    <p>
+      The Player Engine API is <strong>stable and frozen</strong>.
+    </p>
+
+    <p>
+      Internal optimizations may continue,
+      but public behavior will not change without a schema version bump.
+    </p>
+
+    <p>
+      The <code>eq</code> slide type is implemented but considered experimental.
+      Its behavior may evolve without breaking the core player API.
+    </p>
+
     <div class="footer">
-      Taleem Player Docs
+      Taleem Docs
     </div>
 
   </div>

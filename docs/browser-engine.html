@@ -16,17 +16,37 @@
     </p>
 
     <p>
-      It renders exactly one slide at a time and moves strictly by slide index.
+      It renders exactly one complete slide at a time
+      and moves strictly by <strong>explicit slide index</strong>.
+    </p>
+
+    <p>
+      The browser engine does not know about time,
+      progression, or playback.
     </p>
 
     <h2>What the Browser Engine Does</h2>
 
     <ul>
-      <li>accepts a valid Taleem deck</li>
-      <li>renders one slide at a time</li>
-      <li>moves by numeric slide index</li>
-      <li>does not track time</li>
+      <li>accepts a valid <code>deck-v1</code> Taleem deck</li>
+      <li>renders one full slide at a time</li>
+      <li>selects slides by numeric index</li>
+      <li>provides deterministic, manual navigation</li>
     </ul>
+
+    <h2>What the Browser Engine Does Not Do</h2>
+
+    <ul>
+      <li>track or evaluate time</li>
+      <li>partially reveal slide content</li>
+      <li>interpret <code>showAt</code> values</li>
+      <li>animate, delay, or sequence items</li>
+      <li>guess author intent</li>
+    </ul>
+
+    <p>
+      These responsibilities belong to other layers of the system.
+    </p>
 
     <h2>Public API</h2>
 
@@ -36,12 +56,13 @@
 
 <pre><code>import { createTaleemBrowser } from "taleem-browser";</code></pre>
 
-    <h3><code>createTaleemBrowser</code></h3>
-
-<pre><code>const browser = createTaleemBrowser(deck, options);</code></pre>
+<pre><code>const browser = createTaleemBrowser({
+  mount: "#app",
+  deck
+});</code></pre>
 
     <p>
-      This creates an index-driven controller over the deck.
+      This creates an index-driven controller over a validated deck.
     </p>
 
     <h2>Browser Instance API</h2>
@@ -57,6 +78,21 @@
   getSlideCount(): number
 }</code></pre>
 
+    <h2>Navigation Model</h2>
+
+    <p>
+      Navigation is explicit and manual.
+    </p>
+
+    <p>
+      Calling a navigation method immediately replaces
+      the currently visible slide with the target slide.
+    </p>
+
+    <p>
+      No intermediate states exist.
+    </p>
+
     <h2>Mental Model</h2>
 
     <blockquote>
@@ -64,17 +100,64 @@
     </blockquote>
 
     <p>
-      The browser engine never partially renders slides and never evaluates time.
+      The browser engine answers this question directly,
+      without evaluating time or state history.
     </p>
 
     <h2>Relationship to Player Engine</h2>
 
+    <p>
+      The two engines serve different, non-overlapping purposes.
+    </p>
+
     <blockquote>
-      Browser Engine moves by <strong>slide index</strong>.
+      Browser Engine moves by <strong>slide index</strong>,
+      not by time.
     </blockquote>
 
+    <ul>
+      <li>Browser Engine selects slides explicitly</li>
+      <li>Player Engine reveals content progressively</li>
+    </ul>
+
+    <p>
+      The browser engine is not a preview mode of the player,
+      and the player is not a timed version of the browser.
+    </p>
+
+    <h2>Failure Mode (By Design)</h2>
+
+    <p>
+      If slide indices are invalid:
+    </p>
+
+    <ul>
+      <li>navigation may fail</li>
+      <li>no slide may be rendered</li>
+    </ul>
+
+    <p>
+      These failures are intentional.
+    </p>
+
+    <p>
+      The browser engine does not guard against invalid navigation,
+      because doing so would hide application-level errors.
+    </p>
+
+    <h2>Stability</h2>
+
+    <p>
+      The Browser Engine API is <strong>stable and frozen</strong>.
+    </p>
+
+    <p>
+      Internal optimizations may continue,
+      but public behavior will not change without a schema version bump.
+    </p>
+
     <div class="footer">
-      Taleem Player Docs
+      Taleem Docs
     </div>
 
   </div>

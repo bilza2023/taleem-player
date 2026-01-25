@@ -9,107 +9,283 @@
 <body>
   <div class="container">
 
-    <h1>Taleem JSON Schema</h1>
+    <h1>Taleem Schema</h1>
+
+    <p>
+      The Taleem ecosystem is built around one simple idea:
+    </p>
+
+    <blockquote>
+      Everything follows a single, strict, shared schema.
+    </blockquote>
+
+    <p>
+      There is no separate format for authors, players, demos, or tools.
+      There is no “almost compatible” mode.
+      There is no interpretation layer.
+    </p>
+
+    <p>
+      If something is a Taleem deck, it follows the same schema everywhere.
+    </p>
+
+    <p>
+      This schema is called <strong>deck-v1</strong>.
+    </p>
+
+    <h2>One Schema, One Truth</h2>
 
     <p>
       The Taleem schema defines what a presentation <em>is</em>.
     </p>
 
     <p>
-      It is a structural contract that describes the shape of a Taleem deck,
-      independent of how that deck is rendered, browsed, or played.
+      It does not describe how a slide looks on screen.
+      It does not describe animations, themes, or UI behavior.
+      It does not describe playback controls or application logic.
     </p>
-
-    <h2>What the Schema Defines</h2>
 
     <p>
-      The schema specifies:
+      It only describes structure.
     </p>
 
+    <p>
+      If a JSON object conforms to the schema, it is a valid Taleem deck.
+      If it does not, it is rejected.
+    </p>
+
+    <p>
+      There is no best-effort rendering.
+    </p>
+
+    <h2>A Minimal Working Example</h2>
+
+<p>
+  Below is a complete, valid <code>deck-v1</code> example.
+  It follows the schema exactly and will validate and render correctly
+  in any Taleem-compatible renderer.
+</p>
+
+<pre><code>{
+  "version": "deck-v1",
+  "name": "Minimal Example Deck",
+  "background": {
+    "backgroundColor": "#111111",
+    "backgroundImage": null,
+    "backgroundImageOpacity": 0.25
+  },
+  "deck": [
+    {
+      "type": "titleSlide",
+      "start": 0,
+      "end": 5,
+      "data": [
+        {
+          "name": "title",
+          "content": "What Is Taleem?",
+          "showAt": 0
+        }
+      ]
+    },
+    {
+      "type": "bulletList",
+      "start": 5,
+      "end": 10,
+      "data": [
+        {
+          "name": "bullet",
+          "content": "Structure-first presentations",
+          "showAt": 5
+        },
+        {
+          "name": "bullet",
+          "content": "One schema everywhere",
+          "showAt": 6
+        }
+      ]
+    }
+  ]
+}</code></pre>
+
+<p>
+  This example demonstrates:
+</p>
+
+<ul>
+  <li>a valid <code>deck-v1</code> header</li>
+  <li>optional background data</li>
+  <li>explicit slide types</li>
+  <li>time-bounded slides</li>
+  <li>pure, declarative content</li>
+</ul>
+
+<p>
+  Any renderer that supports <code>deck-v1</code> must produce
+  the same logical output for this input.
+</p>
+
+    <h2>Where the Schema Lives</h2>
+
+    <p>
+      The Taleem schema is not defined in documentation.
+    </p>
+
+    <p>
+      It is defined in code, inside the <strong>taleem-core</strong> package.
+    </p>
+
+    <p>
+      This documentation explains the schema, but the
+      <strong>source of truth is the implementation</strong>.
+    </p>
+
+    <h3>Permanent References</h3>
+
     <ul>
-      <li>the overall structure of a deck</li>
-      <li>the order of slides</li>
-      <li>the available slide types</li>
-      <li>the data fields each slide type accepts</li>
+      <li>
+        <strong>Deck schema (deck-v1, enforced via Zod)</strong><br />
+        <a href="https://github.com/bilza2023/taleem-core/blob/master/src/deck/zodDeckV1.js">
+          https://github.com/bilza2023/taleem-core/blob/master/src/deck/zodDeckV1.js
+        </a>
+      </li>
+
+      <li>
+        <strong>Enumerated slide types (v1)</strong><br />
+        <a href="https://github.com/bilza2023/taleem-core/blob/master/src/deck/slideTypesV1.js">
+          https://github.com/bilza2023/taleem-core/blob/master/src/deck/slideTypesV1.js
+        </a>
+      </li>
     </ul>
 
     <p>
-      If a JSON file follows this schema, it is a valid Taleem deck.
+      Any system claiming compatibility with Taleem must validate
+      against these definitions.
     </p>
 
-    <h2>What the Schema Does Not Define</h2>
+    <h2>Finite Slide Types</h2>
 
     <p>
-      The schema does not include:
+      The schema defines a <strong>finite set of slide types</strong>.
+    </p>
+
+    <p>
+      At the time of writing, <code>deck-v1</code> defines
+      <strong>21 slide types</strong>.
+    </p>
+
+    <p>
+      Each slide:
     </p>
 
     <ul>
-      <li>layout or visual styling</li>
-      <li>CSS or themes</li>
-      <li>animation or transitions</li>
-      <li>playback or timing behavior</li>
-      <li>application or UI logic</li>
+      <li>declares its type explicitly</li>
+      <li>accepts only a fixed set of fields</li>
+      <li>rejects unknown or malformed data</li>
     </ul>
 
     <p>
-      These concerns belong to the renderer and the application,
-      not the data format.
-    </p>
-
-    <h2>Pure Data Only</h2>
-
-    <p>
-      The Taleem schema contains only data.
+      Slide types do not evolve silently.
+      Adding a new slide type is a deliberate schema change.
     </p>
 
     <p>
-      There are no functions, callbacks, or executable logic.
-      This allows the same deck to be reused across different environments
-      without modification.
+      Existing decks are never reinterpreted.
     </p>
 
-    <h2>Explicit Slide Types</h2>
+    <h2>Validation Is Mandatory</h2>
 
     <p>
-      Every slide declares its type explicitly.
-    </p>
-
-    <p>
-      Each type accepts a fixed and known set of fields.
-      Unknown or malformed data is rejected rather than guessed.
+      Every Taleem deck is validated.
     </p>
 
     <p>
-      This keeps rendering predictable and prevents silent layout drift.
-    </p>
-
-    <h2>Validation</h2>
-
-    <p>
-      A deck is considered valid only if it conforms fully to the schema.
+      Validation is not optional.
+      Validation is not advisory.
     </p>
 
     <p>
-      There are no partial modes, fallbacks, or best-effort rendering.
-      Invalid data is treated as an error.
+      A deck is either:
+    </p>
+
+    <ul>
+      <li>valid → rendered</li>
+      <li>invalid → rejected</li>
+    </ul>
+
+    <p>
+      This keeps the system deterministic and predictable.
+    </p>
+
+    <h2>The Golden Deck</h2>
+
+    <p>
+      The Taleem project provides a canonical reference deck:
+    </p>
+
+    <p>
+      <a href="https://github.com/bilza2023/taleem-core/blob/master/src/samples/goldenDeckV1.js">
+        https://github.com/bilza2023/taleem-core/blob/master/src/samples/goldenDeckV1.js
+      </a>
+    </p>
+
+    <p>
+      This deck is not a demo.
+    </p>
+
+    <p>
+      It is a <strong>reference implementation</strong> that:
+    </p>
+
+    <ul>
+      <li>conforms fully to <code>deck-v1</code></li>
+      <li>exercises all defined slide types</li>
+      <li>serves as a living proof of the schema</li>
+    </ul>
+
+    <p>
+      If a renderer can render the golden deck correctly,
+      it supports the schema.
     </p>
 
     <h2>Why This Matters</h2>
 
     <p>
-      Treating presentation content as structured data makes it possible to:
+      Because there is one schema:
     </p>
 
     <ul>
-      <li>generate decks programmatically</li>
-      <li>render the same content in multiple ways</li>
-      <li>keep systems deterministic and testable</li>
-      <li>evolve renderers without rewriting content</li>
+      <li>content can be generated programmatically</li>
+      <li>the same deck can be rendered in different environments</li>
+      <li>renderers can evolve without rewriting content</li>
+      <li>old lessons never change meaning</li>
     </ul>
 
     <p>
-      The schema is the foundation that allows Taleem Player to remain stable
-      while applications and renderers change over time.
+      The schema is the contract.
+    </p>
+
+    <p>
+      Applications may change.
+      Renderers may change.
+      Styles may change.
+    </p>
+
+    <p>
+      The schema does not.
+    </p>
+
+    <h2>Summary</h2>
+
+    <p>
+      Taleem is not a collection of tools.
+    </p>
+
+    <p>
+      It is a schema-first system.
+    </p>
+
+    <p>
+      Everything else exists to serve that structure.
     </p>
 
     <div class="footer">

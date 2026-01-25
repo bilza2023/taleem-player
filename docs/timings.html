@@ -2,34 +2,72 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Slide Timing Rules</title>
+  <title>Slide Timing Rules (deck-v1)</title>
   <link rel="stylesheet" href="./docs.css" />
 </head>
 
 <body>
   <div class="container">
 
-    <h1>Slide Timing Rules</h1>
+    <h1>Slide Timing Rules (deck-v1)</h1>
 
     <p>
-      Timing in Taleem is <strong>explicit and declarative</strong>.
+      Timing in Taleem is <strong>explicit, absolute, and declarative</strong>.
     </p>
 
     <p>
-      All timing values describe <em>when something becomes visible</em>.
-      Nothing is inferred.
+      These rules define <em>when content becomes visible</em>.
+      They do not define animation, transitions, or behavior.
     </p>
 
-    <h2>Slide-Level Timing</h2>
+    <p>
+      Timing is part of the data contract.
+      How that timing is enforced depends on the engine.
+    </p>
+
+    <h2>Objective</h2>
 
     <p>
-      Every slide defines a visible time window.
+      Ensure every timing value is:
+    </p>
+
+    <ul>
+      <li>valid within the deck’s global timeline</li>
+      <li>explicitly declared</li>
+      <li>deterministic across renderers</li>
+    </ul>
+
+    <p>
+      These rules apply to <strong>all slide types</strong>, including flat-format
+      <code>eq</code> slides.
+    </p>
+
+    <h2>Global Timeline</h2>
+
+    <p>
+      All timing values (<code>start</code>, <code>end</code>, <code>showAt</code>)
+      are measured in <strong>absolute seconds</strong> from the beginning of playback.
+    </p>
+
+    <p>
+      There is no concept of relative, local, or slide-based time.
+    </p>
+
+    <h2>Slide Boundaries</h2>
+
+    <p>
+      Every slide defines a visible time window:
     </p>
 
 <pre><code>{
   "start": 10,
   "end": 20
 }</code></pre>
+
+    <ul>
+      <li><code>start</code> marks when the slide becomes visible</li>
+      <li><code>end</code> marks when the slide stops being visible</li>
+    </ul>
 
     <p>
       A slide is considered visible when:
@@ -39,10 +77,21 @@
       start ≤ currentTime &lt; end
     </blockquote>
 
+    <p>
+      The <code>start</code> value is typically injected by the DeckBuilder
+      and equals the previous slide’s <code>end</code>.
+    </p>
+
+    <p>
+      The <code>end</code> value must be provided and must be
+      <strong>strictly greater than</strong> <code>start</code>.
+    </p>
+
     <h2>Item-Level Timing (<code>showAt</code>)</h2>
 
     <p>
-      Items inside a slide may define <code>showAt</code>.
+      Items inside a slide may define <code>showAt</code>,
+      which controls when the item becomes visible.
     </p>
 
 <pre><code>{
@@ -59,52 +108,126 @@
       currentTime ≥ showAt
     </blockquote>
 
+    <p>
+      Each <code>showAt</code> must satisfy:
+    </p>
+
+<pre><code>slide.start ≤ showAt ≤ slide.end</code></pre>
+
+    <p>
+      If <code>showAt</code> is omitted, it defaults to <code>slide.start</code>.
+    </p>
+
     <h2>No Implicit Ordering</h2>
 
     <p>
-      Item order does <strong>not</strong> control timing.
+      Item order in the data array does <strong>not</strong> control timing.
     </p>
 
     <p>
       Only explicit time values matter.
     </p>
 
-    <h2>Browser vs Player</h2>
+    <h2>Special Case: Flat EQ Slides</h2>
 
     <p>
-      Timing rules exist even if they are not used.
+      EQ slides use a flat list of entries.
     </p>
+
+<pre><code>{
+  "type": "eq",
+  "start": 50,
+  "end": 60,
+  "data": [
+    { "name": "line", "type": "math", "content": "E = mc²", "showAt": 52 },
+    { "type": "spText", "content": "Sidebar note" }
+  ]
+}</code></pre>
 
     <ul>
       <li>
-        <strong>Browser Engine</strong> ignores time
+        Only main entries (<code>math</code>, <code>text</code>, <code>heading</code>)
+        carry <code>showAt</code>
       </li>
       <li>
-        <strong>Player Engine</strong> enforces time
+        <code>sp*</code> entries are <strong>not timed individually</strong>
+      </li>
+      <li>
+        <code>sp*</code> entries appear together with their parent line
+      </li>
+      <li>
+        Any <code>showAt</code> on <code>sp*</code> entries is ignored
       </li>
     </ul>
 
-    <h2>What Timing Does NOT Do</h2>
+    <h2>Validation Rules</h2>
+
+    <ol>
+      <li>
+        <strong>Slide timeline continuity</strong><br />
+<pre><code>slide[i].end ≤ slide[i+1].start</code></pre>
+      </li>
+
+      <li>
+        <strong>Item bounds</strong><br />
+<pre><code>slide.start ≤ showAt ≤ slide.end</code></pre>
+      </li>
+
+      <li>
+        <strong>Flat EQ pairing</strong>
+        <ul>
+          <li><code>sp*</code> items must follow a main line</li>
+          <li><code>sp*</code> items are attached during transformation</li>
+        </ul>
+      </li>
+    </ol>
+
+    <h2>Common Pitfalls</h2>
+
+    <ul>
+      <li>Using <code>showAt</code> outside the slide’s range</li>
+      <li>Assuming any time value is relative</li>
+      <li>Assigning <code>showAt</code> to <code>sp*</code> entries</li>
+      <li>Forgetting to update <code>end</code>, creating a zero-length slide</li>
+    </ul>
+
+    <h2>Engine Behavior</h2>
+
+    <ul>
+      <li><strong>Browser Engine</strong> ignores timing values</li>
+      <li><strong>Player Engine</strong> enforces timing values</li>
+    </ul>
+
+    <p>
+      Timing rules exist even if an engine chooses not to use them.
+    </p>
+
+    <h2>What Timing Does Not Do</h2>
 
     <ul>
       <li>animate content</li>
       <li>create transitions</li>
       <li>resolve overlaps</li>
-      <li>fix invalid ranges</li>
+      <li>fix invalid data</li>
     </ul>
 
     <p>
       Timing is a contract, not behavior.
     </p>
 
-    <h2>Authoring Rule</h2>
+    <h2>Freeze Notice</h2>
 
-    <blockquote>
-      If something appears later, it must say when.
-    </blockquote>
+    <p>
+      These timing rules are fixed for <code>deck-v1</code>.
+    </p>
+
+    <p>
+      Any future timing-related features will appear only in
+      <code>deck-v2</code>.
+    </p>
 
     <div class="footer">
-      Taleem Player Docs
+      Taleem Docs
     </div>
 
   </div>

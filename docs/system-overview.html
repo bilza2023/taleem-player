@@ -1,21 +1,18 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <title>System Overview</title>
   <link rel="stylesheet" href="./docs.css" />
 </head>
+
 <body>
   <div class="container">
-    <nav>
-      <a href="./index.html">← Docs</a>
-      <a href="../index.html">Home</a>
-    </nav>
 
     <h1>System Overview</h1>
 
     <p>
-      Taleem is built as a small number of independent layers.
+      Taleem is built as a small number of strict, independent layers.
     </p>
 
     <p>
@@ -23,41 +20,61 @@
       No layer overlaps with another.
     </p>
 
-    <h2>The Four Layers</h2>
-
     <p>
-      The system is structured as:
+      This structure is not stylistic.
+      It exists to prevent long-term architectural collapse.
     </p>
+
+    <h2>The Core Principle</h2>
 
     <blockquote>
-      Format → Renderer → Engine → UI
+      Structure flows downward. Control never flows upward.
     </blockquote>
 
-    <h2>1. Format (Schema v1)</h2>
+    <p>
+      Every Taleem system can be understood by reading
+      from top to bottom.
+    </p>
+
+    <h2>The Layer Stack</h2>
+
+    <blockquote>
+      Schema → Renderer → Engine → UI
+    </blockquote>
 
     <p>
-      The format defines what a deck is.
+      Each layer consumes the output of the layer above it
+      and exposes a simpler surface to the layer below.
+    </p>
+
+    <h2>1. Schema (Format)</h2>
+
+    <p>
+      The schema defines what a Taleem deck <em>is</em>.
     </p>
 
     <p>
-      It is pure structured data.
-    </p>
-
-    <p>
-      The format:
+      It is pure, declarative data.
     </p>
 
     <ul>
       <li>defines slide types</li>
-      <li>defines allowed data</li>
+      <li>defines allowed fields</li>
+      <li>defines timing boundaries</li>
       <li>contains no rendering logic</li>
-      <li>contains no timing or UI concepts</li>
+      <li>contains no UI or engine concepts</li>
     </ul>
 
-    <h2>2. Renderer (taleem-slides)</h2>
+    <p>
+      If data does not conform to the schema,
+      it is not a Taleem deck.
+    </p>
+
+    <h2>2. Renderer</h2>
 
     <p>
-      The renderer converts validated data into HTML.
+      The renderer converts validated schema data
+      into concrete HTML.
     </p>
 
     <p>
@@ -67,29 +84,84 @@
     <ul>
       <li>slide templates</li>
       <li>markup structure</li>
+      <li>semantic layout decisions</li>
     </ul>
 
     <p>
-      It does not know how slides are used.
+      The renderer does <strong>not</strong> know:
+    </p>
+
+    <ul>
+      <li>how slides are navigated</li>
+      <li>when slides appear</li>
+      <li>how the user interacts</li>
+    </ul>
+
+    <p>
+      Rendering happens exactly once.
     </p>
 
     <h2>3. Engines</h2>
 
     <p>
-      Engines decide when and where rendered slides appear.
+      Engines decide <em>which rendered output</em> is visible.
     </p>
 
     <p>
-      Taleem currently has two engines:
+      They operate on rendered slides,
+      not on raw schema data.
+    </p>
+
+    <p>
+      Taleem provides two engines:
     </p>
 
     <ul>
-      <li>index-based navigation (browser)</li>
-      <li>time-based playback (player)</li>
+      <li><strong>Browser Engine</strong> — index-based selection</li>
+      <li><strong>Player Engine</strong> — time-based playback</li>
     </ul>
 
     <p>
-      Engines treat slides as opaque HTML units.
+      Engines:
+    </p>
+
+    <ul>
+      <li>do not parse slide content</li>
+      <li>do not modify markup</li>
+      <li>do not inspect schema structure</li>
+    </ul>
+
+    <p>
+      Engines treat slides as opaque units.
+    </p>
+
+    <h2>Time Ownership</h2>
+
+    <p>
+      Time exists in exactly one place.
+    </p>
+
+    <blockquote>
+      Time lives only in the player engine.
+    </blockquote>
+
+    <p>
+      The browser engine is completely time-agnostic.
+    </p>
+
+    <p>
+      This separation allows the same deck to be:
+    </p>
+
+    <ul>
+      <li>browsed manually</li>
+      <li>played automatically</li>
+      <li>synchronized with narration</li>
+      <li>rendered progressively</li>
+    </ul>
+
+    <p>
+      Without rewriting content.
     </p>
 
     <h2>4. UI / Controls</h2>
@@ -99,33 +171,51 @@
     </p>
 
     <p>
-      It provides:
+      It may include:
     </p>
 
     <ul>
       <li>buttons</li>
-      <li>keyboard input</li>
+      <li>key bindings</li>
       <li>sliders</li>
+      <li>scrub bars</li>
     </ul>
 
     <p>
-      UI never touches schema or slides directly.
+      The UI:
+    </p>
+
+    <ul>
+      <li>does not inspect schema data</li>
+      <li>does not parse slide content</li>
+      <li>does not reason about rendering</li>
+    </ul>
+
+    <p>
+      UI is replaceable.
+      Engines and content are not affected.
     </p>
 
     <h2>Why This Structure Exists</h2>
 
     <p>
-      Most systems fail because everything knows everything.
+      Most systems fail because responsibilities blur over time.
     </p>
 
     <p>
-      Taleem survives by ensuring that:
+      Logic leaks upward.
+      Data becomes reactive.
+      Behavior becomes implicit.
+    </p>
+
+    <p>
+      Taleem avoids this by enforcing:
     </p>
 
     <ul>
-      <li>layers are simple</li>
-      <li>responsibilities do not overlap</li>
-      <li>changes are isolated</li>
+      <li>one-way data flow</li>
+      <li>single responsibility per layer</li>
+      <li>explicit failure instead of silent correction</li>
     </ul>
 
     <p>
@@ -136,6 +226,7 @@
     <div class="footer">
       Taleem Docs
     </div>
+
   </div>
 </body>
 </html>
