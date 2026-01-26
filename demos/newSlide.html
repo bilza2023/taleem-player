@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Taleem – Custom Slide Test</title>
+
+  <!-- Player CSS -->
+  <link rel="stylesheet" href="../dist/css/taleem.css" />
+  <link rel="stylesheet" href="../dist/css/themes/light.css" />
+
+  <style>
+    .mySlide {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      background: #4b2aad;
+      color: white;
+      font-size: 48px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="app"></div>
+
+  <script type="module">
+    import {
+      createTaleemPlayer,
+      registerSlide
+    } from "../dist/taleem-player.esm.js";
+
+    // --------------------------------------------------
+    // CUSTOM SLIDE TEMPLATE (CORRECT SHAPE)
+    // --------------------------------------------------
+    const MyCustomSlide = {
+      type: "mySlide",
+
+      fromJSON(raw) {
+        const text = raw.text;
+
+        if (!text) {
+          throw new Error("mySlide: text is required");
+        }
+
+        return Object.freeze({
+          type: "mySlide",
+          text,
+
+          render() {
+            return `
+              <section class="slide mySlide">
+                ${text}
+              </section>
+            `;
+          }
+        });
+      }
+    };
+
+    // --------------------------------------------------
+    // REGISTER SLIDE
+    // --------------------------------------------------
+    registerSlide("mySlide", MyCustomSlide);
+
+    // --------------------------------------------------
+    // DECK USING CUSTOM SLIDE
+    // --------------------------------------------------
+    const deck = {
+      version: "deck-v1",
+      deck: [
+        {
+          type: "mySlide",
+          start: 0,
+          end: 5,
+          text: "Hello Custom Slide 👋"
+        }
+      ]
+    };
+
+    // --------------------------------------------------
+    // CREATE PLAYER
+    // --------------------------------------------------
+    const player = createTaleemPlayer({
+      mount: "#app",
+      deck
+    });
+
+    // --------------------------------------------------
+    // RENDER
+    // --------------------------------------------------
+    player.renderAt(0);
+  </script>
+
+</body>
+</html>

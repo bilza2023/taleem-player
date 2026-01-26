@@ -24,6 +24,7 @@ var TaleemPlayer = (() => {
     createTaleemBrowser: () => createTaleemBrowser,
     createTaleemPlayer: () => createTaleemPlayer,
     getDeckEndTime: () => getDeckEndTime,
+    registerSlide: () => registerSlide,
     resolveAssetPaths: () => resolveAssetPaths,
     resolveBackground: () => resolveBackground
   });
@@ -641,6 +642,14 @@ var TaleemPlayer = (() => {
       throw new Error(`Unknown slide template type "${type}"`);
     }
     return template;
+  }
+
+  // src/slides/registerSlide.js
+  function registerSlide(type, renderer) {
+    if (SlideRegistry[type]) {
+      throw new Error(`Slide type "${type}" is already registered`);
+    }
+    SlideRegistry[type] = renderer;
   }
 
   // src/engines/player/stage.js

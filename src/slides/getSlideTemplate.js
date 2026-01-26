@@ -10,3 +10,4 @@ export function getSlideTemplate(type) {
 
   return template;
 }
+

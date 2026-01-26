@@ -613,6 +613,14 @@ function getSlideTemplate(type) {
   return template;
 }
 
+// src/slides/registerSlide.js
+function registerSlide(type, renderer) {
+  if (SlideRegistry[type]) {
+    throw new Error(`Slide type "${type}" is already registered`);
+  }
+  SlideRegistry[type] = renderer;
+}
+
 // src/engines/player/stage.js
 function createStage(mount, background = {}) {
   if (!mount) throw new Error("taleem-player: mount is required");
@@ -847,6 +855,7 @@ export {
   createTaleemBrowser,
   createTaleemPlayer,
   getDeckEndTime,
+  registerSlide,
   resolveAssetPaths,
   resolveBackground
 };
