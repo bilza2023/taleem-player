@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Taleem Browser – Math Demo</title>
+
+  <!-- player css -->
+  <link rel="stylesheet" href="./dist/css/taleem.css" />
+  <link rel="stylesheet" href="./dist/css/themes/dark.css" />
+
+  <!-- math css (opt-in) -->
+  <link rel="stylesheet" href="./dist/math/useMath.css" />
+
+</head>
+<body>
+
+  <div id="app"></div>
+
+  <script type="module">
+    import {
+      createTaleemBrowser
+    } from "./dist/taleem-player.esm.js";
+
+    import { useMath } from "./dist/math/useMath.js";
+    // -----------------------
+    // SIMPLE CANONICAL DECK
+    // -----------------------
+    const deck = {
+    "version": "deck-v1",
+    "name": "Core Math Formulas",
+  
+    "background": {
+      "backgroundColor": "#111111"
+    },
+  
+    "deck": [
+      {
+        "type": "titleSlide",
+        "data": [
+          {
+            "name": "title",
+            "content": "Essential Math Formulas",
+            "showAt": 0
+          },
+          {
+            "name": "subtitle",
+            "content": "Quick revision with clear equations",
+            "showAt": 0
+          }
+        ]
+      },
+  
+      {
+        "type": "bulletList",
+        "data": [
+          {
+            "name": "bullet",
+            "content": "Pythagoras theorem: $a^2 + b^2 = c^2$",
+            "showAt": 0
+          },
+          {
+            "name": "bullet",
+            "content": "Distance formula: $d = \\sqrt{(x_2-x_1)^2 + (y_2-y_1)^2}$",
+            "showAt": 0
+          }
+        ]
+      },
+  
+      {
+        "type": "bulletList",
+        "data": [
+          {
+            "name": "bullet",
+            "content": "Area of square: $A = a^2$",
+            "showAt": 0
+          },
+          {
+            "name": "bullet",
+            "content": "Area of rectangle: $A = l \\times w$",
+            "showAt": 0
+          },
+          {
+            "name": "bullet",
+            "content": "Area of triangle: $A = \\frac{1}{2}bh$",
+            "showAt": 0
+          }
+        ]
+      },
+  
+      {
+        "type": "bulletList",
+        "data": [
+          {
+            "name": "bullet",
+            "content": "Area of circle: $A = \\pi r^2$",
+            "showAt": 0
+          },
+          {
+            "name": "bullet",
+            "content": "Circumference of circle: $C = 2\\pi r$",
+            "showAt": 0
+          }
+        ]
+      },
+  
+      {
+        "type": "bulletList",
+        "data": [
+          {
+            "name": "bullet",
+            "content": "Speed: $v = \\frac{d}{t}$",
+            "showAt": 0
+          },
+          {
+            "name": "bullet",
+            "content": "Acceleration: $a = \\frac{v-u}{t}$",
+            "showAt": 0
+          },
+          {
+            "name": "bullet",
+            "content": "Distance (uniform motion): $s = vt$",
+            "showAt": 0
+          }
+        ]
+      },
+  
+      {
+        "type": "bulletList",
+        "data": [
+          {
+            "name": "bullet",
+            "content": "Linear equation: $ax + b = 0$",
+            "showAt": 0
+          },
+          {
+            "name": "bullet",
+            "content": "Solution: $x = -\\frac{b}{a}$",
+            "showAt": 0
+          }
+        ]
+      },
+  
+      {
+        "type": "bulletList",
+        "data": [
+          {
+            "name": "bullet",
+            "content": "Quadratic equation: $ax^2 + bx + c = 0$",
+            "showAt": 0
+          },
+          {
+            "name": "bullet",
+            "content": "Discriminant: $D = b^2 - 4ac$",
+            "showAt": 0
+          },
+          {
+            "name": "bullet",
+            "content": "Roots: $x = \\frac{-b \\pm \\sqrt{D}}{2a}$",
+            "showAt": 0
+          }
+        ]
+      },
+  
+      {
+        "type": "bulletList",
+        "data": [
+          {
+            "name": "bullet",
+            "content": "Simple interest: $SI = \\frac{PRT}{100}$",
+            "showAt": 0
+          },
+          {
+            "name": "bullet",
+            "content": "Amount: $A = P + SI$",
+            "showAt": 0
+          }
+        ]
+      },
+  
+      {
+        "type": "bulletList",
+        "data": [
+          {
+            "name": "bullet",
+            "content": "Mean: $\\bar{x} = \\frac{\\sum x}{n}$",
+            "showAt": 0
+          },
+          {
+            "name": "bullet",
+            "content": "Probability: $P(E) = \\frac{\\text{favourable outcomes}}{\\text{total outcomes}}$",
+            "showAt": 0
+          }
+        ]
+      }
+    ]
+  };
+  
+    // -----------------------
+    // create browser
+    // -----------------------
+    const browser = createTaleemBrowser({
+      mount: "#app",
+      deck
+    });
+
+    let index = 0;
+    const MAX = deck.deck.length - 1;
+
+    function render() {
+      browser.render(index);
+
+      // IMPORTANT: run math AFTER each render
+      useMath(document.querySelector("#app"));
+    }
+
+    render();
+
+    // -----------------------
+    // arrow key navigation
+    // -----------------------
+    document.addEventListener("keydown", e => {
+      if (e.key === "ArrowRight") {
+        index = Math.min(index + 1, MAX);
+        render();
+      }
+
+      if (e.key === "ArrowLeft") {
+        index = Math.max(index - 1, 0);
+        render();
+      }
+    });
+
+    window.browser = browser;
+  </script>
+
+</body>
+</html>

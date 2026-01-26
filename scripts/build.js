@@ -35,6 +35,27 @@ await build({
 });
 
 // -----------------
+// JS: Math (opt-in)
+// -----------------
+fs.mkdirSync("dist/math", { recursive: true });
+
+await build({
+  entryPoints: ["src/math/useMath.js"],
+  outfile: "dist/math/useMath.js",
+  bundle: true,
+  format: "esm",
+  platform: "browser",
+  sourcemap: false,
+  loader: {
+    ".css": "css",
+    ".woff": "file",
+    ".woff2": "file",
+    ".ttf": "file"
+  },
+  assetNames: "assets/[name]"
+});
+
+// -----------------
 // CSS
 // -----------------
 fs.mkdirSync("dist/css/themes", { recursive: true });

@@ -1,6 +1,7 @@
+
 {
   "name": "taleem-player",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "type": "module",
   "main": "./dist/taleem-player.umd.js",
   "module": "./dist/taleem-player.esm.js",
@@ -9,12 +10,18 @@
       "import": "./dist/taleem-player.esm.js",
       "require": "./dist/taleem-player.umd.js"
     },
+
+    "./math": {
+      "import": "./dist/math/useMath.js"
+    },
+
     "./validate": {
       "import": "./dist/validation/validateDeckV1.js"
     },
     "./schema": {
       "import": "./dist/validation/zodDeckV1.js"
     },
+
     "./css": "./dist/css/taleem.css",
     "./css/dark": "./dist/css/themes/dark.css",
     "./css/light": "./dist/css/themes/light.css",
@@ -28,6 +35,7 @@
     "test": "vitest run"
   },
   "dependencies": {
+    "katex": "^0.16.28",
     "taleem-slides": "^1.0.1"
   },
   "devDependencies": {
