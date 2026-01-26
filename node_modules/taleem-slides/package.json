@@ -1,17 +1,12 @@
 {
   "name": "taleem-slides",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "type": "module",
   "description": "Convert Taleem schema into HTML slides",
   "exports": {
-    ".": "./src/index.js",
-    "./styles/taleem.css": "./dist/taleem.css",
-    "./styles/themes/dark.css": "./dist/themes/dark.css",
-    "./styles/themes/light.css": "./dist/themes/light.css",
-    "./styles/themes/paper.css": "./dist/themes/paper.css"
+    ".": "./src/index.js"
   },
   "files": [
-    "dist",
     "src"
   ],
   "scripts": {
@@ -25,17 +20,16 @@
     "taleem-core": "^1.5.1"
   },
   "devDependencies": {
-    "zod": "^4.3.5",
     "vite": "^5.0.0",
-    "vitest": "^1.5.0"
+    "vitest": "^1.5.0",
+    "zod": "^4.3.5"
   },
   "keywords": [
-  "slides",
-  "presentation",
-  "education",
-  "html",
-  "renderer",
-  "taleem"
-]
-
+    "slides",
+    "presentation",
+    "education",
+    "html",
+    "renderer",
+    "taleem"
+  ]
 }
