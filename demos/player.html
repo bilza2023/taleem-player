@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Taleem PAM Player (Test Nav)</title>
+
+  <!-- Taleem Player styles -->
+  <!-- <link
+    rel="stylesheet"
+    href="https://unpkg.com/taleem-player@0.7.3-rc/dist/css/taleem.css"
+  /> -->
+  <link
+    rel="stylesheet"
+    href="./taleem.css"
+  />
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/taleem-player@0latest/dist/css/themes/dark.css"
+  />
+
+  <style>
+    body {
+      margin: 0;
+      font-family: system-ui, sans-serif;
+    }
+
+    /* slide area */
+    #app {
+      height: 100vh;
+      padding-bottom: 90px; /* reserve space for fixed nav */
+      box-sizing: border-box;
+    }
+
+    .nav-test {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 90px;
+  transition: opacity 0.5s ease;
+  backdrop-filter: blur(0px);           /* optional, modern browsers */
+  -webkit-backdrop-filter: blur(0px);
+  background: rgba(187, 187, 188, 0.85);
+
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0 1rem;
+
+  z-index: 999999;
+}
+
+
+    .nav-test span {
+      font-weight: 700;
+      min-width: 80px;
+    }
+
+    input[type="range"] {
+      flex: 1;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- SLIDES -->
+  <div id="app"></div>
+
+  <!-- NAV (FORCED) -->
+  <div class="nav-test">
+    <button id="play-btn">▶</button>
+    <button id="pause-btn">⏸</button>
+    <button id="stop-btn">⏹</button>
+
+    <span id="time">0.0s</span>
+
+    <input
+      id="scrub"
+      type="range"
+      min="0"
+      max="30"
+      step="0.1"
+    />
+  </div>
+
+  <script type="module">
+
+    import { createTaleemPlayer, resolveAssetPaths,resolveBackground } from
+      "https://unpkg.com/taleem-player@latest/dist/taleem-player.esm.js"
+
+    import { renderLoop, Timer } from
+      "https://unpkg.com/taleem-pam@latest/src/index.js"
+
+
+    // ------------------------------
+    // auto-hide nav logic
+    // ------------------------------
+const navEl = document.querySelector(".nav-test")
+
+let hideTimer = null
+const HIDE_DELAY = 5000   // 5 seconds
+const HOT_ZONE = 120      // px from bottom
+
+function showNav() {
+  navEl.style.opacity = "1"
+  navEl.style.pointerEvents = "auto"
+
+  clearTimeout(hideTimer)
+  hideTimer = setTimeout(hideNav, HIDE_DELAY)
+}
+
+function hideNav() {
+  navEl.style.opacity = "0"
+  navEl.style.pointerEvents = "none"
+}
+
+// initial auto-hide
+showNav()
+
+// show nav when mouse is near bottom
+window.addEventListener("mousemove", e => {
+  const fromBottom = window.innerHeight - e.clientY
+  if (fromBottom < HOT_ZONE) {
+    showNav()
+  }
+})
+
+    // ------------------------------
+    // load deck
+    // ------------------------------
+    const params = new URLSearchParams(window.location.search)
+    const deckName = params.get("deck") || "test"
+// debugger;
+    const res = await fetch(`./decks/${deckName}.json`)
+    if (!res.ok) {
+      document.body.innerHTML = "<h2>Deck not found</h2>"
+      throw new Error("Deck not found")
+    }
+    const deck = await res.json()
+    
+    // import { goldenDeckV1 } from 
+    //   "https://unpkg.com/taleem-core@latest/dist/taleem-core.esm.js";
+    // debugger;
+    //   const deck = structuredClone(goldenDeckV1);
+    resolveAssetPaths(deck, "./public/media/images/");
+    resolveBackground(deck, "./public/media/images/");
+    //console.log("deck" , deck); 
+    // ------------------------------
+    // derive duration from deck
+    // ------------------------------
+    // debugger;
+    const duration =
+    deck.deck[deck.deck.length -1].end;
+
+    // ------------------------------
+    // create player
+    // ------------------------------
+    const player = createTaleemPlayer({
+      mount: "#app",
+      deck
+    })
+
+    // ------------------------------
+    // PAM state + time
+    // ------------------------------
+    const state = {
+  currentTime: 0,
+  duration
+  }
+
+
+    const timer = new Timer()
+
+    // ------------------------------
+    // UI refs
+    // ------------------------------
+    const timeEl  = document.getElementById("time")
+    const playBtn = document.getElementById("play-btn")
+    const pauseBtn = document.getElementById("pause-btn")
+    const stopBtn = document.getElementById("stop-btn")
+    const scrubEl = document.getElementById("scrub")
+
+    scrubEl.max = state.duration
+
+    // ------------------------------
+    // draw
+    // ------------------------------
+    function draw(state) {
+      const t = state.currentTime
+      player.renderAt(t)
+      timeEl.textContent = `${t.toFixed(1)}s`
+      scrubEl.value = t
+    }
+
+    renderLoop.setDraw(draw)
+
+    // ------------------------------
+    // loop
+    // ------------------------------
+    renderLoop.start(() => {
+      state.currentTime = timer.now()
+      renderLoop.draw(state)
+    })
+
+    // ------------------------------
+    // controls
+    // ------------------------------
+    playBtn.onclick  = () => timer.play()
+    pauseBtn.onclick = () => timer.pause()
+    stopBtn.onclick  = () => {
+      timer.pause()
+      timer.seek(0)
+    }
+
+    scrubEl.oninput = e => {
+      timer.seek(+e.target.value)
+      timer.pause()
+    }
+  </script>
+
+</body>
+</html>

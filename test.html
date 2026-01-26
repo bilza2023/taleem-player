@@ -1,90 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <title>Taleem Player – Dist Test</title>
-
-  <!-- player css from dist -->
-  <link rel="stylesheet" href="./dist/css/taleem.css" />
-  <link rel="stylesheet" href="./dist/css/themes/paper.css" />
-
-  <style>
-    body {
-      margin: 0;
-      font-family: system-ui, sans-serif;
-    }
-
-    #app {
-      height: 100vh;
-    }
-
-    #timebar {
-      position: fixed;
-      bottom: 10px;
-      left: 10px;
-      background: rgba(0,0,0,0.6);
-      color: white;
-      padding: 6px 10px;
-      border-radius: 6px;
-      font-size: 14px;
-    }
-  </style>
+  <title>Taleem Lessons</title>
 </head>
 <body>
 
-  <div id="app"></div>
-  <div id="timebar">t = 0s</div>
+<h1>Taleem Lessons</h1>
 
-  <script type="module">
-    // ✅ DIST BUILD (this is the key)
-    import {
-      createTaleemPlayer,
-      resolveAssetPaths,
-      resolveBackground
-    } from "./dist/taleem-player.esm.js";
-
-    // canonical demo deck
-    import { goldenDeckV1 } from
-      "https://unpkg.com/taleem-core@latest/dist/taleem-core.esm.js";
-
-    // clone demo deck
-    const deck = structuredClone(goldenDeckV1);
-
-      // BACKGROUND DEMO
-      // ----------------------------------
-      deck.background = {
-        backgroundColor: "#0b1220",
-        backgroundImage: "wood.jpg",
-        backgroundImageOpacity: 0.25
-      };
-
-    // resolve assets + background
-    resolveAssetPaths(deck, "./public/media/images/");
-    resolveBackground(deck, "./public/media/images/");
-
-    // create player
-    const player = createTaleemPlayer({
-      mount: "#app",
-      deck
-    });
-
-    // simple external clock
-    let t = 0;
-    const STEP = 1;
-    const timebar = document.getElementById("timebar");
-
-    function tick() {
-      player.renderAt(t);
-      timebar.textContent = `t = ${t}s`;
-      t += STEP;
-    }
-
-    tick();
-    setInterval(tick, STEP * 1000);
-
-    // debug hook
-    window.player = player;
-  </script>
+<ul>
+  <li><a href="demos/player.html?deck=test">Test</a></li>
+  <li><a href="demos/player.html?deck=success">Success</a></li>
+  <li><a href="demos/player.html?deck=gpt-test">gpt-test</a></li>
+  <li><a href="demos/player.html?deck=bodmas">bodmas</a></li>
+  <li><a href="demos/player.html?deck=study-tips">study-tips</a></li>
+  <li><a href="demos/player.html?deck=eq-deck">eq-deck</a></li>
+ 
+  
+</ul>
 
 </body>
 </html>
