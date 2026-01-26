@@ -56,6 +56,34 @@ await build({
 });
 
 // -----------------
+// JS: Validation (opt-in, tooling)
+// -----------------
+fs.mkdirSync("dist/validation", { recursive: true });
+
+await build({
+  entryPoints: ["src/validation/index.js"],
+  outfile: "dist/validation/index.js",
+  bundle: true,
+  format: "esm",
+  platform: "node",
+  sourcemap: false
+});
+
+// -----------------
+// JS: Spec (artifacts)
+// -----------------
+fs.mkdirSync("dist/spec", { recursive: true });
+
+await build({
+  entryPoints: ["src/spec/index.js"],
+  outfile: "dist/spec/index.js",
+  bundle: true,
+  format: "esm",
+  platform: "neutral",
+  sourcemap: false
+});
+
+// -----------------
 // CSS
 // -----------------
 fs.mkdirSync("dist/css/themes", { recursive: true });

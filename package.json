@@ -2,41 +2,50 @@
   "name": "taleem-player",
   "version": "1.0.5",
   "type": "module",
+
   "main": "./dist/taleem-player.umd.js",
   "module": "./dist/taleem-player.esm.js",
+
   "exports": {
     ".": {
       "import": "./dist/taleem-player.esm.js",
       "require": "./dist/taleem-player.umd.js"
     },
+
     "./math": {
       "import": "./dist/math/useMath.js"
     },
-    "./validate": {
-      "import": "./dist/validation/validateDeckV1.js"
+
+    "./validation": {
+      "import": "./dist/validation/index.js"
     },
-    "./schema": {
-      "import": "./dist/validation/zodDeckV1.js"
+
+    "./spec": {
+      "import": "./dist/spec/index.js"
     },
+
     "./css": "./dist/css/taleem.css",
     "./css/dark": "./dist/css/themes/dark.css",
     "./css/light": "./dist/css/themes/light.css",
     "./css/paper": "./dist/css/themes/paper.css"
   },
+
   "files": [
     "dist"
   ],
+
   "scripts": {
     "build": "node ./scripts/build.js",
     "test": "vitest run"
   },
+
   "dependencies": {
     "katex": "^0.16.28"
   },
+
   "devDependencies": {
     "esbuild": "^0.27.2",
     "jsdom": "^22.1.0",
-    "taleem-core": "^1.5.1",
     "vitest": "^3.2.4",
     "zod": "^4.3.6"
   }
