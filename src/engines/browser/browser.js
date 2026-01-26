@@ -1,5 +1,4 @@
-
-import { getSlideTemplate } from "taleem-slides";
+import { getSlideTemplate } from "../../slides";
 
 /**
  * createTaleemBrowser

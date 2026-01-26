@@ -1,4 +1,4 @@
-// node_modules/taleem-slides/src/slides/TitleSlide.js
+// src/slides/templates/TitleSlide.js
 var TitleSlide = {
   type: "titleSlide",
   fromJSON(raw) {
@@ -19,7 +19,7 @@ var TitleSlide = {
   }
 };
 
-// node_modules/taleem-slides/src/slides/TitleAndSubtitleSlide.js
+// src/slides/templates/TitleAndSubtitleSlide.js
 var TitleAndSubtitleSlide = {
   type: "titleAndSubtitle",
   fromJSON(raw) {
@@ -42,7 +42,7 @@ var TitleAndSubtitleSlide = {
   }
 };
 
-// node_modules/taleem-slides/src/slides/TitleAndParaSlide.js
+// src/slides/templates/TitleAndParaSlide.js
 var TitleAndParaSlide = {
   type: "titleAndPara",
   fromJSON(raw) {
@@ -65,7 +65,7 @@ var TitleAndParaSlide = {
   }
 };
 
-// node_modules/taleem-slides/src/slides/BulletListSlide.js
+// src/slides/templates/BulletListSlide.js
 var BulletListSlide = {
   type: "bulletList",
   fromJSON(raw) {
@@ -93,7 +93,7 @@ var BulletListSlide = {
   }
 };
 
-// node_modules/taleem-slides/src/slides/TwoColumnTextSlide.js
+// src/slides/templates/TwoColumnTextSlide.js
 var TwoColumnTextSlide = {
   type: "twoColumnText",
   fromJSON(raw) {
@@ -120,7 +120,7 @@ var TwoColumnTextSlide = {
   }
 };
 
-// node_modules/taleem-slides/src/slides/ImageSlide.js
+// src/slides/templates/ImageSlide.js
 var ImageSlide = {
   type: "imageSlide",
   fromJSON(raw) {
@@ -140,7 +140,7 @@ var ImageSlide = {
   }
 };
 
-// node_modules/taleem-slides/src/slides/FillImageSlide.js
+// src/slides/templates/FillImageSlide.js
 var FillImageSlide = {
   type: "fillImage",
   fromJSON(raw) {
@@ -162,7 +162,7 @@ var FillImageSlide = {
   }
 };
 
-// node_modules/taleem-slides/src/slides/ImageWithTitleSlide.js
+// src/slides/templates/ImageWithTitleSlide.js
 var ImageWithTitleSlide = {
   type: "imageWithTitle",
   fromJSON(raw) {
@@ -187,7 +187,7 @@ var ImageWithTitleSlide = {
   }
 };
 
-// node_modules/taleem-slides/src/slides/ImageWithCaptionSlide.js
+// src/slides/templates/ImageWithCaptionSlide.js
 var ImageWithCaptionSlide = {
   type: "imageWithCaption",
   fromJSON(raw) {
@@ -212,7 +212,7 @@ var ImageWithCaptionSlide = {
   }
 };
 
-// node_modules/taleem-slides/src/slides/ImageLeftBulletsRightSlide.js
+// src/slides/templates/ImageLeftBulletsRightSlide.js
 var ImageLeftBulletsRightSlide = {
   type: "imageLeftBulletsRight",
   fromJSON(raw) {
@@ -241,7 +241,7 @@ var ImageLeftBulletsRightSlide = {
   }
 };
 
-// node_modules/taleem-slides/src/slides/ImageRightBulletsLeftSlide.js
+// src/slides/templates/ImageRightBulletsLeftSlide.js
 var ImageRightBulletsLeftSlide = {
   type: "imageRightBulletsLeft",
   fromJSON(raw) {
@@ -270,7 +270,7 @@ var ImageRightBulletsLeftSlide = {
   }
 };
 
-// node_modules/taleem-slides/src/slides/TableSlide.js
+// src/slides/templates/TableSlide.js
 var TableSlide = {
   type: "table",
   fromJSON(raw) {
@@ -296,7 +296,7 @@ var TableSlide = {
   }
 };
 
-// node_modules/taleem-slides/src/slides/StatisticSlide.js
+// src/slides/templates/StatisticSlide.js
 var StatisticSlide = {
   type: "statistic",
   fromJSON(raw) {
@@ -321,7 +321,7 @@ var StatisticSlide = {
   }
 };
 
-// node_modules/taleem-slides/src/slides/BigNumberSlide.js
+// src/slides/templates/BigNumberSlide.js
 var BigNumberSlide = {
   type: "bigNumber",
   fromJSON(raw) {
@@ -346,7 +346,7 @@ var BigNumberSlide = {
   }
 };
 
-// node_modules/taleem-slides/src/slides/BarChartSlide.js
+// src/slides/templates/BarChartSlide.js
 var BarChartSlide = {
   type: "barChart",
   fromJSON(raw) {
@@ -382,7 +382,7 @@ var BarChartSlide = {
   }
 };
 
-// node_modules/taleem-slides/src/slides/DonutChartSlide.js
+// src/slides/templates/DonutChartSlide.js
 var DonutChartSlide = {
   type: "donutChart",
   fromJSON(raw) {
@@ -420,7 +420,7 @@ var DonutChartSlide = {
   }
 };
 
-// node_modules/taleem-slides/src/slides/QuoteSlide.js
+// src/slides/templates/QuoteSlide.js
 var QuoteSlide = {
   type: "quoteSlide",
   fromJSON(raw) {
@@ -445,7 +445,7 @@ var QuoteSlide = {
   }
 };
 
-// node_modules/taleem-slides/src/slides/QuoteWithImageSlide.js
+// src/slides/templates/QuoteWithImageSlide.js
 var QuoteWithImageSlide = {
   type: "quoteWithImage",
   fromJSON(raw) {
@@ -475,7 +475,7 @@ var QuoteWithImageSlide = {
   }
 };
 
-// node_modules/taleem-slides/src/slides/CornerWordsSlide.js
+// src/slides/templates/CornerWordsSlide.js
 var CornerWordsSlide = {
   type: "cornerWordsSlide",
   fromJSON(raw) {
@@ -505,7 +505,7 @@ var CornerWordsSlide = {
   }
 };
 
-// node_modules/taleem-slides/src/slides/ContactSlide.js
+// src/slides/templates/ContactSlide.js
 var ContactSlide = {
   type: "contactSlide",
   fromJSON(raw) {
@@ -527,7 +527,7 @@ var ContactSlide = {
   }
 };
 
-// node_modules/taleem-slides/src/slides/EqSlide.js
+// src/slides/templates/EqSlide.js
 var WINDOW_SIZE = 3;
 var EqSlide = {
   type: "eq",
@@ -579,8 +579,8 @@ var EqSlide = {
   }
 };
 
-// node_modules/taleem-slides/src/SlideTemplates.js
-var SlideTemplates = {
+// src/slides/registry.js
+var SlideRegistry = {
   titleSlide: TitleSlide,
   titleAndSubtitle: TitleAndSubtitleSlide,
   titleAndPara: TitleAndParaSlide,
@@ -604,9 +604,9 @@ var SlideTemplates = {
   eq: EqSlide
 };
 
-// node_modules/taleem-slides/src/getSlideTemplate.js
+// src/slides/getSlideTemplate.js
 function getSlideTemplate(type) {
-  const template = SlideTemplates[type];
+  const template = SlideRegistry[type];
   if (!template) {
     throw new Error(`Unknown slide template type "${type}"`);
   }
@@ -823,7 +823,7 @@ function resolveAssetPaths(deck, IMG_BASE) {
 }
 
 // src/utils/resolveBackground.js
-function resolveBackground2(deck, ASSET_BASE) {
+function resolveBackground(deck, ASSET_BASE) {
   if (!deck || !deck.background) return deck;
   const bg = deck.background;
   if (typeof bg.backgroundImage === "string" && bg.backgroundImage.length > 0) {
@@ -848,5 +848,5 @@ export {
   createTaleemPlayer,
   getDeckEndTime,
   resolveAssetPaths,
-  resolveBackground2 as resolveBackground
+  resolveBackground
 };

@@ -1,6 +1,6 @@
 {
   "name": "taleem-player",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "type": "module",
   "main": "./dist/taleem-player.umd.js",
   "module": "./dist/taleem-player.esm.js",
@@ -31,8 +31,7 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "katex": "^0.16.28",
-    "taleem-slides": "^1.0.2"
+    "katex": "^0.16.28"
   },
   "devDependencies": {
     "esbuild": "^0.27.2",

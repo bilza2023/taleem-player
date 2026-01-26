@@ -1,6 +1,6 @@
 // src/engines/player.js
 
-import { getSlideTemplate } from "taleem-slides";
+import { getSlideTemplate } from "../../slides";
 import { createStage } from "./stage.js";
 
 export function createTaleemPlayer({ mount, deck }) {
