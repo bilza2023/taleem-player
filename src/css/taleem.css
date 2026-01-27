@@ -409,34 +409,75 @@
   }
 
   
+/* =====================================================
+   EQ — Final visual behavior
+   ===================================================== */
+/* EQ should grow from TOP, not vertical center */
+.slide.eq.imageRightBulletsLeft {
+  align-items: flex-start;
+}
 
-/* -------------------------------
-   EQ v1 — ImageRightBulletsLeft shape
-   ------------------------------- */
+/* ---------- EQ: equation lines as table rows ---------- */
 
-   .slide.eq.imageRightBulletsLeft {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 64px;
-    text-align: left;
-  }
-  
-  /* left: bullets (already working) */
-  .slide.eq.imageRightBulletsLeft .eq-lines {
-    flex: 1;
-    list-style: disc;
-    padding-left: 2rem;
-    margin: 0;
-  }
-  
-  /* right: placeholder panel (image slot replacement) */
-  .slide.eq.imageRightBulletsLeft .eq-side-panel {
-    flex: 1;
-    min-height: 60vh;
-  
-    border-radius: 16px;
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px dashed rgba(255, 255, 255, 0.18);
-  }
+.slide.eq.imageRightBulletsLeft .eq-lines {
+  flex: 1;
+  list-style: none;          /* remove bullet visuals */
+  padding: 0;
+  margin: 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.slide.eq.imageRightBulletsLeft .eq-lines li {
+  padding: 14px 18px;
+  font-size: 2.6rem;
+  line-height: 1.45;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.03);
+
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+/* selected (latest) line */
+.slide.eq.imageRightBulletsLeft .eq-lines li:last-child {
+  background: rgba(245, 197, 66, 0.18); /* soft yellow */
+  color: #ffd7a3;                      /* warm / reddish */
+  font-weight: 600;
+}
+
+/* ---------- RIGHT: fixed explanation panel ---------- */
+
+.slide.eq.imageRightBulletsLeft .eq-side-panel {
+  flex: 1;
+  height: 60vh;               /* FIXED height → no shaking */
+  overflow: hidden;           /* contain layout */
+
+  padding: 28px 32px;
+
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 16px;
+
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+
+  display: flex;
+  flex-direction: column;
+}
+
+/* explanation content scrolls INSIDE */
+.slide.eq.imageRightBulletsLeft .eq-side-panel > * {
+  overflow-y: auto;
+}
+
+/* explanation text */
+.slide.eq.imageRightBulletsLeft .eq-explain-item {
+  font-size: 2.4rem;
+  line-height: 1.45;
+
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
   
