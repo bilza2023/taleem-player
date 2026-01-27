@@ -31,6 +31,10 @@
             {
               "type": "spText",
               "content": "The square means the bracket is multiplied by itself."
+            },
+            {
+              "type": "spImage",
+              "content": "box.webp"
             }
           ]
         },

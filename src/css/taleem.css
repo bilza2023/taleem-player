@@ -452,7 +452,7 @@
 
 .slide.eq.imageRightBulletsLeft .eq-side-panel {
   flex: 1;
-  height: 60vh;               /* FIXED height → no shaking */
+  height: 70vh;               /* FIXED height → no shaking */
   overflow: hidden;           /* contain layout */
 
   padding: 28px 32px;
