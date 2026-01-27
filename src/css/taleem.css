@@ -407,4 +407,36 @@
     bottom: 0;
     right: 0;
   }
+
+  
+
+/* -------------------------------
+   EQ v1 — ImageRightBulletsLeft shape
+   ------------------------------- */
+
+   .slide.eq.imageRightBulletsLeft {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 64px;
+    text-align: left;
+  }
+  
+  /* left: bullets (already working) */
+  .slide.eq.imageRightBulletsLeft .eq-lines {
+    flex: 1;
+    list-style: disc;
+    padding-left: 2rem;
+    margin: 0;
+  }
+  
+  /* right: placeholder panel (image slot replacement) */
+  .slide.eq.imageRightBulletsLeft .eq-side-panel {
+    flex: 1;
+    min-height: 60vh;
+  
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px dashed rgba(255, 255, 255, 0.18);
+  }
   

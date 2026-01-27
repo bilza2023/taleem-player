@@ -1,6 +1,6 @@
 {
   "version": "deck-v1",
-  "name": "EQ Gold Standard – Locked Rules",
+  "name": "EQ Single Slide – Long Derivation Test",
 
   "background": {
     "backgroundColor": "#111111"
@@ -8,71 +8,69 @@
 
   "deck": [
     {
-      "type": "titleSlide",
-      "start": 0,
-      "end": 6,
-      "data": [
-        {
-          "name": "title",
-          "content": "Expanding (a + b)²",
-          "showAt": 0
-        },
-        {
-          "name": "subtitle",
-          "content": "Step-by-step derivation using EQ",
-          "showAt": 1
-        }
-      ]
-    },
-    {
       "type": "eq",
-      "start": 8,
-      "end": 26,
+      "start": 0,
+      "end": 90,
       "data": [
         {
           "name": "line",
-          "content": "Start with the expression",
-          "showAt": 8
+          "content": "Start with the given expression",
+          "showAt": 0,
+          "spItems": [
+            {
+              "type": "spText",
+              "content": "We begin by writing the expression exactly as given."
+            }
+          ]
         },
         {
           "name": "line",
           "content": "$(a + b)^2$",
-          "showAt": 11,
+          "showAt": 6,
           "spItems": [
             {
               "type": "spText",
-              "content": "This means (a + b) multiplied by itself."
+              "content": "The square means the bracket is multiplied by itself."
+            }
+          ]
+        },
+        {
+          "name": "line",
+          "content": "Rewrite the square as a product",
+          "showAt": 12,
+          "spItems": [
+            {
+              "type": "spText",
+              "content": "This makes expansion easier to understand."
             }
           ]
         },
         {
           "name": "line",
           "content": "$(a + b)(a + b)$",
-          "showAt": 16
+          "showAt": 18,
+          "spItems": [
+            {
+              "type": "spText",
+              "content": "Each term in the first bracket will multiply each term in the second."
+            }
+          ]
         },
         {
           "name": "line",
-          "content": "Multiply term by term",
-          "showAt": 19
-        }
-      ]
-    },
-
-   
-    {
-      "type": "eq",
-      "start": 28,
-      "end": 46,
-      "data": [
-        {
-          "name": "line",
-          "content": "$(a + b)(a + b)$",
-          "showAt": 28
+          "content": "Apply the distributive law",
+          "showAt": 24,
+          "spItems": [
+            {
+              "type": "spText",
+              "content": "Distributive law allows multiplication across addition."
+            }
+          ]
         },
         {
           "name": "line",
           "content": "$= a(a + b) + b(a + b)$",
-          "showAt": 31,
+          "showAt": 30,
           "spItems": [
             {
               "type": "spText",
@@ -82,56 +80,102 @@
         },
         {
           "name": "line",
-          "content": "$= a^2 + ab + ab + b^2$",
-          "showAt": 36
-        },
-        {
-          "name": "line",
-          "content": "Now group like terms",
-          "showAt": 39
-        }
-      ]
-    },
-
-   
-    {
-      "type": "eq",
-      "start": 48,
-      "end": 64,
-      "data": [
-        {
-          "name": "line",
-          "content": "$= a^2 + ab + ab + b^2$",
-          "showAt": 48
-        },
-        {
-          "name": "line",
-          "content": "$= a^2 + 2ab + b^2$",
-          "showAt": 51,
+          "content": "Expand each product separately",
+          "showAt": 36,
           "spItems": [
             {
               "type": "spText",
-              "content": "The two middle terms ab combine to form 2ab."
+              "content": "Now remove the brackets step by step."
             }
           ]
         },
         {
           "name": "line",
-          "content": "This is the final expanded form",
-          "showAt": 57
-        }
-      ]
-    },
-
-    {
-      "type": "quoteSlide",
-      "start": 66,
-      "end": 78,
-      "data": [
+          "content": "$= a^2 + ab + ab + b^2$",
+          "showAt": 42,
+          "spItems": [
+            {
+              "type": "spText",
+              "content": "Each multiplication is written as a separate term."
+            }
+          ]
+        },
         {
-          "name": "quote",
-          "content": "In algebra, clarity comes from seeing every step.",
-          "showAt": 66
+          "name": "line",
+          "content": "Identify like terms",
+          "showAt": 48,
+          "spItems": [
+            {
+              "type": "spText",
+              "content": "Like terms have the same variables raised to the same powers."
+            }
+          ]
+        },
+        {
+          "name": "line",
+          "content": "Notice the two middle terms",
+          "showAt": 54,
+          "spItems": [
+            {
+              "type": "spText",
+              "content": "Both middle terms are equal to ab."
+            }
+          ]
+        },
+        {
+          "name": "line",
+          "content": "$ab + ab = 2ab$",
+          "showAt": 60,
+          "spItems": [
+            {
+              "type": "spText",
+              "content": "Adding like terms means adding their coefficients."
+            }
+          ]
+        },
+        {
+          "name": "line",
+          "content": "Substitute back into the expression",
+          "showAt": 66,
+          "spItems": [
+            {
+              "type": "spText",
+              "content": "Replace the two ab terms with 2ab."
+            }
+          ]
+        },
+        {
+          "name": "line",
+          "content": "$= a^2 + 2ab + b^2$",
+          "showAt": 72,
+          "spItems": [
+            {
+              "type": "spText",
+              "content": "This is the simplified expanded form."
+            }
+          ]
+        },
+        {
+          "name": "line",
+          "content": "This is the final expansion",
+          "showAt": 78,
+          "spItems": [
+            {
+              "type": "spText",
+              "content": "No further simplification is possible."
+            }
+          ]
+        },
+        {
+          "name": "line",
+          "content": "Expansion complete",
+          "showAt": 84,
+          "spItems": [
+            {
+              "type": "spText",
+              "content": "We have fully expanded and simplified the expression."
+            }
+          ]
         }
       ]
     }

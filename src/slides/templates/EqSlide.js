@@ -1,5 +1,3 @@
-const WINDOW_SIZE = 3;
-
 export const EqSlide = {
   type: "eq",
 
@@ -10,59 +8,30 @@ export const EqSlide = {
       type: "eq",
       lines,
 
-      render(time = null) {
-        let activeIndex = -1;
-
-        if (typeof time === "number") {
-          for (let i = 0; i < lines.length; i++) {
-            if (lines[i].showAt <= time) {
-              activeIndex = i;
-            }
-          }
-        }
-
-        const isTimed = activeIndex !== -1;
-
-        let start = 0;
-        let end = lines.length;
-
-        if (isTimed && activeIndex >= WINDOW_SIZE) {
-          start = activeIndex - (WINDOW_SIZE - 1);
-          end = activeIndex + 1;
-        }
-
-        const visible = lines.slice(start, end);
+      render({ visibleCount = lines.length } = {}) {
+        const lastIndex = Math.min(visibleCount - 1, lines.length - 1);
+        const activeLine = lastIndex >= 0 ? lines[lastIndex] : null;
+        const spItems = activeLine?.spItems ?? [];
 
         return `
-          <section class="slide eq">
-            <div class="eq-slide">
-              ${visible
-                .map((line, localIndex) => {
-                  const index = start + localIndex;
-                  const isActive = isTimed && index === activeIndex;
-                  const hasSp =
-                    Array.isArray(line.spItems) && line.spItems.length > 0;
+          <section class="slide eq imageRightBulletsLeft">
+            
+            <!-- LEFT: lines (bullet behavior) -->
+            <ul class="eq-lines">
+              ${lines.map((line, i) =>
+                i < visibleCount
+                  ? `<li class="eq-line">${line.content}</li>`
+                  : ""
+              ).join("")}
+            </ul>
 
-                  return `
-                    <div class="eq-line ${isActive ? "active" : ""}">
-                      <div class="eq-line-content">${line.content}</div>
-                      ${
-                        hasSp && (!isTimed || isActive)
-                          ? `<div class="eq-sp-items">
-                              ${line.spItems
-                                .map(
-                                  sp =>
-                                    `<div class="eq-sp-item">${sp.content}</div>`
-                                )
-                                .join("")}
-                            </div>`
-                          : ""
-                      }
-                    </div>
-                  `;
-                })
-                .join("")}
+            <!-- RIGHT: explanation panel -->
+            <div class="eq-side-panel">
+              ${spItems.map(
+                item => `<div class="eq-explain-item">${item.content}</div>`
+              ).join("")}
             </div>
+
           </section>
         `;
       }

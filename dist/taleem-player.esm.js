@@ -528,7 +528,6 @@ var ContactSlide = {
 };
 
 // src/slides/templates/EqSlide.js
-var WINDOW_SIZE = 3;
 var EqSlide = {
   type: "eq",
   fromJSON(raw) {
@@ -536,42 +535,20 @@ var EqSlide = {
     return Object.freeze({
       type: "eq",
       lines,
-      render(time = null) {
-        let activeIndex = -1;
-        if (typeof time === "number") {
-          for (let i = 0; i < lines.length; i++) {
-            if (lines[i].showAt <= time) {
-              activeIndex = i;
-            }
-          }
-        }
-        const isTimed = activeIndex !== -1;
-        let start = 0;
-        let end = lines.length;
-        if (isTimed && activeIndex >= WINDOW_SIZE) {
-          start = activeIndex - (WINDOW_SIZE - 1);
-          end = activeIndex + 1;
-        }
-        const visible = lines.slice(start, end);
+      render({ visibleCount = lines.length } = {}) {
         return `
-          <section class="slide eq">
-            <div class="eq-slide">
-              ${visible.map((line, localIndex) => {
-          const index = start + localIndex;
-          const isActive = isTimed && index === activeIndex;
-          const hasSp = Array.isArray(line.spItems) && line.spItems.length > 0;
-          return `
-                    <div class="eq-line ${isActive ? "active" : ""}">
-                      <div class="eq-line-content">${line.content}</div>
-                      ${hasSp && (!isTimed || isActive) ? `<div class="eq-sp-items">
-                              ${line.spItems.map(
-            (sp) => `<div class="eq-sp-item">${sp.content}</div>`
-          ).join("")}
-                            </div>` : ""}
-                    </div>
-                  `;
-        }).join("")}
-            </div>
+          <section class="slide eq imageRightBulletsLeft">
+            
+            <!-- LEFT: lines (bullet behavior) -->
+            <ul class="eq-lines">
+              ${lines.map(
+          (line, i) => i < visibleCount ? `<li class="eq-line">${line.content}</li>` : ""
+        ).join("")}
+            </ul>
+
+            <!-- RIGHT: placeholder (image slot replacement) -->
+            <div class="eq-side-panel"></div>
+
           </section>
         `;
       }
