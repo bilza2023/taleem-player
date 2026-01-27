@@ -2,7 +2,7 @@
 // @vitest-environment jsdom
 
 import { describe, it, expect, beforeEach, afterEach } from "vitest";
-import { goldenDeckV1 } from "taleem-core";
+import { goldenDeckV1 } from "../src/spec/goldenDeckV1.js";
 import { createTaleemPlayer } from "../src/index.js";
 
 describe("taleem-player (real slides render)", () => {

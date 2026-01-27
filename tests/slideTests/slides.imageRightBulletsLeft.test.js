@@ -1,6 +1,6 @@
 import { describe, test, expect } from "vitest";
 import { ImageRightBulletsLeftSlide } from "../../src/slides/templates/ImageRightBulletsLeftSlide.js";
-import { goldenDeckV1 } from "taleem-core";
+import { goldenDeckV1 } from "../../src/spec/goldenDeckV1.js";
 
 describe("ImageRightBulletsLeftSlide", () => {
   test("renders imageRightBulletsLeft from golden deck", () => {

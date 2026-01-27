@@ -1,6 +1,6 @@
 import { describe, test, expect } from "vitest";
 import { TitleSlide } from "../../src/slides/templates/TitleSlide.js";
-import { goldenDeckV1 } from "taleem-core";
+import { goldenDeckV1 } from "../../src/spec/goldenDeckV1.js";
 
 describe("TitleSlide", () => {
   test("renders title slide structure", () => {

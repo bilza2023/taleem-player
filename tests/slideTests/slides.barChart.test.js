@@ -1,6 +1,6 @@
 import { describe, test, expect } from "vitest";
 import { BarChartSlide } from "../../src/slides/templates/BarChartSlide";
-import { goldenDeckV1 } from "taleem-core"; // path may vary in monorepo
+import { goldenDeckV1 } from "../../src/spec/goldenDeckV1.js"; // path may vary in monorepo
 
 describe("BarChartSlide", () => {
   test("renders barChart slide from golden deck", () => {

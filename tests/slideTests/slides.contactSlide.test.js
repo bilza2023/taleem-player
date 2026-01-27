@@ -1,7 +1,7 @@
 
 import { describe, test, expect } from "vitest";
 import { ContactSlide } from "../../src/slides/templates/ContactSlide.js";
-import { goldenDeckV1 } from "taleem-core";
+import { goldenDeckV1 } from "../../src/spec/goldenDeckV1.js";
 
 describe("ContactSlide", () => {
   test("renders contactSlide from golden deck", () => {

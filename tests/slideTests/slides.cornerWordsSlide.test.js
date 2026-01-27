@@ -1,7 +1,7 @@
 
 import { describe, test, expect } from "vitest";
 import { CornerWordsSlide } from "../../src/slides/templates/CornerWordsSlide.js";
-import { goldenDeckV1 } from "taleem-core";
+import { goldenDeckV1 } from "../../src/spec/goldenDeckV1.js";
 
 describe("CornerWordsSlide", () => {
   test("renders cornerWordsSlide from golden deck", () => {

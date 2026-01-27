@@ -1,6 +1,6 @@
 import { describe, test, expect } from "vitest";
 import { BigNumberSlide } from "../../src/slides/templates/BigNumberSlide.js";
-import { goldenDeckV1 } from "taleem-core";
+import { goldenDeckV1 } from "../../src/spec/goldenDeckV1.js";
 
 describe("BigNumberSlide", () => {
   test("renders bigNumber structure", () => {

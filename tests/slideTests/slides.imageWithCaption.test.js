@@ -1,7 +1,7 @@
 
 import { describe, test, expect } from "vitest";
 import { ImageWithCaptionSlide } from "../../src/slides/templates/ImageWithCaptionSlide.js";
-import { goldenDeckV1 } from "taleem-core";
+import { goldenDeckV1 } from "../../src/spec/goldenDeckV1.js";
 
 describe("ImageWithCaptionSlide", () => {
   test("renders imageWithCaption from golden deck", () => {

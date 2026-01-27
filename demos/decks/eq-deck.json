@@ -34,7 +34,7 @@
             },
             {
               "type": "spImage",
-              "content": "/public/media/images/box.webp"
+              "content": "box.webp"
             }
           ]
         },
@@ -60,7 +60,7 @@
             },
             {
               "type": "spImage",
-              "content": "/public/media/images/box.webp"
+              "content": "box.webp"
             }
           ]
         },
@@ -86,7 +86,7 @@
             },
             {
               "type": "spImage",
-              "content": "/public/media/images/box.webp"
+              "content": "box.webp"
             }
           ]
         },
@@ -112,7 +112,7 @@
             },
             {
               "type": "spImage",
-              "content": "/public/media/images/box.webp"
+              "content": "box.webp"
             }
           ]
         },
@@ -138,7 +138,7 @@
             },
             {
               "type": "spImage",
-              "content": "/public/media/images/box.webp"
+              "content": "box.webp"
             }
           ]
         },
@@ -161,7 +161,7 @@
             
             {
               "type": "spImage",
-              "content": "/public/media/images/box.webp"
+              "content": "box.webp"
             },
             {
               "type": "spText",

@@ -1,6 +1,6 @@
 import { describe, test, expect } from "vitest";
 import { TableSlide } from "../../src/slides/templates/TableSlide.js";
-import { goldenDeckV1 } from "taleem-core";
+import { goldenDeckV1 } from "../../src/spec/goldenDeckV1.js";
 
 describe("TableSlide", () => {
   test("renders table structure from golden deck", () => {

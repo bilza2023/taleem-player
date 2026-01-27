@@ -1,6 +1,6 @@
 import { describe, test, expect } from "vitest";
 import { StatisticSlide } from "../../src/slides/templates/StatisticSlide.js";
-import { goldenDeckV1 } from "taleem-core";
+import { goldenDeckV1 } from "../../src/spec/goldenDeckV1.js";
 
 describe("StatisticSlide", () => {
   test("renders statistic slide structure", () => {

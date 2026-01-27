@@ -1,6 +1,6 @@
 import { describe, test, expect } from "vitest";
 import { TitleAndParaSlide } from "../../src/slides/templates/TitleAndParaSlide.js";
-import { goldenDeckV1 } from "taleem-core";
+import { goldenDeckV1 } from "../../src/spec/goldenDeckV1.js";
 
 describe("TitleAndParaSlide", () => {
   test("renders title and paragraph structure", () => {
