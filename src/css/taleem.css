@@ -408,10 +408,10 @@
     right: 0;
   }
 
-  
 /* =====================================================
    EQ — Final visual behavior
    ===================================================== */
+
 /* EQ should grow from TOP, not vertical center */
 .slide.eq.imageRightBulletsLeft {
   align-items: flex-start;
@@ -467,17 +467,27 @@
   flex-direction: column;
 }
 
-/* explanation content scrolls INSIDE */
-.slide.eq.imageRightBulletsLeft .eq-side-panel > * {
-  overflow-y: auto;
-}
+/* ---------- Side panel items ---------- */
 
-/* explanation text */
 .slide.eq.imageRightBulletsLeft .eq-explain-item {
-  font-size: 2.4rem;
+  font-size: 1.4rem;
   line-height: 1.45;
+  text-align: center;
 
   word-wrap: break-word;
   overflow-wrap: break-word;
+
+  background: rgba(255, 255, 255, 0.06);
+  padding: 14px 18px;
+  border-radius: 12px;
 }
-  
+
+/* ---------- Side panel image ---------- */
+
+.slide.eq.imageRightBulletsLeft .eq-explain-image img {
+  width: 70%;
+  margin: 0 auto;            /* center image */
+  display: block;
+
+  border-radius: 12px;
+}

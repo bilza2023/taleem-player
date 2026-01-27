@@ -34,7 +34,7 @@
             },
             {
               "type": "spImage",
-              "content": "box.webp"
+              "content": "/public/media/images/box.webp"
             }
           ]
         },
@@ -57,6 +57,10 @@
             {
               "type": "spText",
               "content": "Each term in the first bracket will multiply each term in the second."
+            },
+            {
+              "type": "spImage",
+              "content": "/public/media/images/box.webp"
             }
           ]
         },
@@ -79,6 +83,10 @@
             {
               "type": "spText",
               "content": "Each term in the first bracket multiplies the entire second bracket."
+            },
+            {
+              "type": "spImage",
+              "content": "/public/media/images/box.webp"
             }
           ]
         },
@@ -101,6 +109,10 @@
             {
               "type": "spText",
               "content": "Each multiplication is written as a separate term."
+            },
+            {
+              "type": "spImage",
+              "content": "/public/media/images/box.webp"
             }
           ]
         },
@@ -123,6 +135,10 @@
             {
               "type": "spText",
               "content": "Both middle terms are equal to ab."
+            },
+            {
+              "type": "spImage",
+              "content": "/public/media/images/box.webp"
             }
           ]
         },
@@ -142,6 +158,11 @@
           "content": "Substitute back into the expression",
           "showAt": 66,
           "spItems": [
+            
+            {
+              "type": "spImage",
+              "content": "/public/media/images/box.webp"
+            },
             {
               "type": "spText",
               "content": "Replace the two ab terms with 2ab."

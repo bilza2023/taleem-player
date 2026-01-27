@@ -1,3 +1,4 @@
+
 export const EqSlide = {
   type: "eq",
 
@@ -27,9 +28,22 @@ export const EqSlide = {
 
             <!-- RIGHT: explanation panel -->
             <div class="eq-side-panel">
-              ${spItems.map(
-                item => `<div class="eq-explain-item">${item.content}</div>`
-              ).join("")}
+              ${spItems.map(item => {
+                if (item.type === "spImage") {
+                  return `
+                    <div class="eq-explain-item eq-explain-image">
+                      <img src="${item.content}" alt="" />
+                    </div>
+                  `;
+                }
+
+                // default: spText / spMath / spHeading (render as text for now)
+                return `
+                  <div class="eq-explain-item">
+                    ${item.content}
+                  </div>
+                `;
+              }).join("")}
             </div>
 
           </section>
