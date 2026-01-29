@@ -60,11 +60,11 @@
 
     <h2>A Minimal Working Example</h2>
 
-<p>
-  Below is a complete, valid <code>deck-v1</code> example.
-  It follows the schema exactly and will validate and render correctly
-  in any Taleem-compatible renderer.
-</p>
+    <p>
+      Below is a complete, valid <code>deck-v1</code> example.
+      It follows the schema exactly and will validate and render correctly
+      in any Taleem-compatible renderer.
+    </p>
 
 <pre><code>{
   "version": "deck-v1",
@@ -76,7 +76,7 @@
   },
   "deck": [
     {
-      "type": "titleSlide",
+      "type": "titleAndPara",
       "start": 0,
       "end": 5,
       "data": [
@@ -107,31 +107,31 @@
   ]
 }</code></pre>
 
-<p>
-  This example demonstrates:
-</p>
+    <p>
+      This example demonstrates:
+    </p>
 
-<ul>
-  <li>a valid <code>deck-v1</code> header</li>
-  <li>optional background data</li>
-  <li>explicit slide types</li>
-  <li>time-bounded slides</li>
-  <li>pure, declarative content</li>
-</ul>
+    <ul>
+      <li>a valid <code>deck-v1</code> header</li>
+      <li>optional background data</li>
+      <li>explicit slide types</li>
+      <li>time-bounded slides</li>
+      <li>pure, declarative content</li>
+    </ul>
 
-<p>
-  Any renderer that supports <code>deck-v1</code> must produce
-  the same logical output for this input.
-</p>
+    <p>
+      Any renderer that supports <code>deck-v1</code> must produce
+      the same logical output for this input.
+    </p>
 
     <h2>Where the Schema Lives</h2>
 
     <p>
-      The Taleem schema is not defined in documentation.
+      The Taleem schema is not defined in prose documentation.
     </p>
 
     <p>
-      It is defined in code, inside the <strong>taleem-core</strong> package.
+      It is defined in code, inside the <strong>taleem-player</strong> package.
     </p>
 
     <p>
@@ -143,16 +143,16 @@
 
     <ul>
       <li>
-        <strong>Deck schema (deck-v1, enforced via Zod)</strong><br />
-        <a href="https://github.com/bilza2023/taleem-core/blob/master/src/deck/zodDeckV1.js">
-          https://github.com/bilza2023/taleem-core/blob/master/src/deck/zodDeckV1.js
+        <strong>Deck schema (deck-v1, enforced via code)</strong><br />
+        <a href="https://github.com/bilza2023/taleem-player/tree/master/src/spec">
+          https://github.com/bilza2023/taleem-player/tree/master/src/spec
         </a>
       </li>
 
       <li>
-        <strong>Enumerated slide types (v1)</strong><br />
-        <a href="https://github.com/bilza2023/taleem-core/blob/master/src/deck/slideTypesV1.js">
-          https://github.com/bilza2023/taleem-core/blob/master/src/deck/slideTypesV1.js
+        <strong>Canonical slide renderers (v1)</strong><br />
+        <a href="https://github.com/bilza2023/taleem-player/tree/master/src/slides">
+          https://github.com/bilza2023/taleem-player/tree/master/src/slides
         </a>
       </li>
     </ul>
@@ -165,12 +165,11 @@
     <h2>Finite Slide Types</h2>
 
     <p>
-      The schema defines a <strong>finite set of slide types</strong>.
+      The schema defines a <strong>finite, closed set of slide types</strong>.
     </p>
 
     <p>
-      At the time of writing, <code>deck-v1</code> defines
-      <strong>21 slide types</strong>.
+      <code>deck-v1</code> defines <strong>16 canonical slide types</strong>.
     </p>
 
     <p>
@@ -223,8 +222,8 @@
     </p>
 
     <p>
-      <a href="https://github.com/bilza2023/taleem-core/blob/master/src/samples/goldenDeckV1.js">
-        https://github.com/bilza2023/taleem-core/blob/master/src/samples/goldenDeckV1.js
+      <a href="https://github.com/bilza2023/taleem-player/blob/master/src/spec/goldenDeckV1.js">
+        https://github.com/bilza2023/taleem-player/blob/master/src/spec/goldenDeckV1.js
       </a>
     </p>
 
@@ -289,7 +288,7 @@
     </p>
 
     <div class="footer">
-      Taleem Player Docs
+      Taleem · deck-v1 · Frozen
     </div>
 
   </div>
