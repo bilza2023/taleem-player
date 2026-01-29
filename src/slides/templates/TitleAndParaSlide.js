@@ -6,8 +6,8 @@ export const TitleAndParaSlide = {
     const title = raw.data?.find(d => d.name === "title")?.content;
     const para = raw.data?.find(d => d.name === "para")?.content;
 
-    if (!title || !para) {
-      throw new Error("titleAndPara: requires title and para");
+    if (!title && !para) {
+      throw new Error("titleAndPara: requires at least title or para");
     }
 
     return Object.freeze({
@@ -15,8 +15,8 @@ export const TitleAndParaSlide = {
       render() {
         return `
           <section class="slide titleAndPara">
-            <h1>${title}</h1>
-            <p>${para}</p>
+            ${title ? `<h1>${title}</h1>` : ``}
+            ${para ? `<p>${para}</p>` : ``}
           </section>
         `;
       }

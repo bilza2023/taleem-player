@@ -1,3 +1,4 @@
+
 // src/slides/TitleAndSubtitleSlide.js
 export const TitleAndSubtitleSlide = {
   type: "titleAndSubtitle",
@@ -6,8 +7,8 @@ export const TitleAndSubtitleSlide = {
     const title = raw.data?.find(d => d.name === "title")?.content;
     const subtitle = raw.data?.find(d => d.name === "subtitle")?.content;
 
-    if (!title || !subtitle) {
-      throw new Error("titleAndSubtitle: requires title and subtitle");
+    if (!title) {
+      throw new Error("titleAndSubtitle: requires title");
     }
 
     return Object.freeze({
@@ -16,7 +17,7 @@ export const TitleAndSubtitleSlide = {
         return `
           <section class="slide titleAndSubtitle">
             <h1>${title}</h1>
-            <h2>${subtitle}</h2>
+            ${subtitle ? `<h2>${subtitle}</h2>` : ``}
           </section>
         `;
       }

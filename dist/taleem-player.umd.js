@@ -35,8 +35,8 @@ var TaleemPlayer = (() => {
     fromJSON(raw) {
       const title = raw.data?.find((d) => d.name === "title")?.content;
       const subtitle = raw.data?.find((d) => d.name === "subtitle")?.content;
-      if (!title || !subtitle) {
-        throw new Error("titleAndSubtitle: requires title and subtitle");
+      if (!title) {
+        throw new Error("titleAndSubtitle: requires title");
       }
       return Object.freeze({
         type: "titleAndSubtitle",
@@ -44,7 +44,7 @@ var TaleemPlayer = (() => {
           return `
           <section class="slide titleAndSubtitle">
             <h1>${title}</h1>
-            <h2>${subtitle}</h2>
+            ${subtitle ? `<h2>${subtitle}</h2>` : ``}
           </section>
         `;
         }
@@ -58,16 +58,16 @@ var TaleemPlayer = (() => {
     fromJSON(raw) {
       const title = raw.data?.find((d) => d.name === "title")?.content;
       const para = raw.data?.find((d) => d.name === "para")?.content;
-      if (!title || !para) {
-        throw new Error("titleAndPara: requires title and para");
+      if (!title && !para) {
+        throw new Error("titleAndPara: requires at least title or para");
       }
       return Object.freeze({
         type: "titleAndPara",
         render() {
           return `
           <section class="slide titleAndPara">
-            <h1>${title}</h1>
-            <p>${para}</p>
+            ${title ? `<h1>${title}</h1>` : ``}
+            ${para ? `<p>${para}</p>` : ``}
           </section>
         `;
         }
