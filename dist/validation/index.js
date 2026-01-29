@@ -13777,57 +13777,59 @@ var baseSlide = external_exports.object({
   start: external_exports.number(),
   end: external_exports.number()
 });
-var titleSlide = baseSlide.extend({
-  type: external_exports.literal("titleSlide"),
-  data: external_exports.array(
-    external_exports.object({
-      name: external_exports.literal("title"),
-      content: external_exports.string(),
-      showAt: external_exports.number().optional()
-    })
-  )
-});
+var showAt = external_exports.number().optional();
 var titleAndSubtitle = baseSlide.extend({
   type: external_exports.literal("titleAndSubtitle"),
   data: external_exports.array(
     external_exports.union([
-      external_exports.object({ name: external_exports.literal("title"), content: external_exports.string(), showAt: external_exports.number().optional() }),
-      external_exports.object({ name: external_exports.literal("subtitle"), content: external_exports.string(), showAt: external_exports.number().optional() })
+      external_exports.object({ name: external_exports.literal("title"), content: external_exports.string(), showAt }),
+      external_exports.object({ name: external_exports.literal("subtitle"), content: external_exports.string(), showAt })
+    ])
+  )
+});
+var titleAndPara = baseSlide.extend({
+  type: external_exports.literal("titleAndPara"),
+  data: external_exports.array(
+    external_exports.union([
+      external_exports.object({ name: external_exports.literal("title"), content: external_exports.string(), showAt }),
+      external_exports.object({ name: external_exports.literal("para"), content: external_exports.string(), showAt })
     ])
   )
 });
 var bulletList = baseSlide.extend({
   type: external_exports.literal("bulletList"),
   data: external_exports.array(
-    external_exports.object({
-      name: external_exports.literal("bullet"),
-      content: external_exports.string(),
-      showAt: external_exports.number().optional()
-    })
+    external_exports.object({ name: external_exports.literal("bullet"), content: external_exports.string(), showAt })
   )
 });
 var twoColumnText = baseSlide.extend({
   type: external_exports.literal("twoColumnText"),
   data: external_exports.array(
     external_exports.union([
-      external_exports.object({ name: external_exports.literal("title"), content: external_exports.string(), showAt: external_exports.number().optional() }),
-      external_exports.object({ name: external_exports.literal("left"), content: external_exports.string(), showAt: external_exports.number().optional() }),
-      external_exports.object({ name: external_exports.literal("right"), content: external_exports.string(), showAt: external_exports.number().optional() })
+      external_exports.object({ name: external_exports.literal("title"), content: external_exports.string(), showAt }),
+      external_exports.object({ name: external_exports.literal("left"), content: external_exports.string(), showAt }),
+      external_exports.object({ name: external_exports.literal("right"), content: external_exports.string(), showAt })
     ])
   )
 });
 var imageSlide = baseSlide.extend({
   type: external_exports.literal("imageSlide"),
   data: external_exports.array(
-    external_exports.object({ name: external_exports.literal("image"), content: external_exports.string(), showAt: external_exports.number().optional() })
+    external_exports.object({ name: external_exports.literal("image"), content: external_exports.string(), showAt })
+  )
+});
+var fillImage = baseSlide.extend({
+  type: external_exports.literal("fillImage"),
+  data: external_exports.array(
+    external_exports.object({ name: external_exports.literal("image"), content: external_exports.string(), showAt })
   )
 });
 var imageWithTitle = baseSlide.extend({
   type: external_exports.literal("imageWithTitle"),
   data: external_exports.array(
     external_exports.union([
-      external_exports.object({ name: external_exports.literal("image"), content: external_exports.string(), showAt: external_exports.number().optional() }),
-      external_exports.object({ name: external_exports.literal("title"), content: external_exports.string(), showAt: external_exports.number().optional() })
+      external_exports.object({ name: external_exports.literal("image"), content: external_exports.string(), showAt }),
+      external_exports.object({ name: external_exports.literal("title"), content: external_exports.string(), showAt })
     ])
   )
 });
@@ -13835,8 +13837,8 @@ var imageWithCaption = baseSlide.extend({
   type: external_exports.literal("imageWithCaption"),
   data: external_exports.array(
     external_exports.union([
-      external_exports.object({ name: external_exports.literal("image"), content: external_exports.string(), showAt: external_exports.number().optional() }),
-      external_exports.object({ name: external_exports.literal("caption"), content: external_exports.string(), showAt: external_exports.number().optional() })
+      external_exports.object({ name: external_exports.literal("image"), content: external_exports.string(), showAt }),
+      external_exports.object({ name: external_exports.literal("caption"), content: external_exports.string(), showAt })
     ])
   )
 });
@@ -13846,7 +13848,7 @@ var imageLeftBulletsRight = baseSlide.extend({
     external_exports.object({
       name: external_exports.union([external_exports.literal("image"), external_exports.literal("bullet")]),
       content: external_exports.string(),
-      showAt: external_exports.number().optional()
+      showAt
     })
   )
 });
@@ -13856,49 +13858,13 @@ var imageRightBulletsLeft = baseSlide.extend({
     external_exports.object({
       name: external_exports.union([external_exports.literal("image"), external_exports.literal("bullet")]),
       content: external_exports.string(),
-      showAt: external_exports.number().optional()
+      showAt
     })
   )
 });
 var table = baseSlide.extend({
   type: external_exports.literal("table"),
-  data: external_exports.array(
-    external_exports.array(external_exports.string()).min(1)
-    // each row must have at least 1 cell
-  ).min(1).refine(
-    (rows) => rows.every((r) => r.length === rows[0].length),
-    {
-      message: "All table rows must have the same number of columns"
-    }
-  )
-});
-var statistic = baseSlide.extend({
-  type: external_exports.literal("statistic"),
-  data: external_exports.array(
-    external_exports.union([
-      external_exports.object({ name: external_exports.literal("number"), content: external_exports.string(), showAt: external_exports.number().optional() }),
-      external_exports.object({ name: external_exports.literal("label"), content: external_exports.string(), showAt: external_exports.number().optional() })
-    ])
-  )
-});
-var donutChart = baseSlide.extend({
-  type: external_exports.literal("donutChart"),
-  data: external_exports.array(
-    external_exports.object({
-      name: external_exports.union([external_exports.literal("percent"), external_exports.literal("label"), external_exports.literal("color")]),
-      content: external_exports.string(),
-      showAt: external_exports.number().optional()
-    })
-  )
-});
-var bigNumber = baseSlide.extend({
-  type: external_exports.literal("bigNumber"),
-  data: external_exports.array(
-    external_exports.union([
-      external_exports.object({ name: external_exports.literal("number"), content: external_exports.string(), showAt: external_exports.number().optional() }),
-      external_exports.object({ name: external_exports.literal("label"), content: external_exports.string(), showAt: external_exports.number().optional() })
-    ])
-  )
+  data: external_exports.array(external_exports.array(external_exports.string()).min(1)).min(1)
 });
 var barChart = baseSlide.extend({
   type: external_exports.literal("barChart"),
@@ -13907,7 +13873,18 @@ var barChart = baseSlide.extend({
       name: external_exports.literal("bar"),
       label: external_exports.string(),
       value: external_exports.number(),
-      showAt: external_exports.number().optional()
+      showAt
+    })
+  )
+});
+var progressbar = baseSlide.extend({
+  type: external_exports.literal("progressbar"),
+  data: external_exports.array(
+    external_exports.object({
+      name: external_exports.literal("bar"),
+      label: external_exports.string(),
+      value: external_exports.number(),
+      showAt
     })
   )
 });
@@ -13915,23 +13892,13 @@ var quoteSlide = baseSlide.extend({
   type: external_exports.literal("quoteSlide"),
   data: external_exports.array(
     external_exports.union([
-      external_exports.object({ name: external_exports.literal("quote"), content: external_exports.string(), showAt: external_exports.number().optional() }),
-      external_exports.object({ name: external_exports.literal("author"), content: external_exports.string(), showAt: external_exports.number().optional() })
+      external_exports.object({ name: external_exports.literal("quote"), content: external_exports.string(), showAt }),
+      external_exports.object({ name: external_exports.literal("author"), content: external_exports.string(), showAt })
     ])
   )
 });
-var quoteWithImage = baseSlide.extend({
-  type: external_exports.literal("quoteWithImage"),
-  data: external_exports.array(
-    external_exports.union([
-      external_exports.object({ name: external_exports.literal("quote"), content: external_exports.string(), showAt: external_exports.number().optional() }),
-      external_exports.object({ name: external_exports.literal("author"), content: external_exports.string(), showAt: external_exports.number().optional() }),
-      external_exports.object({ name: external_exports.literal("image"), content: external_exports.string(), showAt: external_exports.number().optional() })
-    ])
-  )
-});
-var cornerWordsSlide = baseSlide.extend({
-  type: external_exports.literal("cornerWordsSlide"),
+var keyIdeasSlide = baseSlide.extend({
+  type: external_exports.literal("keyIdeasSlide"),
   data: external_exports.array(
     external_exports.object({
       name: external_exports.literal("card"),
@@ -13941,69 +13908,26 @@ var cornerWordsSlide = baseSlide.extend({
     })
   )
 });
-var contactSlide = baseSlide.extend({
-  type: external_exports.literal("contactSlide"),
-  data: external_exports.array(
-    external_exports.union([
-      external_exports.object({ name: external_exports.literal("headline"), content: external_exports.string(), showAt: external_exports.number().optional() }),
-      external_exports.object({ name: external_exports.literal("email"), content: external_exports.string(), showAt: external_exports.number().optional() }),
-      external_exports.object({ name: external_exports.literal("phone"), content: external_exports.string(), showAt: external_exports.number().optional() })
-    ])
-  )
-});
-var eqSlide = baseSlide.extend({
+var eq = baseSlide.extend({
   type: external_exports.literal("eq"),
   data: external_exports.array(
     external_exports.object({
       name: external_exports.literal("line"),
-      type: external_exports.union([
-        external_exports.literal("heading"),
-        external_exports.literal("text"),
-        external_exports.literal("math")
-      ]),
+      type: external_exports.enum(["heading", "text", "math"]),
       content: external_exports.string(),
-      showAt: external_exports.number().optional(),
+      showAt,
       spItems: external_exports.array(
         external_exports.object({
-          type: external_exports.union([
-            external_exports.literal("spHeading"),
-            external_exports.literal("spText"),
-            external_exports.literal("spMath"),
-            external_exports.literal("spImage")
-          ]),
+          type: external_exports.enum(["spHeading", "spText", "spMath", "spImage"]),
           content: external_exports.string()
         })
       ).optional()
     })
   )
 });
-var fillImage = baseSlide.extend({
-  type: external_exports.literal("fillImage"),
-  data: external_exports.array(
-    external_exports.object({
-      name: external_exports.literal("image"),
-      content: external_exports.string(),
-      showAt: external_exports.number().optional()
-    })
-  )
-});
-var titleAndPara = baseSlide.extend({
-  type: external_exports.literal("titleAndPara"),
-  data: external_exports.array(
-    external_exports.union([
-      external_exports.object({ name: external_exports.literal("title"), content: external_exports.string(), showAt: external_exports.number().optional() }),
-      external_exports.object({ name: external_exports.literal("para"), content: external_exports.string(), showAt: external_exports.number().optional() })
-    ])
-  )
-});
 var zodDeckV1 = external_exports.object({
-  name: external_exports.string().optional(),
-  description: external_exports.string().optional(),
-  tags: external_exports.array(external_exports.string()).optional(),
-  status: external_exports.enum(["draft", "ready", "published", "archived"]).optional(),
-  createdAt: external_exports.string().datetime().optional(),
-  editedAt: external_exports.string().datetime().optional(),
   version: external_exports.literal("deck-v1"),
+  name: external_exports.string().optional(),
   background: external_exports.object({
     backgroundColor: external_exports.string().optional(),
     backgroundImage: external_exports.string().nullable().optional(),
@@ -14011,27 +13935,22 @@ var zodDeckV1 = external_exports.object({
   }).optional(),
   deck: external_exports.array(
     external_exports.discriminatedUnion("type", [
-      titleAndPara,
-      eqSlide,
-      fillImage,
-      titleSlide,
       titleAndSubtitle,
+      titleAndPara,
       bulletList,
       twoColumnText,
       imageSlide,
+      fillImage,
       imageWithTitle,
       imageWithCaption,
       imageLeftBulletsRight,
       imageRightBulletsLeft,
       table,
-      statistic,
-      donutChart,
-      bigNumber,
       barChart,
+      progressbar,
       quoteSlide,
-      quoteWithImage,
-      cornerWordsSlide,
-      contactSlide
+      keyIdeasSlide,
+      eq
     ])
   )
 });

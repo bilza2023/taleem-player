@@ -1,31 +1,36 @@
 # Taleem Player
 
-<img src="./docs/images/taleem.webp"
-     alt="Taleem Player — JSON to Web Presentations"
-     width="100%" />
-
 **Taleem Player** converts **Taleem JSON slide data** into **web-based presentations**.
 
-It renders the _same taleem JSON_ in multiple ways using different display modes.
+It renders the **same Taleem JSON** in multiple display modes using a single, stable rendering engine.
 
-> **Stable 1.0 — API frozen.**  
+> **Stable · deck-v1 frozen**  
+> The slide language, schema, and registry are complete.  
 > Internal improvements may continue without breaking public contracts.
 
 ---
-
-## Demo & Documentation
-
+Demo & Documentation
 👉 https://bilza2023.github.io/taleem/
 
 The live demo shows:
 
-- Browser Mode (index-based rendering)
-- Player Mode (time-based rendering)
-- Real production Taleem JSON
-- Shared CSS across all modes
+ - Browser Mode (index-based rendering)
+ - Player Mode (time-based rendering)
+ - Real production Taleem JSON
+ - Shared CSS across all modes
+ - No screenshots. No mock data.
+ - What you see is the real engine running in the browser.
+---
 
-**No screenshots. No mock data.  
-What you see is the real engine running in the browser.**
+## What this project is
+
+Taleem Player is a **presentation engine**, not a slide editor.
+
+It takes **validated Taleem decks** and turns them into:
+- index-based presentations
+- time-based presentations
+
+The system is **declarative**, **predictable**, and **CSS-driven**.
 
 ---
 
@@ -33,15 +38,15 @@ What you see is the real engine running in the browser.**
 
 ```bash
 npm install taleem-player
-```
+````
 
 ---
 
 ## Display Modes
 
-### Browser Mode (Index-based)
+### Browser Mode (index-based)
 
-Use when you want **direct access to slides**.
+Use when you want **direct control over which slide is shown**.
 
 ```js
 import { createTaleemBrowser } from "taleem-player";
@@ -55,18 +60,18 @@ browser.render(0);
 browser.getTotal();
 ```
 
-**Ideal for**
+**Best for**
 
-- previews
-- galleries
-- editors
-- syllabus pages
+* previews
+* editors
+* galleries
+* syllabus pages
 
 ---
 
-### Player Mode (Time-based)
+### Player Mode (time-based)
 
-Use when slides must change **progressively over time**.
+Use when slides should progress according to **external timing**.
 
 ```js
 import { createTaleemPlayer } from "taleem-player";
@@ -75,32 +80,43 @@ const player = createTaleemPlayer({ mount: "#app" });
 player.renderAt(12.5);
 ```
 
-**Ideal for**
+**Best for**
 
-- narrated lessons
-- video / audio sync
-- recorded presentations
-
----
-
-## Browser vs Player (Quick Comparison)
-
-| Feature         | Browser        | Player         |
-| --------------- | -------------- | -------------- |
-| Rendering       | Index-based    | Time-based     |
-| Timing required | No             | Yes            |
-| Navigation      | Manual         | Progressive    |
-| Control         | App-driven     | External clock |
-| Use case        | Preview / Edit | Playback       |
-
-> ⚠️ Player Mode requires **valid, ordered timings**.
-> The library does not auto-correct or guess timing errors.
+* narrated lessons
+* recorded explanations
+* audio / video synchronization
 
 ---
 
-## Utilities (Runtime-safe)
+## Browser vs Player
 
-These **Utilities (Runtime-safe)** are exported :
+| Feature    | Browser Mode | Player Mode |
+| ---------- | ------------ | ----------- |
+| Rendering  | Index-based  | Time-based  |
+| Timing     | Optional     | Required    |
+| Navigation | Manual       | Progressive |
+| Control    | App-driven   | External    |
+| Use case   | Preview      | Playback    |
+
+> ⚠️ Player Mode assumes **valid timings**.
+> The library does not guess, correct, or mutate deck data.
+
+---
+
+## Slide System
+
+* The core system defines **16 canonical slide types**
+* The slide registry is **stable and frozen**
+* Slides express **visual state**, not interaction
+* All motion and emphasis are **CSS-based**
+
+If a deck validates against `deck-v1`, it is correct Taleem data.
+
+---
+
+## Utilities (runtime-safe)
+
+The following helpers are exported for **application use**:
 
 ```js
 import {
@@ -111,12 +127,13 @@ import {
 } from "taleem-player";
 ```
 
-- `assignMockTimings(deck, seconds)`
-- `resolveAssetPaths(deck, basePath)`
-- `resolveBackground(deck, basePath)`
-- `getDeckEndTime(deck)`
+* `assignMockTimings(deck, seconds)`
+* `resolveAssetPaths(deck, basePath)`
+* `resolveBackground(deck, basePath)`
+* `getDeckEndTime(deck)`
 
-These helpers prepare decks for real usage and runtime playback.
+These functions **prepare** decks for runtime usage.
+They never change slide meaning.
 
 ---
 
@@ -129,31 +146,63 @@ import "taleem-player/css/light";
 import "taleem-player/css/paper";
 ```
 
-CSS must be imported explicitly by the host app.
-All modes share the same styling system.
+CSS is **explicitly imported** by the host application.
+
+* No JS-driven interaction
+* No runtime behavior logic
+* Visual changes are handled via **CSS state**
 
 ---
 
 ## What Taleem Player does NOT do
 
-- create slides
-- edit JSON
-- manage clocks or media playback
-- handle audio or narration
-- auto-validate or repair data
+Taleem Player does **not**:
 
-Those responsibilities belong to the **application layer**.
+* create slides
+* edit JSON
+* manage playback clocks
+* handle audio or narration
+* auto-fix invalid data
+* provide interactive UI controls
+
+Those responsibilities belong to **application-level projects** or **slide bundles**.
+
+---
+
+## Slide Extensions
+
+The core slide language is **closed**.
+
+Additional slides should be developed as:
+
+* external slide bundles
+* application-specific extensions
+
+The core registry supports **additive registration only**.
+
+---
+
+## EQ slide
+
+The `eq` slide type is implemented and tested.
+
+It represents **structured symbolic content** and intentionally marks the **upper boundary** of the system.
+
+Anything more complex than this belongs in a **separate product**, not in the core player.
 
 ---
 
 ## Status
 
-**Stable — Version 1.0**
+**Stable · deck-v1 frozen**
 
-The `eq` slide type is **experimental**:
-- it is implemented but intentionally limited
-- it should not be relied on for production math rendering
-- its behavior may evolve without breaking the core player API
+The system is complete and production-safe.
+
+Future work should focus on:
+
+* content
+* slide bundles
+* authoring tools
 
 ---
 

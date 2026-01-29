@@ -29,27 +29,6 @@ var TaleemPlayer = (() => {
     resolveBackground: () => resolveBackground
   });
 
-  // src/slides/templates/TitleSlide.js
-  var TitleSlide = {
-    type: "titleSlide",
-    fromJSON(raw) {
-      const title = raw.data?.find((d) => d.name === "title")?.content;
-      if (!title) {
-        throw new Error("titleSlide: requires title");
-      }
-      return Object.freeze({
-        type: "titleSlide",
-        render() {
-          return `
-          <section class="slide titleSlide">
-            <h1>${title}</h1>
-          </section>
-        `;
-        }
-      });
-    }
-  };
-
   // src/slides/templates/TitleAndSubtitleSlide.js
   var TitleAndSubtitleSlide = {
     type: "titleAndSubtitle",
@@ -327,85 +306,40 @@ var TaleemPlayer = (() => {
     }
   };
 
-  // src/slides/templates/StatisticSlide.js
-  var StatisticSlide = {
-    type: "statistic",
-    fromJSON(raw) {
-      const label = raw.data?.find((d) => d.name === "label")?.content;
-      const number = raw.data?.find((d) => d.name === "number")?.content;
-      if (!label || number === void 0) {
-        throw new Error("statistic: requires number and label");
-      }
-      return Object.freeze({
-        type: "statistic",
-        label,
-        number,
-        render() {
-          return `
-          <section class="slide statistic">
-            <div class="stat-value">${number}</div>
-            <div class="stat-label">${label}</div>
-          </section>
-        `;
-        }
-      });
-    }
-  };
-
-  // src/slides/templates/BigNumberSlide.js
-  var BigNumberSlide = {
-    type: "bigNumber",
-    fromJSON(raw) {
-      const number = raw.data?.find((d) => d.name === "number")?.content;
-      const label = raw.data?.find((d) => d.name === "label")?.content;
-      if (!number) {
-        throw new Error("bigNumber: number required");
-      }
-      return Object.freeze({
-        type: "bigNumber",
-        number,
-        label,
-        render() {
-          return `
-          <section class="slide bigNumber">
-            <div class="number">${number}</div>
-            ${label ? `<div class="label">${label}</div>` : ""}
-          </section>
-        `;
-        }
-      });
-    }
-  };
-
   // src/slides/templates/BarChartSlide.js
   var BarChartSlide = {
     type: "barChart",
     fromJSON(raw) {
-      const bars = raw.data?.filter((d) => d.name === "bar").map((d) => ({
-        label: d.label,
-        value: d.value
-      }));
-      if (!bars || bars.length === 0) {
-        throw new Error("barChart: requires at least one bar");
+      const bars = (raw.data || []).filter((d) => d.name === "bar");
+      if (!bars.length) {
+        throw new Error("barChart requires bar items");
       }
+      const maxValue = Math.max(...bars.map((b) => b.value));
       return Object.freeze({
         type: "barChart",
-        bars,
-        render({ visibleCount = bars.length, activeIndex = null } = {}) {
+        render({ visibleCount = bars.length, activeIndex = -1 } = {}) {
           return `
           <section class="slide barChart">
-            <ul class="bars">
-              ${bars.map((b, i) => {
+            <div class="bar-chart">
+              ${bars.map((bar, i) => {
             if (i >= visibleCount) return "";
-            const cls = i === activeIndex ? "is-active" : activeIndex !== null && i < activeIndex ? "is-dim" : "";
+            const width = bar.value / maxValue * 100;
             return `
-                  <li class="bar ${cls}">
-                    <span class="bar-label">${b.label}</span>
-                    <span class="bar-value">${b.value}</span>
-                  </li>
+                  <div class="bar-row">
+                    <div class="bar-label">${bar.label}</div>
+
+                    <div class="bar-track">
+                      <div
+                        class="bar-fill"
+                        style="width: ${width}%"
+                      ></div>
+                    </div>
+
+                    <div class="bar-value">${bar.value}</div>
+                  </div>
                 `;
           }).join("")}
-            </ul>
+            </div>
           </section>
         `;
         }
@@ -413,37 +347,34 @@ var TaleemPlayer = (() => {
     }
   };
 
-  // src/slides/templates/DonutChartSlide.js
-  var DonutChartSlide = {
-    type: "donutChart",
+  // src/slides/templates/Progressbar.js
+  var Progressbar = {
+    type: "progressbar",
     fromJSON(raw) {
-      const segments = [];
-      let current = null;
-      for (const d of raw.data || []) {
-        if (d.name === "percent") {
-          current = { percent: d.content };
-          segments.push(current);
-        } else if (current && d.name === "label") {
-          current.label = d.content;
-        } else if (current && d.name === "color") {
-          current.color = d.content;
-        }
-      }
-      if (!segments.length) {
-        throw new Error("donutChart: requires at least one segment");
+      const bars = raw.data?.filter((d) => d.name === "bar").map((d) => ({
+        label: d.label,
+        value: Math.max(0, Math.min(100, Number(d.value)))
+      }));
+      if (!bars || bars.length === 0) {
+        throw new Error("progressbar requires at least one bar");
       }
       return Object.freeze({
-        type: "donutChart",
-        segments,
-        render({ visibleCount = segments.length } = {}) {
+        type: "progressbar",
+        bars,
+        render({ visibleCount = bars.length } = {}) {
           return `
-          <section class="slide donutChart">
-            <ul>
-              ${segments.map((s, i) => {
+          <section class="slide progressbar">
+            ${bars.map((b, i) => {
             if (i >= visibleCount) return "";
-            return `<li>${s.label}: ${s.percent}%</li>`;
+            return `
+                <div class="progressbar-item">
+                  <div class="progressbar-label">${b.label}</div>
+                  <div class="progressbar-track">
+                    <div class="progressbar-fill" style="width:${b.value}%"></div>
+                  </div>
+                </div>
+              `;
           }).join("")}
-            </ul>
           </section>
         `;
         }
@@ -476,81 +407,29 @@ var TaleemPlayer = (() => {
     }
   };
 
-  // src/slides/templates/QuoteWithImageSlide.js
-  var QuoteWithImageSlide = {
-    type: "quoteWithImage",
-    fromJSON(raw) {
-      const quote = raw.data?.find((d) => d.name === "quote")?.content;
-      const image = raw.data?.find((d) => d.name === "image")?.content;
-      const author = raw.data?.find((d) => d.name === "author")?.content;
-      if (!quote || !image) {
-        throw new Error("quoteWithImage: quote and image required");
-      }
-      return Object.freeze({
-        type: "quoteWithImage",
-        quote,
-        image,
-        author,
-        render() {
-          return `
-          <section class="slide quoteWithImage">
-            <img src="${image}" alt="" />
-            <blockquote>
-              <p>${quote}</p>
-              ${author ? `<footer>${author}</footer>` : ""}
-            </blockquote>
-          </section>
-        `;
-        }
-      });
-    }
-  };
-
-  // src/slides/templates/CornerWordsSlide.js
-  var CornerWordsSlide = {
-    type: "cornerWordsSlide",
+  // src/slides/templates/KeyIdeasSlide.js
+  var KeyIdeasSlide = {
+    type: "keyIdeasSlide",
     fromJSON(raw) {
       const cards = raw.data?.filter((d) => d.name === "card").map((d) => ({ icon: d.icon, label: d.label }));
       if (!cards || cards.length === 0) {
-        throw new Error("cornerWordsSlide: requires at least one card");
+        throw new Error("keyIdeasSlide requires at least one card");
       }
       return Object.freeze({
-        type: "cornerWordsSlide",
+        type: "keyIdeasSlide",
         cards,
         render({ visibleCount = cards.length } = {}) {
           return `
-          <section class="slide cornerWordsSlide">
+          <section class="slide keyIdeasSlide">
             ${cards.map((c, i) => {
             if (i >= visibleCount) return "";
             return `
-                <span class="corner-card corner-${i + 1}">
-                  <span class="icon">${c.icon}</span>
-                  <span class="label">${c.label}</span>
-                </span>
+                <div class="key-idea">
+                  <div class="icon">${c.icon}</div>
+                  <div class="label">${c.label}</div>
+                </div>
               `;
           }).join("")}
-          </section>
-        `;
-        }
-      });
-    }
-  };
-
-  // src/slides/templates/ContactSlide.js
-  var ContactSlide = {
-    type: "contactSlide",
-    fromJSON(raw) {
-      const items = raw.data?.map((d) => d.content);
-      if (!items || items.length === 0) {
-        throw new Error("contactSlide: content required");
-      }
-      return Object.freeze({
-        type: "contactSlide",
-        items,
-        render() {
-          return `
-          <section class="slide contactSlide">
-            ${items.map((text) => `<div>${text}</div>`).join("")}
           </section>
         `;
         }
@@ -567,18 +446,37 @@ var TaleemPlayer = (() => {
         type: "eq",
         lines,
         render({ visibleCount = lines.length } = {}) {
+          const end = Math.min(visibleCount, lines.length);
+          const visibleLines = lines.slice(0, end);
+          const activeLine = end > 0 ? lines[end - 1] : null;
+          const spItems = activeLine?.spItems ?? [];
           return `
           <section class="slide eq imageRightBulletsLeft">
             
-            <!-- LEFT: lines (bullet behavior) -->
+            <!-- LEFT: lines (pure bullet behavior) -->
             <ul class="eq-lines">
-              ${lines.map(
-            (line, i) => i < visibleCount ? `<li class="eq-line">${line.content}</li>` : ""
+              ${visibleLines.map(
+            (line) => `<li class="eq-line">${line.content}</li>`
           ).join("")}
             </ul>
 
-            <!-- RIGHT: placeholder (image slot replacement) -->
-            <div class="eq-side-panel"></div>
+            <!-- RIGHT: explanation panel -->
+            <div class="eq-side-panel">
+              ${spItems.map((item) => {
+            if (item.type === "spImage") {
+              return `
+                    <div class="eq-explain-item eq-explain-image">
+                      <img src="${item.content}" alt="" />
+                    </div>
+                  `;
+            }
+            return `
+                  <div class="eq-explain-item">
+                    ${item.content}
+                  </div>
+                `;
+          }).join("")}
+            </div>
 
           </section>
         `;
@@ -589,7 +487,6 @@ var TaleemPlayer = (() => {
 
   // src/slides/registry.js
   var SlideRegistry = {
-    titleSlide: TitleSlide,
     titleAndSubtitle: TitleAndSubtitleSlide,
     titleAndPara: TitleAndParaSlide,
     bulletList: BulletListSlide,
@@ -601,14 +498,10 @@ var TaleemPlayer = (() => {
     imageLeftBulletsRight: ImageLeftBulletsRightSlide,
     imageRightBulletsLeft: ImageRightBulletsLeftSlide,
     table: TableSlide,
-    statistic: StatisticSlide,
-    bigNumber: BigNumberSlide,
     barChart: BarChartSlide,
-    donutChart: DonutChartSlide,
+    progressbar: Progressbar,
     quoteSlide: QuoteSlide,
-    quoteWithImage: QuoteWithImageSlide,
-    cornerWordsSlide: CornerWordsSlide,
-    contactSlide: ContactSlide,
+    keyIdeasSlide: KeyIdeasSlide,
     eq: EqSlide
   };
 
@@ -832,6 +725,13 @@ var TaleemPlayer = (() => {
       slide.data?.forEach((item) => {
         if (item.name === "image" && typeof item.content === "string") {
           item.content = IMG_BASE + item.content.split("/").pop();
+        }
+        if (Array.isArray(item.spItems)) {
+          item.spItems.forEach((sp) => {
+            if (sp.type === "spImage" && typeof sp.content === "string") {
+              sp.content = IMG_BASE + sp.content.split("/").pop();
+            }
+          });
         }
       });
     });

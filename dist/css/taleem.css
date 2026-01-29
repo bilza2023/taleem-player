@@ -273,9 +273,6 @@
     }
     
 
-
-    /* ///////fixes  */
-
     /* -------------------------------
    Image + Bullets (Side by Side)
    ------------------------------- */
@@ -346,19 +343,211 @@
 }
   
 
-/* -------------------------------
-   Corner Words Slide (4 Quadrants)
+/* =====================================================
+   EQ — Final visual behavior
+   ===================================================== */
+
+/* EQ should grow from TOP, not vertical center */
+.slide.eq.imageRightBulletsLeft {
+  align-items: flex-start;
+}
+
+/* ---------- EQ: equation lines as table rows ---------- */
+
+.slide.eq.imageRightBulletsLeft .eq-lines {
+  flex: 1;
+  list-style: none;          /* remove bullet visuals */
+  padding: 0;
+  margin: 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.slide.eq.imageRightBulletsLeft .eq-lines li {
+  padding: 14px 18px;
+  font-size: 2.6rem;
+  line-height: 1.45;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.03);
+
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+/* selected (latest) line */
+.slide.eq.imageRightBulletsLeft .eq-lines li:last-child {
+  background: rgba(245, 197, 66, 0.18); /* soft yellow */
+  color: #ffd7a3;                      /* warm / reddish */
+  font-weight: 600;
+}
+
+/* ---------- RIGHT: fixed explanation panel ---------- */
+
+.slide.eq.imageRightBulletsLeft .eq-side-panel {
+  flex: 1;
+  height: 75vh;               /* FIXED height → no shaking */
+  overflow: hidden;           /* contain layout */
+
+  padding: 28px 32px;
+
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 16px;
+
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---------- Side panel items ---------- */
+
+.slide.eq.imageRightBulletsLeft .eq-explain-item {
+  font-size: 1.4rem;
+  line-height: 1.45;
+  text-align: center;
+
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+
+  background: rgba(255, 255, 255, 0.06);
+  padding: 14px 18px;
+  border-radius: 12px;
+}
+
+/* ---------- Side panel image ---------- */
+
+.slide.eq.imageRightBulletsLeft .eq-explain-image img {
+  width: 70%;
+  margin: 0 auto;            /* center image */
+  display: block;
+
+  border-radius: 12px;
+}
+
+/* =====================================================
+   Bar Chart Slide
+   ===================================================== */
+
+   .slide.barChart {
+    justify-content: center;
+    align-items: center;
+    text-align: left;
+  }
+  
+  .slide.barChart .bar-chart {
+    width: 100%;
+    max-width: 900px;
+  
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
+  
+  /* one bar row */
+  .slide.barChart .bar-row {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  /* label on the left */
+  .slide.barChart .bar-label {
+    width: 220px;
+    font-size: 2.2rem;
+    opacity: 0.9;
+    flex-shrink: 0;
+  }
+  
+  /* bar background */
+  .slide.barChart .bar-track {
+    flex: 1;
+    height: 26px;
+  
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 13px;
+    overflow: hidden;
+  }
+  
+  /* actual bar */
+  .slide.barChart .bar-fill {
+    height: 100%;
+    width: 0;
+  
+    background: #ff9900;
+    border-radius: 13px;
+  }
+  
+  /* numeric value on right */
+  .slide.barChart .bar-value {
+    width: 48px;
+    text-align: right;
+    font-size: 2rem;
+    opacity: 0.85;
+  }
+
+  
+  /* -------------------------------
+   Progress Bar Slide
    ------------------------------- */
 
-   .slide.cornerWordsSlide {
+.slide.progressbar {
+  justify-content: center;
+  align-items: center;
+  text-align: left;
+}
+
+.slide.progressbar .progressbar-item {
+  width: 100%;
+  max-width: 900px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+
+  margin-bottom: 28px;
+}
+
+.slide.progressbar .progressbar-label {
+  font-size: 2.4rem;
+  font-weight: 600;
+  opacity: 0.9;
+}
+
+.slide.progressbar .progressbar-track {
+  width: 100%;
+  height: 28px;
+
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.slide.progressbar .progressbar-fill {
+  height: 100%;
+  width: 0;
+
+  background: #ff9900;
+  border-radius: 14px;
+
+  transition: width 0.6s ease;
+}
+
+/* -------------------------------
+   Key Ideas Slide (Corner Words / 4 Quadrants)
+   ------------------------------- */
+
+   .slide.keyIdeasSlide {
     position: relative;
     width: 100%;
     height: 100vh;
     padding: 0;
   }
   
-  /* base card */
-  .cornerWordsSlide .corner-card {
+  /* base idea block */
+  .slide.keyIdeasSlide .key-idea {
     position: absolute;
     width: 45%;
     height: 45%;
@@ -375,114 +564,36 @@
     text-align: center;
   }
   
-  /* emoji / icon */
-  .cornerWordsSlide .corner-card .icon {
+  /* icon */
+  .slide.keyIdeasSlide .key-idea .icon {
     font-size: 5.2rem;
     line-height: 1;
   }
   
-  /* label text */
-  .cornerWordsSlide .corner-card .label {
+  /* label */
+  .slide.keyIdeasSlide .key-idea .label {
     font-size: 3.6rem;
     font-weight: 600;
   }
   
   /* quadrants */
-  .cornerWordsSlide .corner-1 {
+  .slide.keyIdeasSlide .key-idea:nth-child(1) {
     top: 0;
     left: 0;
   }
   
-  .cornerWordsSlide .corner-2 {
+  .slide.keyIdeasSlide .key-idea:nth-child(2) {
     top: 0;
     right: 0;
   }
   
-  .cornerWordsSlide .corner-3 {
+  .slide.keyIdeasSlide .key-idea:nth-child(3) {
     bottom: 0;
     left: 0;
   }
   
-  .cornerWordsSlide .corner-4 {
+  .slide.keyIdeasSlide .key-idea:nth-child(4) {
     bottom: 0;
     right: 0;
   }
-
   
-
-  /* =====================================================
-   EQ — TWO COLUMN (FIXED EXPLANATION PANEL)
-   ===================================================== */
-
-.slide.eq.eq-two-column {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-
-  gap: 64px;
-  text-align: left;
-}
-
-/* LEFT PANEL — explanation (replaces image area) */
-.eq-explain-panel {
-  flex: 1;
-  max-width: 520px;
-
-  background: rgba(0, 0, 0, 0.35);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 14px;
-
-  padding: 28px 32px;
-
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
-}
-
-/* explanation item */
-.eq-explain-item {
-  font-size: 2.4rem;
-  line-height: 1.45;
-  opacity: 0.95;
-}
-
-/* placeholder when nothing active */
-.eq-explain-placeholder {
-  opacity: 0.5;
-  font-style: italic;
-}
-
-/* RIGHT PANEL — equation lines */
-.eq-lines-panel {
-  flex: 1;
-  max-width: 520px;
-
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-/* equation line */
-.eq-line {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  border-radius: 10px;
-
-  padding: 14px 18px;
-
-  font-size: 2.6rem;
-  line-height: 1.5;
-
-  transition:
-    background 0.25s ease,
-    border-color 0.25s ease;
-}
-
-/* active line */
-.eq-line.active {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(120, 160, 255, 0.65);
-}
