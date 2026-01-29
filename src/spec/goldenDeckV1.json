@@ -253,15 +253,9 @@
       "start": 100,
       "end": 105,
       "data": [
-        { "name": "title", "content": "Final Slide and Message", "showAt": 100 },
-        {
-          "name": "para",
-          "content": "All slide types in the system have now been rendered. This final slide uses a simple title and paragraph layout, which represents one of the most important formats in real teaching. While often overlooked in presentations, clear paragraph-based text forms the backbone of explanation and reflection. It is in these quiet moments of reading and thinking that ideas settle, connections form, and learning becomes lasting. This slide stands as a reminder that clarity and thoughtful pacing matter more than visual complexity.",
-          "showAt": 101
-        }
+        { "name": "title", "content": "End", "showAt": 100 },
+        { "name": "para", "content": "All slide types rendered.", "showAt": 101 }
       ]
     }
-    
-    
   ]
 }

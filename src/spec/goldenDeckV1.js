@@ -1,5 +1,3 @@
-// import { zodDeckV1 } from "../deck/zodDeckV1.js";
-
 export const goldenDeckV1 = {
   version: "deck-v1",
   name: "Golden Deck V1 – Full Schema Coverage",
@@ -11,7 +9,6 @@ export const goldenDeckV1 = {
   },
 
   deck: [
-    // 1 titleSlide
     {
       type: "titleSlide",
       start: 0,
@@ -21,7 +18,6 @@ export const goldenDeckV1 = {
       ]
     },
 
-    // 2 titleAndSubtitle
     {
       type: "titleAndSubtitle",
       start: 5,
@@ -31,44 +27,40 @@ export const goldenDeckV1 = {
         { name: "subtitle", content: "A simple, calm way to present ideas", showAt: 6 }
       ]
     },
-// 3 bulletList
-{
-  type: "bulletList",
-  start: 10,
-  end: 15,
-  data: [
-    { name: "bullet", content: "Each slide is carefully prepared information", showAt: 10 },
-    { name: "bullet", content: "The system only shows what is written", showAt: 11 },
-    { name: "bullet", content: "Nothing changes behind the scenes", showAt: 12 },
-    { name: "bullet", content: "The author controls when ideas appear", showAt: 13 },
-    { name: "bullet", content: "The same lesson looks the same everywhere", showAt: 14 }
-  ]
-},
 
-{
-  type: "twoColumnText",
-  start: 15,
-  end: 20,
-  data: [
     {
-      name: "left",
-      content: `
-          taleem-browser shows one complete slide at a time. Each slide appears fully, clear, and ready to read.
-          `,
-      showAt: 15
+      type: "bulletList",
+      start: 10,
+      end: 15,
+      data: [
+        { name: "bullet", content: "Each slide is carefully prepared information", showAt: 10 },
+        { name: "bullet", content: "The system only shows what is written", showAt: 11 },
+        { name: "bullet", content: "Nothing changes behind the scenes", showAt: 12 },
+        { name: "bullet", content: "The author controls when ideas appear", showAt: 13 },
+        { name: "bullet", content: "The same lesson looks the same everywhere", showAt: 14 }
+      ]
     },
+
     {
-      name: "right",
-      content: `
-          taleem-player shows content gradually, like a video. Ideas appear step by step as the lesson moves forward.
-          `,
-      showAt: 17
-    }
-  ]
-},
+      type: "twoColumnText",
+      start: 15,
+      end: 20,
+      data: [
+        {
+          name: "left",
+          content:
+            "taleem-browser shows one complete slide at a time. Each slide appears fully, clear, and ready to read.",
+          showAt: 15
+        },
+        {
+          name: "right",
+          content:
+            "taleem-player shows content gradually, like a video. Ideas appear step by step as the lesson moves forward.",
+          showAt: 17
+        }
+      ]
+    },
 
-
-    // 5 imageSlide
     {
       type: "imageSlide",
       start: 20,
@@ -78,7 +70,6 @@ export const goldenDeckV1 = {
       ]
     },
 
-    // 6 imageWithTitle
     {
       type: "imageWithTitle",
       start: 25,
@@ -89,7 +80,6 @@ export const goldenDeckV1 = {
       ]
     },
 
-    // 7 imageWithCaption
     {
       type: "imageWithCaption",
       start: 30,
@@ -100,37 +90,32 @@ export const goldenDeckV1 = {
       ]
     },
 
- // 8 imageLeftBulletsRight
-{
-  type: "imageLeftBulletsRight",
-  start: 35,
-  end: 40,
-  data: [
-    { name: "image", content: "image.png", showAt: 35 },
-    { name: "bullet", content: "Each slide has a clear visual focus", showAt: 36 },
-    { name: "bullet", content: "Points are shown in a planned order", showAt: 37 },
-    { name: "bullet", content: "Nothing appears randomly", showAt: 38 },
-    { name: "bullet", content: "This helps students follow step by step", showAt: 39 }
-  ]
-},
+    {
+      type: "imageLeftBulletsRight",
+      start: 35,
+      end: 40,
+      data: [
+        { name: "image", content: "image.png", showAt: 35 },
+        { name: "bullet", content: "Each slide has a clear visual focus", showAt: 36 },
+        { name: "bullet", content: "Points are shown in a planned order", showAt: 37 },
+        { name: "bullet", content: "Nothing appears randomly", showAt: 38 },
+        { name: "bullet", content: "This helps students follow step by step", showAt: 39 }
+      ]
+    },
 
+    {
+      type: "imageRightBulletsLeft",
+      start: 40,
+      end: 45,
+      data: [
+        { name: "image", content: "image.png", showAt: 40 },
+        { name: "bullet", content: "Slides do not change on their own", showAt: 41 },
+        { name: "bullet", content: "The teacher decides when to move forward", showAt: 42 },
+        { name: "bullet", content: "Students are never rushed", showAt: 43 },
+        { name: "bullet", content: "This keeps learning calm and focused", showAt: 44 }
+      ]
+    },
 
-// 9 imageRightBulletsLeft
-{
-  type: "imageRightBulletsLeft",
-  start: 40,
-  end: 45,
-  data: [
-    { name: "image", content: "image.png", showAt: 40 },
-    { name: "bullet", content: "Slides do not change on their own", showAt: 41 },
-    { name: "bullet", content: "The teacher decides when to move forward", showAt: 42 },
-    { name: "bullet", content: "Students are never rushed", showAt: 43 },
-    { name: "bullet", content: "This keeps learning calm and focused", showAt: 44 }
-  ]
-},
-
-
-    // 10 table
     {
       type: "table",
       start: 45,
@@ -143,9 +128,7 @@ export const goldenDeckV1 = {
         ["taleem-player", "Time-based presentations"]
       ]
     },
-    
 
-    // 11 statistic
     {
       type: "statistic",
       start: 50,
@@ -156,7 +139,6 @@ export const goldenDeckV1 = {
       ]
     },
 
-    // 12 donutChart
     {
       type: "donutChart",
       start: 55,
@@ -168,7 +150,6 @@ export const goldenDeckV1 = {
       ]
     },
 
-    // 13 bigNumber
     {
       type: "bigNumber",
       start: 60,
@@ -178,44 +159,40 @@ export const goldenDeckV1 = {
         { name: "label", content: "Always the Same Output", showAt: 61 }
       ]
     },
-// 14 barChart
-{
-  type: "barChart",
-  start: 65,
-  end: 70,
-  data: [
-    { name: "bar", label: "Excellent", value: 4, showAt: 65 },
-    { name: "bar", label: "Good", value: 6, showAt: 66 },
-    { name: "bar", label: "Average", value: 5, showAt: 67 },
-    { name: "bar", label: "Needs improvement", value: 2, showAt: 68 }
-  ]
-},
 
-// 15 quoteSlide
-{
-  type: "quoteSlide",
-  start: 70,
-  end: 75,
-  data: [
-    { name: "quote", content: "Clarity makes learning easier for everyone.", showAt: 70 },
-    { name: "author", content: "— Taleem", showAt: 72 }
-  ]
-},
+    {
+      type: "barChart",
+      start: 65,
+      end: 70,
+      data: [
+        { name: "bar", label: "Excellent", value: 4, showAt: 65 },
+        { name: "bar", label: "Good", value: 6, showAt: 66 },
+        { name: "bar", label: "Average", value: 5, showAt: 67 },
+        { name: "bar", label: "Needs improvement", value: 2, showAt: 68 }
+      ]
+    },
 
-   // 16 quoteWithImage
-{
-  type: "quoteWithImage",
-  start: 75,
-  end: 80,
-  data: [
-    { name: "quote", content: "Understanding ideas matters more than using complex tools.", showAt: 75 },
-    { name: "author", content: "— Taleem", showAt: 77 },
-    { name: "image", content: "image.png", showAt: 78 }
-  ]
-},
+    {
+      type: "quoteSlide",
+      start: 70,
+      end: 75,
+      data: [
+        { name: "quote", content: "Clarity makes learning easier for everyone.", showAt: 70 },
+        { name: "author", content: "— Taleem", showAt: 72 }
+      ]
+    },
 
+    {
+      type: "quoteWithImage",
+      start: 75,
+      end: 80,
+      data: [
+        { name: "quote", content: "Understanding ideas matters more than using complex tools.", showAt: 75 },
+        { name: "author", content: "— Taleem", showAt: 77 },
+        { name: "image", content: "image.png", showAt: 78 }
+      ]
+    },
 
-    // 17 cornerWordsSlide
     {
       type: "cornerWordsSlide",
       start: 80,
@@ -225,22 +202,20 @@ export const goldenDeckV1 = {
         { name: "card", icon: "📘", label: "Clarity", showAt: 81 },
         { name: "card", icon: "⏱️", label: "Pace", showAt: 82 },
         { name: "card", icon: "🎯", label: "Understanding", showAt: 83 }
-      ]      
+      ]
     },
 
-// 18 contactSlide
-{
-  type: "contactSlide",
-  start: 85,
-  end: 90,
-  data: [
-    { name: "headline", content: "Taleem Project", showAt: 85 },
-    { name: "email", content: "github.com/taleem", showAt: 86 },
-    { name: "phone", content: "Open-source educational tools", showAt: 87 }
-  ]
-},
+    {
+      type: "contactSlide",
+      start: 85,
+      end: 90,
+      data: [
+        { name: "headline", content: "Taleem Project", showAt: 85 },
+        { name: "email", content: "github.com/taleem", showAt: 86 },
+        { name: "phone", content: "Open-source educational tools", showAt: 87 }
+      ]
+    },
 
-    // 19 eq
     {
       type: "eq",
       start: 90,
@@ -255,16 +230,26 @@ export const goldenDeckV1 = {
         {
           name: "line",
           type: "math",
-          content: "render(data) ⇒ same output",
+          content: "$(a + b)(a + b)$",
           showAt: 91,
           spItems: [
-            { type: "spText", content: "No hidden state" }
+            { type: "spText", content: "The square means the bracket is multiplied by itself." },
+            { type: "spImage", content: "box.webp" }
+          ]
+        },
+        {
+          name: "line",
+          type: "math",
+          content: "$(a + b)^2$",
+          showAt: 92,
+          spItems: [
+            { type: "spText", content: "The square means the bracket is multiplied by itself." },
+            { type: "spImage", content: "image.webp" }
           ]
         }
       ]
     },
 
-    // 20 fillImage
     {
       type: "fillImage",
       start: 95,
@@ -274,7 +259,6 @@ export const goldenDeckV1 = {
       ]
     },
 
-    // 21 titleAndPara
     {
       type: "titleAndPara",
       start: 100,
