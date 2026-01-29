@@ -1,6 +1,5 @@
-
-export const CornerWordsSlide = {
-  type: "cornerWordsSlide",
+export const KeyIdeasSlide = {
+  type: "keyIdeasSlide",
 
   fromJSON(raw) {
     const cards = raw.data
@@ -8,23 +7,23 @@ export const CornerWordsSlide = {
       .map(d => ({ icon: d.icon, label: d.label }));
 
     if (!cards || cards.length === 0) {
-      throw new Error("cornerWordsSlide: requires at least one card");
+      throw new Error("keyIdeasSlide requires at least one card");
     }
 
     return Object.freeze({
-      type: "cornerWordsSlide",
+      type: "keyIdeasSlide",
       cards,
 
       render({ visibleCount = cards.length } = {}) {
         return `
-          <section class="slide cornerWordsSlide">
+          <section class="slide keyIdeasSlide">
             ${cards.map((c, i) => {
               if (i >= visibleCount) return "";
               return `
-                <span class="corner-card corner-${i + 1}">
-                  <span class="icon">${c.icon}</span>
-                  <span class="label">${c.label}</span>
-                </span>
+                <div class="key-idea">
+                  <div class="icon">${c.icon}</div>
+                  <div class="label">${c.label}</div>
+                </div>
               `;
             }).join("")}
           </section>

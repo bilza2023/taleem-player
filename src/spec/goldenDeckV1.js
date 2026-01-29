@@ -1,125 +1,104 @@
 export const goldenDeckV1 = {
   version: "deck-v1",
   name: "Golden Deck V1 – Full Schema Coverage",
-
   background: {
     backgroundColor: "#111111",
     backgroundImage: null,
     backgroundImageOpacity: 0.3
   },
-
   deck: [
     {
-      type: "titleSlide",
+      type: "titleAndSubtitle",
       start: 0,
       end: 5,
       data: [
-        { name: "title", content: "Taleem Project - Golden Deck", showAt: 0 }
+        { name: "title", content: "Taleem Project - Golden Deck", showAt: 0 },
+        { name: "subtitle", content: "A simple, calm way to present ideas", showAt: 1 }
       ]
     },
-
     {
-      type: "titleAndSubtitle",
+      type: "bulletList",
       start: 5,
       end: 10,
       data: [
-        { name: "title", content: "How Taleem Slides Work", showAt: 5 },
-        { name: "subtitle", content: "A simple, calm way to present ideas", showAt: 6 }
+        { name: "bullet", content: "Each slide is carefully prepared information", showAt: 5 },
+        { name: "bullet", content: "The system only shows what is written", showAt: 6 },
+        { name: "bullet", content: "Nothing changes behind the scenes", showAt: 7 },
+        { name: "bullet", content: "The author controls when ideas appear", showAt: 8 },
+        { name: "bullet", content: "The same lesson looks the same everywhere", showAt: 9 }
       ]
     },
-
-    {
-      type: "bulletList",
-      start: 10,
-      end: 15,
-      data: [
-        { name: "bullet", content: "Each slide is carefully prepared information", showAt: 10 },
-        { name: "bullet", content: "The system only shows what is written", showAt: 11 },
-        { name: "bullet", content: "Nothing changes behind the scenes", showAt: 12 },
-        { name: "bullet", content: "The author controls when ideas appear", showAt: 13 },
-        { name: "bullet", content: "The same lesson looks the same everywhere", showAt: 14 }
-      ]
-    },
-
     {
       type: "twoColumnText",
-      start: 15,
-      end: 20,
+      start: 10,
+      end: 15,
       data: [
         {
           name: "left",
           content:
             "taleem-browser shows one complete slide at a time. Each slide appears fully, clear, and ready to read.",
-          showAt: 15
+          showAt: 10
         },
         {
           name: "right",
           content:
             "taleem-player shows content gradually, like a video. Ideas appear step by step as the lesson moves forward.",
-          showAt: 17
+          showAt: 12
         }
       ]
     },
-
     {
       type: "imageSlide",
+      start: 15,
+      end: 20,
+      data: [{ name: "image", content: "image.png", showAt: 15 }]
+    },
+    {
+      type: "imageWithTitle",
       start: 20,
       end: 25,
       data: [
-        { name: "image", content: "image.png", showAt: 20 }
+        { name: "title", content: "Learning with Visual Support", showAt: 20 },
+        { name: "image", content: "image.png", showAt: 21 }
       ]
     },
-
     {
-      type: "imageWithTitle",
+      type: "imageWithCaption",
       start: 25,
       end: 30,
       data: [
-        { name: "title", content: "Learning with Visual Support", showAt: 25 },
-        { name: "image", content: "image.png", showAt: 26 }
+        { name: "image", content: "image.png", showAt: 25 },
+        { name: "caption", content: "Caption as data", showAt: 26 }
       ]
     },
-
     {
-      type: "imageWithCaption",
+      type: "imageLeftBulletsRight",
       start: 30,
       end: 35,
       data: [
         { name: "image", content: "image.png", showAt: 30 },
-        { name: "caption", content: "Caption as data", showAt: 31 }
+        { name: "bullet", content: "Each slide has a clear visual focus", showAt: 31 },
+        { name: "bullet", content: "Points are shown in a planned order", showAt: 32 },
+        { name: "bullet", content: "Nothing appears randomly", showAt: 33 },
+        { name: "bullet", content: "This helps students follow step by step", showAt: 34 }
       ]
     },
-
     {
-      type: "imageLeftBulletsRight",
+      type: "imageRightBulletsLeft",
       start: 35,
       end: 40,
       data: [
         { name: "image", content: "image.png", showAt: 35 },
-        { name: "bullet", content: "Each slide has a clear visual focus", showAt: 36 },
-        { name: "bullet", content: "Points are shown in a planned order", showAt: 37 },
-        { name: "bullet", content: "Nothing appears randomly", showAt: 38 },
-        { name: "bullet", content: "This helps students follow step by step", showAt: 39 }
+        { name: "bullet", content: "Slides do not change on their own", showAt: 36 },
+        { name: "bullet", content: "The teacher decides when to move forward", showAt: 37 },
+        { name: "bullet", content: "Students are never rushed", showAt: 38 },
+        { name: "bullet", content: "This keeps learning calm and focused", showAt: 39 }
       ]
     },
-
-    {
-      type: "imageRightBulletsLeft",
-      start: 40,
-      end: 45,
-      data: [
-        { name: "image", content: "image.png", showAt: 40 },
-        { name: "bullet", content: "Slides do not change on their own", showAt: 41 },
-        { name: "bullet", content: "The teacher decides when to move forward", showAt: 42 },
-        { name: "bullet", content: "Students are never rushed", showAt: 43 },
-        { name: "bullet", content: "This keeps learning calm and focused", showAt: 44 }
-      ]
-    },
-
     {
       type: "table",
-      start: 45,
-      end: 50,
+      start: 40,
+      end: 45,
       data: [
         ["Layer", "Role"],
         ["taleem-core", "Schema for JSON"],
@@ -128,110 +107,54 @@ export const goldenDeckV1 = {
         ["taleem-player", "Time-based presentations"]
       ]
     },
-
     {
-      type: "statistic",
-      start: 50,
-      end: 55,
+      type: "barChart",
+      start: 45,
+      end: 50,
       data: [
-        { name: "number", content: "21", showAt: 50 },
-        { name: "label", content: "Slide Types", showAt: 51 }
+        { name: "bar", label: "Excellent", value: 4, showAt: 45 },
+        { name: "bar", label: "Good", value: 6, showAt: 46 },
+        { name: "bar", label: "Average", value: 5, showAt: 47 },
+        { name: "bar", label: "Needs improvement", value: 2, showAt: 48 }
       ]
     },
-
     {
-      type: "donutChart",
+      type: "progressbar",
+      start: 50,
+      end: 55,
+      data: [{ name: "bar", label: "Lesson Coverage", value: 60, showAt: 50 }]
+    },
+    {
+      type: "quoteSlide",
       start: 55,
       end: 60,
       data: [
-        { name: "percent", content: "60", showAt: 55 },
-        { name: "label", content: "Lesson Covered", showAt: 56 },
-        { name: "color", content: "#ff9900", showAt: 57 }
+        { name: "quote", content: "Clarity makes learning easier for everyone.", showAt: 55 },
+        { name: "author", content: "— Taleem", showAt: 56 }
       ]
     },
-
     {
-      type: "bigNumber",
+      type: "keyIdeasSlide",
       start: 60,
       end: 65,
       data: [
-        { name: "number", content: "100%", showAt: 60 },
-        { name: "label", content: "Always the Same Output", showAt: 61 }
+        { name: "card", icon: "🧠", label: "Focus", showAt: 60 },
+        { name: "card", icon: "📘", label: "Clarity", showAt: 61 },
+        { name: "card", icon: "⏱️", label: "Pace", showAt: 62 },
+        { name: "card", icon: "🎯", label: "Understanding", showAt: 63 }
       ]
     },
-
-    {
-      type: "barChart",
-      start: 65,
-      end: 70,
-      data: [
-        { name: "bar", label: "Excellent", value: 4, showAt: 65 },
-        { name: "bar", label: "Good", value: 6, showAt: 66 },
-        { name: "bar", label: "Average", value: 5, showAt: 67 },
-        { name: "bar", label: "Needs improvement", value: 2, showAt: 68 }
-      ]
-    },
-
-    {
-      type: "quoteSlide",
-      start: 70,
-      end: 75,
-      data: [
-        { name: "quote", content: "Clarity makes learning easier for everyone.", showAt: 70 },
-        { name: "author", content: "— Taleem", showAt: 72 }
-      ]
-    },
-
-    {
-      type: "quoteWithImage",
-      start: 75,
-      end: 80,
-      data: [
-        { name: "quote", content: "Understanding ideas matters more than using complex tools.", showAt: 75 },
-        { name: "author", content: "— Taleem", showAt: 77 },
-        { name: "image", content: "image.png", showAt: 78 }
-      ]
-    },
-
-    {
-      type: "cornerWordsSlide",
-      start: 80,
-      end: 85,
-      data: [
-        { name: "card", icon: "🧠", label: "Focus", showAt: 80 },
-        { name: "card", icon: "📘", label: "Clarity", showAt: 81 },
-        { name: "card", icon: "⏱️", label: "Pace", showAt: 82 },
-        { name: "card", icon: "🎯", label: "Understanding", showAt: 83 }
-      ]
-    },
-
-    {
-      type: "contactSlide",
-      start: 85,
-      end: 90,
-      data: [
-        { name: "headline", content: "Taleem Project", showAt: 85 },
-        { name: "email", content: "github.com/taleem", showAt: 86 },
-        { name: "phone", content: "Open-source educational tools", showAt: 87 }
-      ]
-    },
-
     {
       type: "eq",
-      start: 90,
-      end: 95,
+      start: 65,
+      end: 75,
       data: [
-        {
-          name: "line",
-          type: "heading",
-          content: "Eq Slide - under contruction",
-          showAt: 90
-        },
+        { name: "line", type: "heading", content: "Eq Slide - under construction", showAt: 65 },
         {
           name: "line",
           type: "math",
           content: "$(a + b)(a + b)$",
-          showAt: 91,
+          showAt: 66,
           spItems: [
             { type: "spText", content: "The square means the bracket is multiplied by itself." },
             { type: "spImage", content: "box.webp" }
@@ -241,7 +164,7 @@ export const goldenDeckV1 = {
           name: "line",
           type: "math",
           content: "$(a + b)^2$",
-          showAt: 92,
+          showAt: 67,
           spItems: [
             { type: "spText", content: "The square means the bracket is multiplied by itself." },
             { type: "spImage", content: "image.webp" }
@@ -249,23 +172,24 @@ export const goldenDeckV1 = {
         }
       ]
     },
-
     {
       type: "fillImage",
-      start: 95,
-      end: 100,
-      data: [
-        { name: "image", content: "image.png", showAt: 95 }
-      ]
+      start: 75,
+      end: 80,
+      data: [{ name: "image", content: "image.png", showAt: 75 }]
     },
-
     {
       type: "titleAndPara",
-      start: 100,
-      end: 105,
+      start: 80,
+      end: 85,
       data: [
-        { name: "title", content: "End", showAt: 100 },
-        { name: "para", content: "All slide types rendered.", showAt: 101 }
+        { name: "title", content: "Final Slide and Message", showAt: 80 },
+        {
+          name: "para",
+          content:
+            "All slide types in the system have now been rendered. This final slide uses a simple title and paragraph layout, which represents one of the most important formats in real teaching. While often overlooked in presentations, clear paragraph-based text forms the backbone of explanation and reflection. It is in these quiet moments of reading and thinking that ideas settle, connections form, and learning becomes lasting. This slide stands as a reminder that clarity and thoughtful pacing matter more than visual complexity.",
+          showAt: 81
+        }
       ]
     }
   ]

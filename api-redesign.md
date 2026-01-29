@@ -1,88 +1,56 @@
-Got it. This is the **right question now** 👍
-No redesigning, no “what could it become”. Just **keep vs drop**, based strictly on *usefulness and clarity*.
-
-I’ll be decisive.
+Perfect — locked 👍
+Here’s the **FINAL LIST**, with **renames clearly marked** so you can do those first and safely.
 
 ---
 
-### ✅ **KEEP (core, justified, earns its place)**
+## 🔁 **RENAMES (do these first)**
 
-• **titleAndSubtitle**
-(Also serves as title-only when subtitle is missing)
-→ Clean entry, flexible, reduces slide count.
+1. **donutChart → progressbar**
+   _(semantic rename, no behavior change)_
 
-• **titleAndPara**
-→ Core teaching slide. Non-negotiable.
+2. **highlightStatement → highlight**
+   _(short, obvious, teaching-first)_
 
-• **bulletList**
-→ Core pacing primitive.
-
-• **twoColumnText**
-→ Excellent from a *seeing* point of view. Clear comparisons.
-
-• **imageSlide**
-→ Visual pause / focus slide. Useful.
-
-• **imageWithTitle**
-→ Keep, but understood as *image + label*, not quote.
-
-• **imageWithCaption**
-→ Diagram / textbook figure style. Quiet but important.
-
-• **imageLeftBulletsRight**
-• **imageRightBulletsLeft**
-→ These are **the presentation slides**. Absolute keep.
-
-• **table**
-→ Necessary, even if boring.
-
-• **barChart**
-→ Clear purpose: comparison.
-
-• **quoteSlide**
-→ The *only* quote slide needed. Keep.
-
-• **cornerWordsSlide**
-→ Unique emotional / conceptual emphasis. Keep.
-
-• **eq**
-→ Core to system identity. Keep.
-
-• **fillImage**
-→ Visual reset / ending slide. Keep.
+3. **cornerWordsSlide → keyIdeas**
+   _(clear intent, timeless)_
 
 ---
 
-### ❌ **DROP (no longer justified)**
+## ✅ **FINAL SLIDE LIST (Golden Deck V1)**
 
-• **titleSlide**
-→ Redundant. titleAndSubtitle replaces it cleanly.
+### **Core Slides**
 
-• **statistic**
-→ Vague, overlaps with charts, no unique value.
+1. **titleAndSubtitle**
+2. **titleAndPara**
+3. **bulletList**
+4. **twoColumnText**
+5. **imageSlide**
+6. **imageWithTitle**
+7. **imageWithCaption**
+8. **imageLeftBulletsRight**
+9. **imageRightBulletsLeft**
+10. **table**
 
-• **donutChart**
-→ Rename/remove as chart. (Handled separately as Progressbar)
+### **Visual / Data Slides**
 
-• **bigNumber**
-→ Pure emphasis, no semantic value. Drop now.
+11. **barChart**
+12. **pieChart**
+13. **lineChart**
+14. **progressbar**
 
-• **quoteWithImage**
-→ Semantic confusion (quote ≠ heading ≠ image). Drop.
+### **Concept / Emphasis Slides**
 
-• **contactSlide**
-→ Presentation relic. If identity is needed, it becomes **brandSlide** (new), otherwise drop.
+15. **quoteSlide**
+16. **highlight**
+17. **keyIdeas**
+
+### **System / Structural Slides**
+
+18. **eq**
+19. **fillImage**
+20. **aboutUs**
 
 ---
 
-### Final signal 🧠
-
-After this cut:
-• no weak slides
-• no overlapping intent
-• no “nice to have” junk
-
-What remains is a **tight, teachable, production-ready slide vocabulary**.
-
-This was the correct ruthless pass.
-Next steps (when you’re ready): lock this list as **Golden Slides v1** and don’t touch it again.
+That’s it.
+Do the **3 renames first**, then you’re free to freeze the API and move forward confidently 🚀

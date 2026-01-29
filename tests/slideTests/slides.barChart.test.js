@@ -1,6 +1,6 @@
 import { describe, test, expect } from "vitest";
 import { BarChartSlide } from "../../src/slides/templates/BarChartSlide";
-import { goldenDeckV1 } from "../../src/spec/goldenDeckV1.js"; // path may vary in monorepo
+import { goldenDeckV1 } from "../../src/spec/goldenDeckV1.js";
 
 describe("BarChartSlide", () => {
   test("renders barChart slide from golden deck", () => {
@@ -9,16 +9,18 @@ describe("BarChartSlide", () => {
       slide => slide.type === "barChart"
     );
 
-    // Safety check (optional but fine during refactor)
+    // Safety check
     expect(barChartSlide).toBeTruthy();
 
-    // 2. Feed EXACT golden-deck data into renderer
+    // 2. Render
     const slide = BarChartSlide.fromJSON(barChartSlide);
     const html = slide.render();
 
-    // 3. Assert rendered HTML (presentation only)
-    expect(html).toContain("bar");
-    expect(html).toContain("span");
+    // 3. Assert rendered HTML structure (current renderer)
     expect(html).toContain("barChart");
+    expect(html).toContain("bar-row");
+    expect(html).toContain("bar-fill");
+    expect(html).toContain("bar-label");
+    expect(html).toContain("bar-value");
   });
 });

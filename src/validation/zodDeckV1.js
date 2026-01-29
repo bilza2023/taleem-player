@@ -1,164 +1,119 @@
-import { z } from 'zod';
 
-// Base shared slide structure
+import { z } from "zod";
+
+/* ───────────── Base ───────────── */
 const baseSlide = z.object({
   start: z.number(),
   end: z.number()
 });
 
-// 1 TITLE SLIDE
-const titleSlide = baseSlide.extend({
-  type: z.literal("titleSlide"),
-  data: z.array(
-    z.object({
-      name: z.literal("title"),
-      content: z.string(),
-      showAt: z.number().optional()
-    })
-  )
-});
+const showAt = z.number().optional();
 
-// 2 TITLE AND SUBTITLE
+/* ───────────── Text slides ───────────── */
+
 const titleAndSubtitle = baseSlide.extend({
   type: z.literal("titleAndSubtitle"),
   data: z.array(
     z.union([
-      z.object({ name: z.literal("title"), content: z.string(), showAt: z.number().optional() }),
-      z.object({ name: z.literal("subtitle"), content: z.string(), showAt: z.number().optional() })
+      z.object({ name: z.literal("title"), content: z.string(), showAt }),
+      z.object({ name: z.literal("subtitle"), content: z.string(), showAt })
     ])
   )
 });
 
-// 3 BULLET LIST
-const bulletList = baseSlide.extend({
-  type: z.literal("bulletList"),
+const titleAndPara = baseSlide.extend({
+  type: z.literal("titleAndPara"),
   data: z.array(
-    z.object({
-      name: z.literal("bullet"),
-      content: z.string(),
-      showAt: z.number().optional()
-    })
+    z.union([
+      z.object({ name: z.literal("title"), content: z.string(), showAt }),
+      z.object({ name: z.literal("para"), content: z.string(), showAt })
+    ])
   )
 });
 
-// 4 TWO COLUMN TEXT
+const bulletList = baseSlide.extend({
+  type: z.literal("bulletList"),
+  data: z.array(
+    z.object({ name: z.literal("bullet"), content: z.string(), showAt })
+  )
+});
+
 const twoColumnText = baseSlide.extend({
   type: z.literal("twoColumnText"),
   data: z.array(
     z.union([
-      z.object({ name: z.literal("title"), content: z.string(), showAt: z.number().optional() }),
-      z.object({ name: z.literal("left"), content: z.string(), showAt: z.number().optional() }),
-      z.object({ name: z.literal("right"), content: z.string(), showAt: z.number().optional() })
+      z.object({ name: z.literal("title"), content: z.string(), showAt }),
+      z.object({ name: z.literal("left"), content: z.string(), showAt }),
+      z.object({ name: z.literal("right"), content: z.string(), showAt })
     ])
   )
 });
 
-// 5 IMAGE SLIDE
+/* ───────────── Image slides ───────────── */
+
 const imageSlide = baseSlide.extend({
   type: z.literal("imageSlide"),
   data: z.array(
-    z.object({ name: z.literal("image"), content: z.string(), showAt: z.number().optional() })
+    z.object({ name: z.literal("image"), content: z.string(), showAt })
   )
 });
 
-// 6 IMAGE WITH TITLE
+const fillImage = baseSlide.extend({
+  type: z.literal("fillImage"),
+  data: z.array(
+    z.object({ name: z.literal("image"), content: z.string(), showAt })
+  )
+});
+
 const imageWithTitle = baseSlide.extend({
   type: z.literal("imageWithTitle"),
   data: z.array(
     z.union([
-      z.object({ name: z.literal("image"), content: z.string(), showAt: z.number().optional() }),
-      z.object({ name: z.literal("title"), content: z.string(), showAt: z.number().optional() })
+      z.object({ name: z.literal("image"), content: z.string(), showAt }),
+      z.object({ name: z.literal("title"), content: z.string(), showAt })
     ])
   )
 });
 
-// 7 IMAGE WITH CAPTION
 const imageWithCaption = baseSlide.extend({
   type: z.literal("imageWithCaption"),
   data: z.array(
     z.union([
-      z.object({ name: z.literal("image"), content: z.string(), showAt: z.number().optional() }),
-      z.object({ name: z.literal("caption"), content: z.string(), showAt: z.number().optional() })
+      z.object({ name: z.literal("image"), content: z.string(), showAt }),
+      z.object({ name: z.literal("caption"), content: z.string(), showAt })
     ])
   )
 });
 
-// 8 IMAGE LEFT BULLETS RIGHT
 const imageLeftBulletsRight = baseSlide.extend({
   type: z.literal("imageLeftBulletsRight"),
   data: z.array(
     z.object({
       name: z.union([z.literal("image"), z.literal("bullet")]),
       content: z.string(),
-      showAt: z.number().optional()
+      showAt
     })
   )
 });
 
-// 9 IMAGE RIGHT BULLETS LEFT
 const imageRightBulletsLeft = baseSlide.extend({
   type: z.literal("imageRightBulletsLeft"),
   data: z.array(
     z.object({
       name: z.union([z.literal("image"), z.literal("bullet")]),
       content: z.string(),
-      showAt: z.number().optional()
+      showAt
     })
   )
 });
 
-// 10 TABLE
+/* ───────────── Data slides ───────────── */
+
 const table = baseSlide.extend({
   type: z.literal("table"),
-  data: z
-    .array(
-      z.array(z.string()).min(1) // each row must have at least 1 cell
-    )
-    .min(1) // table must have at least 1 row
-    .refine(
-      rows => rows.every(r => r.length === rows[0].length),
-      {
-        message: "All table rows must have the same number of columns"
-      }
-    )
+  data: z.array(z.array(z.string()).min(1)).min(1)
 });
 
-
-// 11 STATISTIC
-const statistic = baseSlide.extend({
-  type: z.literal("statistic"),
-  data: z.array(
-    z.union([
-      z.object({ name: z.literal("number"), content: z.string(), showAt: z.number().optional() }),
-      z.object({ name: z.literal("label"), content: z.string(), showAt: z.number().optional() })
-    ])
-  )
-});
-
-// 12 DONUT CHART
-const donutChart = baseSlide.extend({
-  type: z.literal("donutChart"),
-  data: z.array(
-    z.object({
-      name: z.union([z.literal("percent"), z.literal("label"), z.literal("color")]),
-      content: z.string(),
-      showAt: z.number().optional()
-    })
-  )
-});
-
-// 13 BIG NUMBER
-const bigNumber = baseSlide.extend({
-  type: z.literal("bigNumber"),
-  data: z.array(
-    z.union([
-      z.object({ name: z.literal("number"), content: z.string(), showAt: z.number().optional() }),
-      z.object({ name: z.literal("label"), content: z.string(), showAt: z.number().optional() })
-    ])
-  )
-});
-
-// 14 BAR CHART
 const barChart = baseSlide.extend({
   type: z.literal("barChart"),
   data: z.array(
@@ -166,37 +121,37 @@ const barChart = baseSlide.extend({
       name: z.literal("bar"),
       label: z.string(),
       value: z.number(),
-      showAt: z.number().optional()
+      showAt
     })
   )
 });
 
-// 15 QUOTE SLIDE
+const progressbar = baseSlide.extend({
+  type: z.literal("progressbar"),
+  data: z.array(
+    z.object({
+      name: z.literal("bar"),
+      label: z.string(),
+      value: z.number(),
+      showAt
+    })
+  )
+});
+
+/* ───────────── Quote / ideas ───────────── */
+
 const quoteSlide = baseSlide.extend({
   type: z.literal("quoteSlide"),
   data: z.array(
     z.union([
-      z.object({ name: z.literal("quote"), content: z.string(), showAt: z.number().optional() }),
-      z.object({ name: z.literal("author"), content: z.string(), showAt: z.number().optional() })
+      z.object({ name: z.literal("quote"), content: z.string(), showAt }),
+      z.object({ name: z.literal("author"), content: z.string(), showAt })
     ])
   )
 });
 
-// 16 QUOTE WITH IMAGE
-const quoteWithImage = baseSlide.extend({
-  type: z.literal("quoteWithImage"),
-  data: z.array(
-    z.union([
-      z.object({ name: z.literal("quote"), content: z.string(), showAt: z.number().optional() }),
-      z.object({ name: z.literal("author"), content: z.string(), showAt: z.number().optional() }),
-      z.object({ name: z.literal("image"), content: z.string(), showAt: z.number().optional() })
-    ])
-  )
-});
-
-// 17 CORNER WORDS SLIDE
-const cornerWordsSlide = baseSlide.extend({
-  type: z.literal("cornerWordsSlide"),
+const keyIdeasSlide = baseSlide.extend({
+  type: z.literal("keyIdeasSlide"),
   data: z.array(
     z.object({
       name: z.literal("card"),
@@ -207,113 +162,59 @@ const cornerWordsSlide = baseSlide.extend({
   )
 });
 
-// 18 CONTACT SLIDE
-const contactSlide = baseSlide.extend({
-  type: z.literal("contactSlide"),
-  data: z.array(
-    z.union([
-      z.object({ name: z.literal("headline"), content: z.string(), showAt: z.number().optional() }),
-      z.object({ name: z.literal("email"), content: z.string(), showAt: z.number().optional() }),
-      z.object({ name: z.literal("phone"), content: z.string(), showAt: z.number().optional() })
-    ])
-  )
-});
 
-// 19 Eq : eq schema
-// ⚠️ One real issue (important, but not fatal)
-// Naming collision: type used twice
-const eqSlide = baseSlide.extend({
+/* ───────────── EQ ───────────── */
+
+const eq = baseSlide.extend({
   type: z.literal("eq"),
   data: z.array(
     z.object({
-      name:    z.literal("line"),
-      type:    z.union([
-                  z.literal("heading"),
-                  z.literal("text"),
-                  z.literal("math")
-               ]),
+      name: z.literal("line"),
+      type: z.enum(["heading", "text", "math"]),
       content: z.string(),
-      showAt:  z.number().optional(),
-      spItems: z.array(
-        z.object({
-          type:    z.union([
-                      z.literal("spHeading"),
-                      z.literal("spText"),
-                      z.literal("spMath"),
-                      z.literal("spImage")
-                   ]),
-          content: z.string()
-        })
-      ).optional()
+      showAt,
+      spItems: z
+        .array(
+          z.object({
+            type: z.enum(["spHeading", "spText", "spMath", "spImage"]),
+            content: z.string()
+          })
+        )
+        .optional()
     })
   )
 });
 
-// 20 : Full image slide
-const fillImage = baseSlide.extend({
-  type: z.literal("fillImage"),
-  data: z.array(
-    z.object({
-      name: z.literal("image"),
-      content: z.string(),
-      showAt: z.number().optional()
-    })
-  )
-});
+/* ───────────── Deck ───────────── */
 
-
-// 21 TITLE AND PARA  ────────────────────────────────────────────────
-const titleAndPara = baseSlide.extend({
-  type: z.literal("titleAndPara"),
-  data: z.array(
-    z.union([
-      z.object({ name: z.literal("title"),     content: z.string(), showAt: z.number().optional() }),
-      z.object({ name: z.literal("para"), content: z.string(), showAt: z.number().optional() })
-    ])
-  )
-});
-
-
-
-//////////////===> Final Deck Object
 export const zodDeckV1 = z.object({
-    name:        z.string().optional(),
-    description: z.string().optional(),
-    tags:        z.array(z.string()).optional(),
-    status:      z.enum(['draft','ready','published','archived']).optional(),
-    createdAt:   z.string().datetime().optional(),
-    editedAt:    z.string().datetime().optional(),
-    version:     z.literal("deck-v1"),
-    background: z
+  version: z.literal("deck-v1"),
+  name: z.string().optional(),
+  background: z
     .object({
       backgroundColor: z.string().optional(),
       backgroundImage: z.string().nullable().optional(),
       backgroundImageOpacity: z.number().optional()
     })
     .optional(),
-    deck:        z.array(
-      z.discriminatedUnion("type", [
-        titleAndPara,
-        eqSlide,
-        fillImage,
-        titleSlide,
-        titleAndSubtitle,
-        bulletList,
-        twoColumnText,
-        imageSlide,
-        imageWithTitle,
-        imageWithCaption,
-        imageLeftBulletsRight,
-        imageRightBulletsLeft,
-        table,
-        statistic,
-        donutChart,
-        bigNumber,
-        barChart,
-        quoteSlide,
-        quoteWithImage,
-        cornerWordsSlide,
-        contactSlide
-      ])
-    )
-  });  
+  deck: z.array(
+    z.discriminatedUnion("type", [
+      titleAndSubtitle,
+      titleAndPara,
+      bulletList,
+      twoColumnText,
+      imageSlide,
+      fillImage,
+      imageWithTitle,
+      imageWithCaption,
+      imageLeftBulletsRight,
+      imageRightBulletsLeft,
+      table,
+      barChart,
+      progressbar,
+      quoteSlide,
+      keyIdeasSlide,
+      eq
+    ])
+  )
+});
