@@ -179,7 +179,7 @@
           "showAt": 66,
           "spItems": [
             { "type": "spText", "content": "The square means the bracket is multiplied by itself." },
-            { "type": "spImage", "content": "box.webp" }
+            { "type": "spImage", "content": "image.png" }
           ]
         },
         {
@@ -189,7 +189,7 @@
           "showAt": 67,
           "spItems": [
             { "type": "spText", "content": "The square means the bracket is multiplied by itself." },
-            { "type": "spImage", "content": "image.webp" }
+            { "type": "spImage", "content": "image.png" }
           ]
         }
       ]

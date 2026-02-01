@@ -16,6 +16,7 @@ export const goldenDeckV1 = {
         { name: "subtitle", content: "A simple, calm way to present ideas", showAt: 1 }
       ]
     },
+
     {
       type: "bulletList",
       start: 5,
@@ -28,6 +29,7 @@ export const goldenDeckV1 = {
         { name: "bullet", content: "The same lesson looks the same everywhere", showAt: 9 }
       ]
     },
+
     {
       type: "twoColumnText",
       start: 10,
@@ -47,12 +49,16 @@ export const goldenDeckV1 = {
         }
       ]
     },
+
     {
       type: "imageSlide",
       start: 15,
       end: 20,
-      data: [{ name: "image", content: "image.png", showAt: 15 }]
+      data: [
+        { name: "image", content: "image.png", showAt: 15 }
+      ]
     },
+
     {
       type: "imageWithTitle",
       start: 20,
@@ -62,6 +68,7 @@ export const goldenDeckV1 = {
         { name: "image", content: "image.png", showAt: 21 }
       ]
     },
+
     {
       type: "imageWithCaption",
       start: 25,
@@ -71,6 +78,7 @@ export const goldenDeckV1 = {
         { name: "caption", content: "Caption as data", showAt: 26 }
       ]
     },
+
     {
       type: "imageLeftBulletsRight",
       start: 30,
@@ -83,6 +91,7 @@ export const goldenDeckV1 = {
         { name: "bullet", content: "This helps students follow step by step", showAt: 34 }
       ]
     },
+
     {
       type: "imageRightBulletsLeft",
       start: 35,
@@ -95,6 +104,7 @@ export const goldenDeckV1 = {
         { name: "bullet", content: "This keeps learning calm and focused", showAt: 39 }
       ]
     },
+
     {
       type: "table",
       start: 40,
@@ -107,6 +117,7 @@ export const goldenDeckV1 = {
         ["taleem-player", "Time-based presentations"]
       ]
     },
+
     {
       type: "barChart",
       start: 45,
@@ -118,12 +129,16 @@ export const goldenDeckV1 = {
         { name: "bar", label: "Needs improvement", value: 2, showAt: 48 }
       ]
     },
+
     {
       type: "progressbar",
       start: 50,
       end: 55,
-      data: [{ name: "bar", label: "Lesson Coverage", value: 60, showAt: 50 }]
+      data: [
+        { name: "bar", label: "Lesson Coverage", value: 60, showAt: 50 }
+      ]
     },
+
     {
       type: "quoteSlide",
       start: 55,
@@ -133,6 +148,7 @@ export const goldenDeckV1 = {
         { name: "author", content: "— Taleem", showAt: 56 }
       ]
     },
+
     {
       type: "keyIdeasSlide",
       start: 60,
@@ -144,12 +160,18 @@ export const goldenDeckV1 = {
         { name: "card", icon: "🎯", label: "Understanding", showAt: 63 }
       ]
     },
+
     {
       type: "eq",
       start: 65,
       end: 75,
       data: [
-        { name: "line", type: "heading", content: "Eq Slide - under construction", showAt: 65 },
+        {
+          name: "line",
+          type: "heading",
+          content: "Eq Slide - under construction",
+          showAt: 65
+        },
         {
           name: "line",
           type: "math",
@@ -157,7 +179,7 @@ export const goldenDeckV1 = {
           showAt: 66,
           spItems: [
             { type: "spText", content: "The square means the bracket is multiplied by itself." },
-            { type: "spImage", content: "box.webp" }
+            { type: "spImage", content: "image.png" }
           ]
         },
         {
@@ -167,17 +189,21 @@ export const goldenDeckV1 = {
           showAt: 67,
           spItems: [
             { type: "spText", content: "The square means the bracket is multiplied by itself." },
-            { type: "spImage", content: "image.webp" }
+            { type: "spImage", content: "image.png" }
           ]
         }
       ]
     },
+
     {
       type: "fillImage",
       start: 75,
       end: 80,
-      data: [{ name: "image", content: "image.png", showAt: 75 }]
+      data: [
+        { name: "image", content: "image.png", showAt: 75 }
+      ]
     },
+
     {
       type: "titleAndPara",
       start: 80,

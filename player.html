@@ -4,10 +4,16 @@
   <meta charset="UTF-8" />
   <title>Taleem PAM Player (Test Nav)</title>
 
-  <!-- Taleem Player styles -->
-  <link rel="stylesheet" href="../src/css/taleem.css" />
-  
-  <link rel="stylesheet" href="../src/css/themes/dark.css" />
+  <link
+  rel="stylesheet"
+  href="https://unpkg.com/taleem-player@latest/dist/css/taleem.css"
+/>
+
+
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/taleem-player@0.7.3-rc/dist/css/themes/dark.css"
+/>
 
   <style>
     body {
@@ -78,13 +84,15 @@
   </div>
 
   <script type="module">
+import { createTaleemPlayer, resolveAssetPaths, resolveBackground } from
+  "https://unpkg.com/taleem-player@latest/dist/taleem-player.esm.js"
 
-    import { createTaleemPlayer, resolveAssetPaths,resolveBackground } from
-      "../src/index.js"
-      import { useMath } from "../src/math/useMath.js"
+import { renderLoop, Timer } from
+  "https://unpkg.com/taleem-pam@latest/dist/taleem-pam.esm.js"
 
-    import { renderLoop, Timer } from
-      "https://unpkg.com/taleem-pam@latest/src/index.js"
+  import { useMath } from
+  "https://unpkg.com/taleem-player@latest/dist/math/useMath.js"
+
 
 
     // ------------------------------
@@ -137,8 +145,8 @@ window.addEventListener("mousemove", e => {
     //   "https://unpkg.com/taleem-core@latest/dist/taleem-core.esm.js";
     // debugger;
     //   const deck = structuredClone(goldenDeckV1);
-    resolveAssetPaths(deck, "../public/media/images/");
-    resolveBackground(deck, "../public/media/images/");
+    resolveAssetPaths(deck, "./public/media/images/");
+    resolveBackground(deck, "./public/media/images/");
     //console.log("deck" , deck); 
     // ------------------------------
     // derive duration from deck

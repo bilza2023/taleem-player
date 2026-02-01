@@ -50,7 +50,9 @@ var goldenDeckV1 = {
       type: "imageSlide",
       start: 15,
       end: 20,
-      data: [{ name: "image", content: "image.png", showAt: 15 }]
+      data: [
+        { name: "image", content: "image.png", showAt: 15 }
+      ]
     },
     {
       type: "imageWithTitle",
@@ -121,7 +123,9 @@ var goldenDeckV1 = {
       type: "progressbar",
       start: 50,
       end: 55,
-      data: [{ name: "bar", label: "Lesson Coverage", value: 60, showAt: 50 }]
+      data: [
+        { name: "bar", label: "Lesson Coverage", value: 60, showAt: 50 }
+      ]
     },
     {
       type: "quoteSlide",
@@ -148,7 +152,12 @@ var goldenDeckV1 = {
       start: 65,
       end: 75,
       data: [
-        { name: "line", type: "heading", content: "Eq Slide - under construction", showAt: 65 },
+        {
+          name: "line",
+          type: "heading",
+          content: "Eq Slide - under construction",
+          showAt: 65
+        },
         {
           name: "line",
           type: "math",
@@ -156,7 +165,7 @@ var goldenDeckV1 = {
           showAt: 66,
           spItems: [
             { type: "spText", content: "The square means the bracket is multiplied by itself." },
-            { type: "spImage", content: "box.webp" }
+            { type: "spImage", content: "image.png" }
           ]
         },
         {
@@ -166,7 +175,7 @@ var goldenDeckV1 = {
           showAt: 67,
           spItems: [
             { type: "spText", content: "The square means the bracket is multiplied by itself." },
-            { type: "spImage", content: "image.webp" }
+            { type: "spImage", content: "image.png" }
           ]
         }
       ]
@@ -175,7 +184,9 @@ var goldenDeckV1 = {
       type: "fillImage",
       start: 75,
       end: 80,
-      data: [{ name: "image", content: "image.png", showAt: 75 }]
+      data: [
+        { name: "image", content: "image.png", showAt: 75 }
+      ]
     },
     {
       type: "titleAndPara",
