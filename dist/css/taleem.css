@@ -405,9 +405,9 @@
 /* ---------- Side panel items ---------- */
 
 .slide.eq.imageRightBulletsLeft .eq-explain-item {
-  font-size: 1.4rem;
-  line-height: 1.45;
-  text-align: center;
+  font-size: 1.6rem;
+  line-height: 1.75;
+  text-align:justify;
 
   word-wrap: break-word;
   overflow-wrap: break-word;
@@ -415,6 +415,8 @@
   background: rgba(255, 255, 255, 0.06);
   padding: 14px 18px;
   border-radius: 12px;
+
+  
 }
 
 /* ---------- Side panel image ---------- */

@@ -1,25 +1,29 @@
+
 # Taleem Player
 
 **Taleem Player** converts **Taleem JSON slide data** into **web-based presentations**.
 
 It renders the **same Taleem JSON** in multiple display modes using a single, stable rendering engine.
 
-> **Stable · deck-v1 frozen**  
-> The slide language, schema, and registry are complete.  
+> **Stable · deck-v1 frozen**
+> The slide language, schema, and registry are complete.
 > Internal improvements may continue without breaking public contracts.
 
 ---
-Demo & Documentation
-👉 https://bilza2023.github.io/taleem/
+
+## Demo & Documentation
+
+👉 [https://bilza2023.github.io/taleem/](https://bilza2023.github.io/taleem/)
 
 The live demo shows:
 
- - Browser Mode (index-based rendering)
- - Player Mode (time-based rendering)
- - Real production Taleem JSON
- - Shared CSS across all modes
- - No screenshots. No mock data.
- - What you see is the real engine running in the browser.
+* Browser Mode (index-based rendering)
+* Player Mode (time-based rendering)
+* Real production Taleem JSON
+* Shared CSS across all modes
+* No screenshots. No mock data.
+* What you see is the real engine running in the browser.
+
 ---
 
 ## What this project is
@@ -27,8 +31,9 @@ The live demo shows:
 Taleem Player is a **presentation engine**, not a slide editor.
 
 It takes **validated Taleem decks** and turns them into:
-- index-based presentations
-- time-based presentations
+
+* index-based presentations
+* time-based presentations
 
 The system is **declarative**, **predictable**, and **CSS-driven**.
 
@@ -38,7 +43,7 @@ The system is **declarative**, **predictable**, and **CSS-driven**.
 
 ```bash
 npm install taleem-player
-````
+```
 
 ---
 
@@ -137,6 +142,87 @@ They never change slide meaning.
 
 ---
 
+## Validation & Authoring Utilities (offline)
+
+Taleem Player also exposes **optional authoring utilities** for **offline use**
+during deck creation, build steps, or publishing pipelines.
+
+These utilities are **not runtime concerns** and are intentionally kept
+separate from the player rendering path.
+
+```js
+import {
+  validateDeckV1,
+  validatePlayerDeckV1,
+  normalizeDeckForPlayerV1,
+} from "taleem-player/validation";
+```
+
+---
+
+### `validateDeckV1(deck)`
+
+Schema-level validation.
+
+* Ensures the deck conforms to **deck-v1**
+* Validates slide types and data shapes
+* Does **not** validate timing semantics
+
+Returns `{ ok, value }` or `{ ok: false, errors }`.
+
+---
+
+### `validatePlayerDeckV1(deck)`
+
+Player-level semantic validation.
+
+* Assumes schema validation has already passed
+* Enforces:
+
+  * slide start / end correctness
+  * strict slide sequencing
+  * `showAt` within slide bounds
+  * EQ slide timing rules
+* Does **not** mutate or fix data
+
+This validator answers:
+
+> “Can time safely move forward without ambiguity?”
+
+---
+
+### `normalizeDeckForPlayerV1(deck, options?)`
+
+Offline normalization utility.
+
+* Patches missing or invalid timing
+* Assigns deterministic mock timings
+* Ensures the deck is **safe for player playback**
+* Intended for build steps, CLIs, or publishing workflows
+
+This is **not validation** — it is a controlled fixer.
+
+---
+
+### Usage model
+
+**Static editors / CDN usage**
+
+* no validation
+* no fixing
+* UX hints only
+
+**Authoring / build / publish step**
+
+```
+normalize → validate → publish
+```
+
+These utilities are **explicit opt-in** and are never executed
+by the player runtime.
+
+---
+
 ## CSS
 
 ```js
@@ -186,7 +272,8 @@ The core registry supports **additive registration only**.
 
 The `eq` slide type is implemented and tested.
 
-It represents **structured symbolic content** and intentionally marks the **upper boundary** of the system.
+It represents **structured symbolic content** and intentionally marks the
+**upper boundary** of the system.
 
 Anything more complex than this belongs in a **separate product**, not in the core player.
 

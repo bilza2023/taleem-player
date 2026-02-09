@@ -13960,7 +13960,179 @@ function validateDeckV1(deck) {
   const r = zodDeckV1.safeParse(deck);
   return r.success ? { ok: true, value: r.data } : { ok: false, errors: r.error.issues };
 }
+
+// src/validation/validatePlayerDeckV1.js
+function validatePlayerDeckV1(deck) {
+  const errors = [];
+  if (!deck || !Array.isArray(deck.deck)) {
+    return fail("DECK_INVALID", "deck.deck must be an array");
+  }
+  const slides = deck.deck;
+  validateSlideTiming(slides, errors);
+  validateSlideSequence(slides, errors);
+  validateShowAtRanges(slides, errors);
+  validateEqSlides(slides, errors);
+  return errors.length === 0 ? { ok: true } : { ok: false, errors };
+}
+function validateSlideTiming(slides, errors) {
+  slides.forEach((slide, i) => {
+    if (typeof slide.start !== "number" || typeof slide.end !== "number") {
+      errors.push(err(
+        "SLIDE_TIME_MISSING",
+        `Slide ${i} must have numeric start/end`
+      ));
+      return;
+    }
+    if (slide.start >= slide.end) {
+      errors.push(err(
+        "SLIDE_TIME_ORDER",
+        `Slide ${i} start (${slide.start}) must be < end (${slide.end})`
+      ));
+    }
+    if (i === 0 && slide.start !== 0) {
+      errors.push(err(
+        "DECK_START_NOT_ZERO",
+        `First slide must start at 0 (got ${slide.start})`
+      ));
+    }
+  });
+}
+function validateSlideSequence(slides, errors) {
+  for (let i = 0; i < slides.length - 1; i++) {
+    const a = slides[i];
+    const b = slides[i + 1];
+    if (a.end !== b.start) {
+      errors.push(err(
+        "SLIDE_SEQUENCE_BREAK",
+        `Slide ${i} ends at ${a.end} but next starts at ${b.start}`
+      ));
+    }
+    if (b.start < a.start) {
+      errors.push(err(
+        "SLIDE_TIME_REVERSE",
+        `Slide ${i + 1} starts before previous slide`
+      ));
+    }
+  }
+}
+function validateShowAtRanges(slides, errors) {
+  slides.forEach((slide, si) => {
+    let lastShowAt = null;
+    if (!Array.isArray(slide.data)) return;
+    slide.data.forEach((item, di) => {
+      if (typeof item.showAt !== "number") return;
+      if (item.showAt < slide.start || item.showAt >= slide.end) {
+        errors.push(err(
+          "SHOWAT_OUT_OF_RANGE",
+          `Slide ${si} item ${di} showAt ${item.showAt} outside [${slide.start}, ${slide.end})`
+        ));
+      }
+      if (lastShowAt !== null && item.showAt < lastShowAt) {
+        errors.push(err(
+          "SHOWAT_ORDER",
+          `Slide ${si} item ${di} showAt decreases (${item.showAt} < ${lastShowAt})`
+        ));
+      }
+      lastShowAt = item.showAt;
+    });
+  });
+}
+function validateEqSlides(slides, errors) {
+  slides.forEach((slide, si) => {
+    if (slide.type !== "eq") return;
+    let lastLineShowAt = null;
+    slide.data.forEach((line, li) => {
+      if (typeof line.showAt === "number") {
+        if (line.showAt < slide.start || line.showAt >= slide.end) {
+          errors.push(err(
+            "EQ_LINE_SHOWAT_RANGE",
+            `EQ slide ${si} line ${li} showAt ${line.showAt} outside slide range`
+          ));
+        }
+        if (lastLineShowAt !== null && line.showAt < lastLineShowAt) {
+          errors.push(err(
+            "EQ_LINE_ORDER",
+            `EQ slide ${si} line ${li} showAt decreases`
+          ));
+        }
+        lastLineShowAt = line.showAt;
+      }
+      if (Array.isArray(line.spItems)) {
+        line.spItems.forEach((sp, spi) => {
+          if ("showAt" in sp) {
+            errors.push(err(
+              "EQ_SPITEM_SHOWAT_FORBIDDEN",
+              `EQ slide ${si} line ${li} spItem ${spi} must not define showAt`
+            ));
+          }
+        });
+      }
+    });
+  });
+}
+function err(code, message) {
+  return { code, message };
+}
+function fail(code, message) {
+  return { ok: false, errors: [{ code, message }] };
+}
+
+// src/validation/normalizeDeckForPlayerV1.js
+function normalizeDeckForPlayerV1(deck, opts = {}) {
+  const {
+    slideDuration = 5,
+    // default seconds per slide
+    itemStep = 1
+    // default gap between showAt items
+  } = opts;
+  let time3 = 0;
+  const slides = deck.deck.map((slide) => {
+    const start = isNumber(slide.start) ? slide.start : time3;
+    const end = isNumber(slide.end) && slide.end > start ? slide.end : start + slideDuration;
+    const fixedSlide = {
+      ...slide,
+      start,
+      end,
+      data: fixShowAt(slide.data, start, end, itemStep)
+    };
+    time3 = end;
+    return fixedSlide;
+  });
+  return {
+    ...deck,
+    deck: slides
+  };
+}
+function fixShowAt(data, start, end, step) {
+  if (!Array.isArray(data)) return data;
+  let t = start;
+  return data.map((item) => {
+    const showAt2 = isNumber(item.showAt) ? clamp(item.showAt, start, end - 1e-4) : t;
+    t = showAt2 + step;
+    if (item.name === "line" && Array.isArray(item.spItems)) {
+      return {
+        ...item,
+        showAt: showAt2,
+        spItems: item.spItems.map((sp) => stripShowAt(sp))
+      };
+    }
+    return { ...item, showAt: showAt2 };
+  });
+}
+function stripShowAt(obj) {
+  if (!obj || typeof obj !== "object") return obj;
+  const { showAt: showAt2, ...rest } = obj;
+  return rest;
+}
+function clamp(v, min, max) {
+  return Math.min(Math.max(v, min), max);
+}
+function isNumber(v) {
+  return typeof v === "number" && !Number.isNaN(v);
+}
 export {
+  normalizeDeckForPlayerV1,
   validateDeckV1,
+  validatePlayerDeckV1,
   zodDeckV1
 };
