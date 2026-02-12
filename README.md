@@ -25,6 +25,17 @@ The live demo shows:
 * What you see is the real engine running in the browser.
 
 ---
+## Visual Editor
+
+Taleem Player has a companion visual editor.
+
+Create structured `deck-v1` presentations in seconds — no manual slide layout required.
+
+👉 https://bilza2023.github.io/taleem-editor/
+
+The editor outputs valid Taleem JSON that runs directly in Taleem Player.
+
+---
 
 ## What this project is
 
