@@ -190,6 +190,10 @@ const eq = baseSlide.extend({
 export const zodDeckV1 = z.object({
   version: z.literal("deck-v1"),
   name: z.string().optional(),
+  audio: z
+  .string()
+  .regex(/^[a-zA-Z0-9-_]+\.(opus|mp3|wav)$/)
+  .optional(),
   background: z
     .object({
       backgroundColor: z.string().optional(),
