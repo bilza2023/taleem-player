@@ -13928,6 +13928,7 @@ var eq = baseSlide.extend({
 var zodDeckV1 = external_exports.object({
   version: external_exports.literal("deck-v1"),
   name: external_exports.string().optional(),
+  audio: external_exports.string().regex(/^[a-zA-Z0-9-_]+\.(opus|mp3|wav)$/).optional(),
   background: external_exports.object({
     backgroundColor: external_exports.string().optional(),
     backgroundImage: external_exports.string().nullable().optional(),

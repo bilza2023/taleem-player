@@ -1,3 +1,4 @@
+
 export const ImageWithTitleSlide = {
   type: "imageWithTitle",
 
@@ -17,8 +18,8 @@ export const ImageWithTitleSlide = {
       render() {
         return `
           <section class="slide imageWithTitle">
-            <h1>${title}</h1>
             <img src="${src}" alt="" />
+            <h1>${title}</h1>
           </section>
         `;
       }
