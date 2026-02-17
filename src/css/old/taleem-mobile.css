@@ -1,0 +1,176 @@
+/* =====================================================
+   TALEEM MOBILE LAYER
+   Full override for small screens
+   ===================================================== */
+
+   @media (max-width: 768px) {
+
+    /* -----------------------------------
+       Base Slide Reset
+       ----------------------------------- */
+  
+    .slide {
+      padding: 24px 16px;
+      gap: 18px;
+      font-size: 1.6rem;
+    }
+  
+    /* -----------------------------------
+       Headings
+       ----------------------------------- */
+  
+    .slide h1 {
+      font-size: 2.8rem !important;
+      line-height: 1.25;
+    }
+  
+    .slide.titleAndSubtitle h2 {
+      font-size: 1.6rem !important;
+    }
+  
+    .slide.titleAndPara p {
+      font-size: 1.5rem !important;
+    }
+  
+    /* -----------------------------------
+       Bullet Lists
+       ----------------------------------- */
+  
+    .slide.bulletList li {
+      font-size: 1.7rem !important;
+      margin-bottom: 0.6rem;
+    }
+  
+    /* -----------------------------------
+       Stack all side-by-side layouts
+       ----------------------------------- */
+  
+    .slide.twoColumnText,
+    .slide.imageLeftBulletsRight,
+    .slide.imageRightBulletsLeft,
+    .slide.eq.imageRightBulletsLeft {
+      flex-direction: column !important;
+      align-items: stretch !important;
+      text-align: left;
+      gap: 22px;
+    }
+  
+    /* -----------------------------------
+       EQ Slide Overrides
+       ----------------------------------- */
+
+        .slide.eq .katex {
+            font-size: 0.8em !important;
+        }
+
+    /* Compact the entire slide vertically */
+    .slide {
+        padding: 16px 14px;
+        gap: 10px;
+      }
+    
+      /* Stack layout */
+      .slide.eq.imageRightBulletsLeft {
+        flex-direction: column !important;
+        align-items: stretch !important;
+      }
+    
+      /* Remove vertical gap between eq lines container */
+      .slide.eq.imageRightBulletsLeft .eq-lines {
+        gap: 0;
+      }
+    
+      /* Make equation lines compact */
+      .slide.eq.imageRightBulletsLeft .eq-lines li {
+        font-size: 1.3rem !important;
+        line-height: 1.25;
+        padding: 6px 8px;
+      }
+    
+      /* Reduce highlight emphasis */
+      .slide.eq.imageRightBulletsLeft .eq-lines li:last-child {
+        font-weight: 600;
+      }
+    
+      /* Side panel below equations */
+      .slide.eq.imageRightBulletsLeft .eq-side-panel {
+        height: auto !important;
+        padding: 12px;
+        margin-top: 10px;
+      }
+    
+      /* Explanation text */
+      .slide.eq.imageRightBulletsLeft .eq-explain-item {
+        font-size: 1.1rem !important;
+        line-height: 1.4;
+        padding: 8px 10px;
+      }
+  
+    /* -----------------------------------
+       Tables
+       ----------------------------------- */
+  
+    .slide.table table {
+      font-size: 1.4rem !important;
+    }
+  
+    .slide.table th,
+    .slide.table td {
+      padding: 10px;
+    }
+  
+    /* -----------------------------------
+       Bar Chart
+       ----------------------------------- */
+  
+    .slide.barChart .bar-label {
+      font-size: 1.4rem !important;
+      width: 120px;
+    }
+  
+    .slide.barChart .bar-value {
+      font-size: 1.2rem !important;
+    }
+  
+    /* -----------------------------------
+       Progress Bar
+       ----------------------------------- */
+  
+    .slide.progressbar .progressbar-label {
+      font-size: 1.6rem !important;
+    }
+  
+    /* -----------------------------------
+       Key Ideas Slide
+       ----------------------------------- */
+  
+    .slide.keyIdeasSlide .key-idea {
+      position: relative !important;
+      width: 100% !important;
+      height: auto !important;
+      padding: 20px 0;
+      font-size: 2rem !important;
+    }
+  
+    .slide.keyIdeasSlide {
+      display: flex !important;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 16px;
+    }
+  
+    /* -----------------------------------
+       App Layer Adjustments
+       ----------------------------------- */
+  
+    #app {
+      padding-bottom: 70px;
+    }
+  
+    .nav-test {
+      height: 70px;
+    }
+  
+  }
+  

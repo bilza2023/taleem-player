@@ -1,0 +1,19 @@
+/* =====================================================
+   DANGER — FORCE EQ SCALE
+   ===================================================== */
+
+/* Reduce equation line font */
+.slide.eq.imageRightBulletsLeft .eq-lines li {
+    font-size: 16px !important;
+    line-height: 1.2 !important;
+  }
+  
+  /* Force KaTeX scale */
+  .slide.eq .katex {
+    font-size: 1.2em !important;
+  }
+  
+  /* Slightly reduce sidebar */
+  .slide.eq .eq-explain-item {
+    font-size: 20px !important;
+  }
