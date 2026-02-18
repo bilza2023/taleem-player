@@ -1,0 +1,43 @@
+/* ----------------------------------
+   Title And Paragraph Slide
+---------------------------------- */
+
+.slide.titleAndPara {
+    display: flex;
+    flex-direction: column;
+  
+    justify-content: flex-start;   /* anchor to top */
+    align-items: center;
+  
+    padding-top: 3rem;             /* breathing space */
+  
+    gap: 1rem;
+  
+    text-align: center;
+  }
+  
+  /* ----------------------------------
+     Title
+  ---------------------------------- */
+  
+  .slide.titleAndPara h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1.2;
+  
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  
+  /* ----------------------------------
+     Paragraph
+  ---------------------------------- */
+  
+  .slide.titleAndPara p {
+    font-size: 2rem;
+    line-height: 1.7;
+  
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  

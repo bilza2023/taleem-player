@@ -1,0 +1,21 @@
+.slide.titleAndSubtitle {
+    align-items: center;
+    text-align: center;
+    gap: 32px;
+  }
+  
+  .slide.titleAndSubtitle h1 {
+    font-size: 5.8rem;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.015em;
+    margin: 0;
+  }
+  
+  .slide.titleAndSubtitle h2 {
+    font-size: 3.8rem;
+    font-weight: 400;
+    opacity: 0.8;
+    margin: 0;
+  }
+  

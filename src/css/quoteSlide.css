@@ -1,0 +1,60 @@
+/* ----------------------------------
+   Quote Slide Container
+---------------------------------- */
+
+.slide.quoteSlide {
+  margin: 0;              /* critical fix */
+  width: 100%;            /* ensure alignment */
+
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  padding: 6rem 10rem;
+}
+
+/* ----------------------------------
+   Quote Text
+---------------------------------- */
+
+.slide.quoteSlide p {
+  font-size: 4.2rem;
+  line-height: 1.4;
+  font-weight: 400;
+
+  max-width: 1100px;
+  margin: 0 auto;
+
+  position: relative;
+}
+
+/* Subtle quotation marks */
+.slide.quoteSlide p::before,
+.slide.quoteSlide p::after {
+  font-size: 6rem;
+  opacity: 0.15;
+  position: absolute;
+}
+
+.slide.quoteSlide p::before {
+  content: "“";
+  left: -4rem;
+  top: -2rem;
+}
+
+.slide.quoteSlide p::after {
+  content: "”";
+  right: -4rem;
+  bottom: -2rem;
+}
+
+/* ----------------------------------
+   Author
+---------------------------------- */
+
+.slide.quoteSlide footer {
+  margin-top: 3rem;
+  font-size: 2.4rem;
+  font-weight: 500;
+  opacity: 0.75;
+}

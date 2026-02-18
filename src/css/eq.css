@@ -1,0 +1,88 @@
+/* ======================================
+   EQ Slide (Independent Layout)
+====================================== */
+
+.slide.eq {
+    display: flex;
+    flex-direction: row;
+  
+    align-items: flex-start;   /* do not vertically center */
+    justify-content: space-between;
+  
+    gap: 1rem;
+
+    /* 🔥 Added: reduce inherited slide padding */
+    padding-left: 3rem;
+    padding-right: 3rem;
+}
+  
+/* -------------------------------
+   Left: Equation Lines
+---------------------------------- */
+  
+.slide.eq .eq-lines {
+    /* 🔥 Increased width slightly */
+    flex: 0 0 45%;
+
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  
+    display: flex;
+    flex-direction: column;
+}
+  
+.slide.eq .eq-lines li {
+    padding: 2px 4px;
+    font-size: 1.25rem;
+    line-height: 1.25;
+  
+    border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+    background: rgba(255, 255, 255, 0.03);
+}
+  
+/* Highlight active line */
+.slide.eq .eq-lines li:last-child {
+    background: rgba(245, 197, 66, 0.18);
+    font-weight: 600;
+    border: 1px solid gold;
+    border-radius: 10px;
+}
+  
+/* -------------------------------
+   Right: Side Panel
+---------------------------------- */
+  
+.slide.eq .eq-side-panel {
+    /* 🔥 Adjusted to balance with left */
+    flex: 0 0 55%;
+  
+    padding: 2px 4px;
+  
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 16px;
+  
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+  
+/* Explanation text */
+.slide.eq .eq-explain-item {
+    font-size: 1.2rem;
+    line-height: 1.5;
+    text-align: justify;
+  
+    background: rgba(255, 255, 255, 0.06);
+    padding: 14px 18px;
+    border-radius: 12px;
+}
+  
+/* Explanation image */
+.slide.eq .eq-explain-image img {
+    width: 70%;
+    margin: 0 auto;
+    display: block;
+    border-radius: 12px;
+}

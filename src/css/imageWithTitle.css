@@ -1,0 +1,35 @@
+
+/* ----------------------------------
+   Base Layout
+---------------------------------- */
+
+.slide.imageWithTitle {
+    align-items: center;
+    text-align: center;
+    gap: 2.5rem;
+  }
+  
+  .slide.imageWithTitle h1 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    line-height: 1.2;
+    margin: 0;
+  }
+  
+  .slide.imageWithTitle img {
+    max-width: 85%;
+    max-height: 70%;
+    object-fit: contain;
+  }
+
+  @media (orientation: portrait) {
+    .slide.imageWithTitle h1 {
+      font-size: 3.2rem;
+    }
+  
+    .slide.imageWithTitle img {
+      max-width: 95%;
+      max-height: 65%;
+    }
+  }
+  

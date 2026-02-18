@@ -1,0 +1,17 @@
+
+/* ----------------------------------
+   Base Behavior
+---------------------------------- */
+
+.slide.imageSlide {
+    padding: 0;                 /* remove slide-base padding */
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .slide.imageSlide img {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+  }
+  
