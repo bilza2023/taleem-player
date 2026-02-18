@@ -20,7 +20,7 @@
       {
         "type": "eq",
         "start": 5,
-        "end": 70,
+        "end": 55,
         "data": [
           {
             "name": "line",
@@ -81,17 +81,73 @@
               { "type": "spText", "content": "Often confused with sum of cubes." },
               { "type": "spText", "content": "Helps simplify large algebraic expressions." }
             ]
+          }
+        ]
+      },
+  
+      {
+        "type": "eq",
+        "start": 55,
+        "end": 105,
+        "data": [
+          {
+            "name": "line",
+            "type": "math",
+            "content": "$\\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}$",
+            "showAt": 55,
+            "spItems": [
+              { "type": "spText", "content": "Quadratic formula." },
+              { "type": "spText", "content": "Used to solve $ax^2 + bx + c = 0$." },
+              { "type": "spText", "content": "The discriminant is $b^2 - 4ac$." },
+              { "type": "spText", "content": "If discriminant > 0 → two real roots." }
+            ]
           },
           {
             "name": "line",
             "type": "math",
-            "content": "$a^3 - b^3 = (a - b)(a^2 + ab + b^2)$",
-            "showAt": 50,
+            "content": "$a^m \\times a^n = a^{m+n}$",
+            "showAt": 65,
             "spItems": [
-              { "type": "spText", "content": "Difference of cubes formula." },
-              { "type": "spText", "content": "The middle term is positive." },
-              { "type": "spText", "content": "Often confused with sum of cubes." },
-              { "type": "spText", "content": "Helps simplify large algebraic expressions." }
+              { "type": "spText", "content": "Law of exponents (multiplication rule)." },
+              { "type": "spText", "content": "Add powers when bases are same." },
+              { "type": "spText", "content": "Example: $x^2 \\times x^3 = x^5$." },
+              { "type": "spText", "content": "Works only if base is identical." }
+            ]
+          },
+          {
+            "name": "line",
+            "type": "math",
+            "content": "$\\frac{a^m}{a^n} = a^{m-n}$",
+            "showAt": 75,
+            "spItems": [
+              { "type": "spText", "content": "Law of exponents (division rule)." },
+              { "type": "spText", "content": "Subtract powers when dividing." },
+              { "type": "spText", "content": "Example: $x^5 / x^2 = x^3$." },
+              { "type": "spText", "content": "Base must remain same." }
+            ]
+          },
+          {
+            "name": "line",
+            "type": "math",
+            "content": "$\\sqrt{a^2 + b^2} = c$",
+            "showAt": 85,
+            "spItems": [
+              { "type": "spText", "content": "Pythagoras theorem." },
+              { "type": "spText", "content": "Used in right-angled triangles." },
+              { "type": "spText", "content": "a and b are perpendicular sides." },
+              { "type": "spText", "content": "c is the hypotenuse." }
+            ]
+          },
+          {
+            "name": "line",
+            "type": "math",
+            "content": "$A = \\pi r^2$",
+            "showAt": 95,
+            "spItems": [
+              { "type": "spText", "content": "Area of a circle." },
+              { "type": "spText", "content": "r is the radius." },
+              { "type": "spText", "content": "π ≈ 3.1416." },
+              { "type": "spText", "content": "Common in geometry problems." }
             ]
           }
         ]

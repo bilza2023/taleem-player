@@ -24,6 +24,9 @@
     margin-bottom: 1rem;
   }
   
+  @media (orientation: landscape) {
+
+  }
   @media (orientation: portrait) {
     .slide.imageLeftBulletsRight {
       flex-direction: column;
