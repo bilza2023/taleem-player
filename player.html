@@ -3,54 +3,37 @@
 <head>
   <meta charset="UTF-8" />
   <title>Taleem PAM Player (Test Nav)</title>
-  <link rel="stylesheet" href="./src/css/taleem.css" />
-  <link rel="stylesheet" href="./src/css/themes/dark.css" />
-  <link rel="stylesheet" href="./src/css/taleem-mobile.css" />
-  <link rel="stylesheet" href="./src/css/danger.css" />
+  <link rel="stylesheet" href="./dist/css/themes/default.css" />
+  <link rel="stylesheet" href="./dist/css/taleem.css" />
+  <!-- <link rel="stylesheet" href="./src/css/themes/default.css" />
+  <link rel="stylesheet" href="./src/css/slide-base.css" />
+
   
-  <style>
-    body {
-      margin: 0;
-      font-family: system-ui, sans-serif;
-    }
+  <link rel="stylesheet" href="./src/css/titleSlide.css" />
+  <link rel="stylesheet" href="./src/css/titleAndSubtitle.css" />
+  <link rel="stylesheet" href="./src/css/titleAndPara.css" />
+  <link rel="stylesheet" href="./src/css/bulletList.css" />
+  <link rel="stylesheet" href="./src/css/twoColumnText.css" />
+  <link rel="stylesheet" href="./src/css/imageSlide.css" />
+  <link rel="stylesheet" href="./src/css/imageWithTitle.css" />
+  <link rel="stylesheet" href="./src/css/imageWithCaption.css" />
+  <link rel="stylesheet" href="./src/css/imageLeftBulletsRight.css" />
+  <link rel="stylesheet" href="./src/css/imageRightBulletsLeft.css" />
+  <link rel="stylesheet" href="./src/css/table.css" />
+  <link rel="stylesheet" href="./src/css/progressbar.css" />
+  <link rel="stylesheet" href="./src/css/keyIdeasSlide.css" />
+  <link rel="stylesheet" href="./src/css/statistic.css" />
+  <link rel="stylesheet" href="./src/css/donutChart.css" />
+  <link rel="stylesheet" href="./src/css/bigNumber.css" />
+  <link rel="stylesheet" href="./src/css/barChart.css" />
+  <link rel="stylesheet" href="./src/css/quoteSlide.css" />
+  <link rel="stylesheet" href="./src/css/quoteWithImage.css" />
+  <link rel="stylesheet" href="./src/css/cornerWordsSlide.css" />
+  <link rel="stylesheet" href="./src/css/contactSlide.css" />
+  <link rel="stylesheet" href="./src/css/fillImage.css" />
+  <link rel="stylesheet" href="./src/css/eq.css" />
+  <link rel="stylesheet" href="./src/css/app.css" />   -->
 
-    /* slide area */
-    #app {
-      height: 100vh;
-      /* padding-bottom: 90px; reserve space for fixed nav */
-      box-sizing: border-box;
-    }
-
-    .nav-test {
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 90px;
-  transition: opacity 0.5s ease;
-  backdrop-filter: blur(0px);           /* optional, modern browsers */
-  -webkit-backdrop-filter: blur(0px);
-  background: rgba(187, 187, 188, 0.85);
-
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 0 1rem;
-
-  z-index: 999999;
-}
-
-
-    .nav-test span {
-      font-weight: 700;
-      min-width: 80px;
-    }
-
-    input[type="range"] {
-      flex: 1;
-    }
   </style>
 </head>
 
@@ -78,7 +61,7 @@
 
   <script type="module">
 import { createTaleemPlayer, resolveAssetPaths, resolveBackground } from
-  "https://unpkg.com/taleem-player@latest/dist/taleem-player.esm.js"
+  "/dist/taleem-player.esm.js"
 
 import { renderLoop, Timer } from
   "https://unpkg.com/taleem-pam@latest/dist/taleem-pam.esm.js"

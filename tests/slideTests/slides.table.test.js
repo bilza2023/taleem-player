@@ -12,7 +12,8 @@ describe("TableSlide", () => {
     const html = slide.render();
 
     // structure assertions only (NEW schema)
-    expect(html).toContain('<table class="slide table">');
+    expect(html).toContain('<section class="slide table">');
+    expect(html).toContain("<table>");
     expect(html).toContain("<tbody>");
     expect(html).toContain("<tr>");
     expect(html).toContain("<td>");

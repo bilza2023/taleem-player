@@ -26,7 +26,12 @@ export const Progressbar = {
                 <div class="progressbar-item">
                   <div class="progressbar-label">${b.label}</div>
                   <div class="progressbar-track">
-                    <div class="progressbar-fill" style="width:${b.value}%"></div>
+                    <div 
+                        class="progressbar-fill"
+                        style="width:${b.value}%"
+                        data-value="${b.value}"
+                      ></div>
+
                   </div>
                 </div>
               `;

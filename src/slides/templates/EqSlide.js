@@ -17,7 +17,7 @@ export const EqSlide = {
         const spItems = activeLine?.spItems ?? [];
 
         return `
-          <section class="slide eq imageRightBulletsLeft">
+          <section class="slide eq">
             
             <!-- LEFT: lines (pure bullet behavior) -->
             <ul class="eq-lines">

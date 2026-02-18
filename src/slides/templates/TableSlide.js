@@ -15,7 +15,8 @@ export const TableSlide = {
 
       render() {
         return `
-          <table class="slide table">
+        <section class="slide table">
+          <table>
             <tbody>
               ${rows
                 .map(
@@ -25,6 +26,7 @@ export const TableSlide = {
                 .join("")}
             </tbody>
           </table>
+          </section>
         `;
       }
     });

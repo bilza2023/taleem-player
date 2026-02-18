@@ -157,8 +157,8 @@ var ImageWithTitleSlide = {
       render() {
         return `
           <section class="slide imageWithTitle">
-            <img src="${src}" alt="" />
             <h1>${title}</h1>
+            <img src="${src}" alt="" />
           </section>
         `;
       }
@@ -262,13 +262,15 @@ var TableSlide = {
       type: "table",
       render() {
         return `
-          <table class="slide table">
+        <section class="slide table">
+          <table>
             <tbody>
               ${rows.map(
           (row) => `<tr>${row.map((cell) => `<td>${cell}</td>`).join("")}</tr>`
         ).join("")}
             </tbody>
           </table>
+          </section>
         `;
       }
     });
@@ -339,7 +341,12 @@ var Progressbar = {
                 <div class="progressbar-item">
                   <div class="progressbar-label">${b.label}</div>
                   <div class="progressbar-track">
-                    <div class="progressbar-fill" style="width:${b.value}%"></div>
+                    <div 
+                        class="progressbar-fill"
+                        style="width:${b.value}%"
+                        data-value="${b.value}"
+                      ></div>
+
                   </div>
                 </div>
               `;
@@ -420,7 +427,7 @@ var EqSlide = {
         const activeLine = end > 0 ? lines[end - 1] : null;
         const spItems = activeLine?.spItems ?? [];
         return `
-          <section class="slide eq imageRightBulletsLeft">
+          <section class="slide eq">
             
             <!-- LEFT: lines (pure bullet behavior) -->
             <ul class="eq-lines">

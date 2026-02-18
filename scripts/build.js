@@ -1,6 +1,6 @@
 import { build } from "esbuild";
 import fs from "fs";
-
+import path from "path";
 // -----------------
 // setup
 // -----------------
@@ -86,11 +86,28 @@ await build({
 // -----------------
 // CSS
 // -----------------
+// -----------------
+// CSS (bundle modular css)
+// -----------------
 fs.mkdirSync("dist/css/themes", { recursive: true });
 
-fs.copyFileSync("src/css/taleem.css", "dist/css/taleem.css");
-fs.copyFileSync("src/css/themes/dark.css", "dist/css/themes/dark.css");
-fs.copyFileSync("src/css/themes/light.css", "dist/css/themes/light.css");
-fs.copyFileSync("src/css/themes/paper.css", "dist/css/themes/paper.css");
+await build({
+  entryPoints: ["src/css/index.css"],
+  bundle: true,
+  outfile: "dist/css/taleem.css",
+  minify: true,
+  loader: {
+    ".css": "css"
+  }
+});
+/////Themes
+const themesDest = "dist/css/themes";
+const themesSrc = "src/css/themes";
+fs.mkdirSync(themesDest, { recursive: true });
 
+fs.readdirSync(themesSrc).forEach(file => {
+  const srcFile = path.join(themesSrc, file);
+  const destFile = path.join(themesDest, file);
+  fs.copyFileSync(srcFile, destFile);
+});
 console.log("✔ taleem-player build complete");
