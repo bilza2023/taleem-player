@@ -1,0 +1,104 @@
+{
+    "version": "deck-v1",
+    "name": "MEGA EQ – Stress Test",
+    "background": {
+      "backgroundColor": "#111111",
+      "backgroundImage": null,
+      "backgroundImageOpacity": 0.3
+    },
+    "deck": [
+      {
+        "type": "titleAndSubtitle",
+        "start": 0,
+        "end": 5,
+        "data": [
+          { "name": "title", "content": "Mega Equation Stress Test", "showAt": 0 },
+          { "name": "subtitle", "content": "Long FIFO Sliding Window Test", "showAt": 2 }
+        ]
+      },
+      {
+        "type": "eq",
+        "start": 5,
+        "end": 205,
+        "data": [
+  
+          { "name": "line", "type": "math", "content": "$a^2 - b^2 = (a - b)(a + b)$", "showAt": 5,
+            "spItems": [{ "type": "spText", "content": "Difference of squares." }] },
+  
+          { "name": "line", "type": "math", "content": "$(a + b)^2 = a^2 + 2ab + b^2$", "showAt": 10,
+            "spItems": [{ "type": "spText", "content": "Square of sum." }] },
+  
+          { "name": "line", "type": "math", "content": "$(a - b)^2 = a^2 - 2ab + b^2$", "showAt": 15,
+            "spItems": [{ "type": "spText", "content": "Square of difference." }] },
+  
+          { "name": "line", "type": "math", "content": "$a^3 + b^3 = (a + b)(a^2 - ab + b^2)$", "showAt": 20,
+            "spItems": [{ "type": "spText", "content": "Sum of cubes." }] },
+  
+          { "name": "line", "type": "math", "content": "$a^3 - b^3 = (a - b)(a^2 + ab + b^2)$", "showAt": 25,
+            "spItems": [{ "type": "spText", "content": "Difference of cubes." }] },
+  
+          { "name": "line", "type": "math", "content": "$\\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}$", "showAt": 30,
+            "spItems": [{ "type": "spText", "content": "Quadratic formula." }] },
+  
+          { "name": "line", "type": "math", "content": "$a^m \\times a^n = a^{m+n}$", "showAt": 35,
+            "spItems": [{ "type": "spText", "content": "Exponent multiplication rule." }] },
+  
+          { "name": "line", "type": "math", "content": "$\\frac{a^m}{a^n} = a^{m-n}$", "showAt": 40,
+            "spItems": [{ "type": "spText", "content": "Exponent division rule." }] },
+  
+          { "name": "line", "type": "math", "content": "$\\sqrt{a^2 + b^2} = c$", "showAt": 45,
+            "spItems": [{ "type": "spText", "content": "Pythagoras theorem." }] },
+  
+          { "name": "line", "type": "math", "content": "$A = \\pi r^2$", "showAt": 50,
+            "spItems": [{ "type": "spText", "content": "Area of circle." }] },
+  
+          { "name": "line", "type": "math", "content": "$C = 2\\pi r$", "showAt": 55,
+            "spItems": [{ "type": "spText", "content": "Circumference of circle." }] },
+  
+          { "name": "line", "type": "math", "content": "$ax^2 + bx + c = 0$", "showAt": 60,
+            "spItems": [{ "type": "spText", "content": "General quadratic form." }] },
+  
+          { "name": "line", "type": "math", "content": "$\\sin^2 x + \\cos^2 x = 1$", "showAt": 65,
+            "spItems": [{ "type": "spText", "content": "Trigonometric identity." }] },
+  
+          { "name": "line", "type": "math", "content": "$\\tan x = \\frac{\\sin x}{\\cos x}$", "showAt": 70,
+            "spItems": [{ "type": "spText", "content": "Definition of tangent." }] },
+  
+          { "name": "line", "type": "math", "content": "$e^{i\\pi} + 1 = 0$", "showAt": 75,
+            "spItems": [{ "type": "spText", "content": "Euler's identity." }] },
+  
+          { "name": "line", "type": "math", "content": "$\\log(ab) = \\log a + \\log b$", "showAt": 80,
+            "spItems": [{ "type": "spText", "content": "Log multiplication rule." }] },
+  
+          { "name": "line", "type": "math", "content": "$\\log\\left(\\frac{a}{b}\\right) = \\log a - \\log b$", "showAt": 85,
+            "spItems": [{ "type": "spText", "content": "Log division rule." }] },
+  
+          { "name": "line", "type": "math", "content": "$\\int x^n dx = \\frac{x^{n+1}}{n+1} + C$", "showAt": 90,
+            "spItems": [{ "type": "spText", "content": "Basic integration rule." }] },
+  
+          { "name": "line", "type": "math", "content": "$\\frac{d}{dx}(x^n) = nx^{n-1}$", "showAt": 95,
+            "spItems": [{ "type": "spText", "content": "Power rule differentiation." }] },
+  
+          { "name": "line", "type": "math", "content": "$\\lim_{x\\to0} \\frac{\\sin x}{x} = 1$", "showAt": 100,
+            "spItems": [{ "type": "spText", "content": "Important limit identity." }] },
+  
+          { "name": "line", "type": "math", "content": "$\\sum_{i=1}^{n} i = \\frac{n(n+1)}{2}$", "showAt": 105,
+            "spItems": [{ "type": "spText", "content": "Sum of first n numbers." }] },
+  
+          { "name": "line", "type": "math", "content": "$\\sum_{i=1}^{n} i^2 = \\frac{n(n+1)(2n+1)}{6}$", "showAt": 110,
+            "spItems": [{ "type": "spText", "content": "Sum of squares." }] },
+  
+          { "name": "line", "type": "math", "content": "$\\sum_{i=1}^{n} i^3 = \\left(\\frac{n(n+1)}{2}\\right)^2$", "showAt": 115,
+            "spItems": [{ "type": "spText", "content": "Sum of cubes identity." }] },
+  
+          { "name": "line", "type": "math", "content": "$F = ma$", "showAt": 120,
+            "spItems": [{ "type": "spText", "content": "Newton's second law." }] },
+  
+          { "name": "line", "type": "math", "content": "$E = mc^2$", "showAt": 125,
+            "spItems": [{ "type": "spText", "content": "Mass-energy equivalence." }] }
+  
+        ]
+      }
+    ]
+  }
+  

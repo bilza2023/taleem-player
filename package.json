@@ -1,6 +1,6 @@
 {
   "name": "taleem-player",
-  "version": "1.0.15",
+  "version": "1.0.16",
   "type": "module",
   "main": "./dist/taleem-player.umd.js",
   "module": "./dist/taleem-player.esm.js",

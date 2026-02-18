@@ -4,6 +4,7 @@
 
 .slide.eq {
     display: flex;
+    color:gray;
     flex-direction: row;
 
     align-items: flex-start;
@@ -50,10 +51,17 @@
 }
 
 /* Highlight active line */
-.slide.eq .eq-lines li:last-child {
+/* .slide.eq .eq-lines li:last-child {
     background: rgba(245, 197, 66, 0.18);
     font-weight: 600;
     border: 1px solid gold;
+    border-radius: 10px;
+} */
+.highlighted {
+    background: rgba(150, 124, 52, 0.18);
+    color:white;
+    font-weight: 600;
+    border: 2px solid gold;
     border-radius: 10px;
 }
 
