@@ -110,4 +110,17 @@ fs.readdirSync(themesSrc).forEach(file => {
   const destFile = path.join(themesDest, file);
   fs.copyFileSync(srcFile, destFile);
 });
+
+//////////////////////////////////////////////
+// -----------------
+// CSS: Copy app.css
+// -----------------
+fs.mkdirSync("dist/css/app", { recursive: true });
+
+fs.copyFileSync(
+  "src/css/app/app.css",
+  "dist/css/app/app.css"
+);
+
+//////////////////////////////////////////////
 console.log("✔ taleem-player build complete");
